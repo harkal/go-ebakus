@@ -20,13 +20,13 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core"
-	"github.com/ebakus/node/core/rawdb"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/core/vm"
-	"github.com/ebakus/node/crypto"
-	"github.com/ebakus/node/params"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core"
+	"github.com/ebakus/go-ebakus/core/rawdb"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/core/vm"
+	"github.com/ebakus/go-ebakus/crypto"
+	"github.com/ebakus/go-ebakus/params"
 )
 
 // This test case is a repro of an annoying bug that took us forever to catch.

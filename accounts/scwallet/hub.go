@@ -41,10 +41,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ebakus/node/accounts"
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/event"
-	"github.com/ebakus/node/log"
+	"github.com/ebakus/go-ebakus/accounts"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/event"
+	"github.com/ebakus/go-ebakus/log"
 	pcsc "github.com/gballet/go-libpcsclite"
 )
 

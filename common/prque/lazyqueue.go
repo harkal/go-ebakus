@@ -20,7 +20,7 @@ import (
 	"container/heap"
 	"time"
 
-	"github.com/ebakus/node/common/mclock"
+	"github.com/ebakus/go-ebakus/common/mclock"
 )
 
 // LazyQueue is a priority queue data structure where priorities can change over

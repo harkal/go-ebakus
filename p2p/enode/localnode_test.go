@@ -21,8 +21,8 @@ import (
 	"net"
 	"testing"
 
-	"github.com/ebakus/node/crypto"
-	"github.com/ebakus/node/p2p/enr"
+	"github.com/ebakus/go-ebakus/crypto"
+	"github.com/ebakus/go-ebakus/p2p/enr"
 	"github.com/stretchr/testify/assert"
 )
 

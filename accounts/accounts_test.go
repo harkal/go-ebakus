@@ -20,7 +20,7 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/ebakus/node/common/hexutil"
+	"github.com/ebakus/go-ebakus/common/hexutil"
 )
 
 func TestTextHash(t *testing.T) {

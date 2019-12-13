@@ -34,8 +34,8 @@ import (
 	"sort"
 	"strconv"
 
-	"github.com/ebakus/node/core"
-	"github.com/ebakus/node/rlp"
+	"github.com/ebakus/go-ebakus/core"
+	"github.com/ebakus/go-ebakus/rlp"
 )
 
 type allocItem struct{ Addr, Balance *big.Int }

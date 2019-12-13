@@ -23,10 +23,10 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/crypto"
-	"github.com/ebakus/node/params"
-	"github.com/ebakus/node/rlp"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/crypto"
+	"github.com/ebakus/go-ebakus/params"
+	"github.com/ebakus/go-ebakus/rlp"
 )
 
 func TestLegacyReceiptDecoding(t *testing.T) {

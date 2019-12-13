@@ -19,8 +19,8 @@ package leveldb
 import (
 	"testing"
 
-	"github.com/ebakus/node/ethdb"
-	"github.com/ebakus/node/ethdb/dbtest"
+	"github.com/ebakus/go-ebakus/ethdb"
+	"github.com/ebakus/go-ebakus/ethdb/dbtest"
 	"github.com/syndtr/goleveldb/leveldb"
 	"github.com/syndtr/goleveldb/leveldb/storage"
 )

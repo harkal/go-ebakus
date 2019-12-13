@@ -25,13 +25,13 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/node"
-	"github.com/ebakus/node/p2p"
-	"github.com/ebakus/node/p2p/enode"
-	"github.com/ebakus/node/p2p/simulations"
-	"github.com/ebakus/node/p2p/simulations/adapters"
-	"github.com/ebakus/node/rpc"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/node"
+	"github.com/ebakus/go-ebakus/p2p"
+	"github.com/ebakus/go-ebakus/p2p/enode"
+	"github.com/ebakus/go-ebakus/p2p/simulations"
+	"github.com/ebakus/go-ebakus/p2p/simulations/adapters"
+	"github.com/ebakus/go-ebakus/rpc"
 )
 
 var adapterType = flag.String("adapter", "sim", `node adapter to use (one of "sim", "exec" or "docker")`)

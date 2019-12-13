@@ -21,7 +21,7 @@ import (
 	"io"
 	"net"
 
-	"github.com/ebakus/node/rlp"
+	"github.com/ebakus/go-ebakus/rlp"
 )
 
 // Entry is implemented by known node record entry types.

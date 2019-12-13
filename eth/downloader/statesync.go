@@ -22,12 +22,12 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core/rawdb"
-	"github.com/ebakus/node/core/state"
-	"github.com/ebakus/node/ethdb"
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/trie"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core/rawdb"
+	"github.com/ebakus/go-ebakus/core/state"
+	"github.com/ebakus/go-ebakus/ethdb"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/trie"
 	"golang.org/x/crypto/sha3"
 )
 

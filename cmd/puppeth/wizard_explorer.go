@@ -21,7 +21,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/ebakus/node/log"
+	"github.com/ebakus/go-ebakus/log"
 )
 
 // deployExplorer creates a new block explorer based on some user input.

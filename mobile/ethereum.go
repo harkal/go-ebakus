@@ -21,8 +21,8 @@ package ebakus
 import (
 	"errors"
 
-	ebakus "github.com/ebakus/node"
-	"github.com/ebakus/node/common"
+	ebakus "github.com/ebakus/go-ebakus"
+	"github.com/ebakus/go-ebakus/common"
 )
 
 // Subscription represents an event subscription where events are

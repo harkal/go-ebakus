@@ -20,8 +20,8 @@ import (
 	"math/rand"
 	"testing"
 
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/crypto"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/crypto"
 )
 
 // Tests that transactions can be added to strict lists and list contents and

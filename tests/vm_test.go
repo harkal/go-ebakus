@@ -19,7 +19,7 @@ package tests
 import (
 	"testing"
 
-	"github.com/ebakus/node/core/vm"
+	"github.com/ebakus/go-ebakus/core/vm"
 )
 
 func TestVM(t *testing.T) {

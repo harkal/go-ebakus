@@ -20,8 +20,8 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/ethdb"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/ethdb"
 )
 
 // Tests that the node iterator indeed walks over the entire database contents.

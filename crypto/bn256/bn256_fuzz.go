@@ -10,8 +10,8 @@ import (
 	"bytes"
 	"math/big"
 
-	cloudflare "github.com/ebakus/node/crypto/bn256/cloudflare"
-	google "github.com/ebakus/node/crypto/bn256/google"
+	cloudflare "github.com/ebakus/go-ebakus/crypto/bn256/cloudflare"
+	google "github.com/ebakus/go-ebakus/crypto/bn256/google"
 )
 
 // FuzzAdd fuzzez bn256 addition between the Google and Cloudflare libraries.

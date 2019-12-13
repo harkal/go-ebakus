@@ -20,10 +20,10 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/ethdb"
-	"github.com/ebakus/node/rlp"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/ethdb"
+	"github.com/ebakus/go-ebakus/rlp"
 )
 
 // Tests that positional lookup metadata can be stored and retrieved.

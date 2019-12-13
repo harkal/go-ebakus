@@ -24,14 +24,14 @@ import (
 	"net"
 	"os"
 
-	"github.com/ebakus/node/cmd/utils"
-	"github.com/ebakus/node/crypto"
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/p2p/discover"
-	"github.com/ebakus/node/p2p/discv5"
-	"github.com/ebakus/node/p2p/enode"
-	"github.com/ebakus/node/p2p/nat"
-	"github.com/ebakus/node/p2p/netutil"
+	"github.com/ebakus/go-ebakus/cmd/utils"
+	"github.com/ebakus/go-ebakus/crypto"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/p2p/discover"
+	"github.com/ebakus/go-ebakus/p2p/discv5"
+	"github.com/ebakus/go-ebakus/p2p/enode"
+	"github.com/ebakus/go-ebakus/p2p/nat"
+	"github.com/ebakus/go-ebakus/p2p/netutil"
 )
 
 func main() {

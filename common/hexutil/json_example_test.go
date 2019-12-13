@@ -20,7 +20,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/ebakus/node/common/hexutil"
+	"github.com/ebakus/go-ebakus/common/hexutil"
 )
 
 type MyType [5]byte

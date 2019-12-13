@@ -29,17 +29,17 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/common/mclock"
-	"github.com/ebakus/node/crypto"
-	"github.com/ebakus/node/event"
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/p2p/discover"
-	"github.com/ebakus/node/p2p/discv5"
-	"github.com/ebakus/node/p2p/enode"
-	"github.com/ebakus/node/p2p/enr"
-	"github.com/ebakus/node/p2p/nat"
-	"github.com/ebakus/node/p2p/netutil"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/common/mclock"
+	"github.com/ebakus/go-ebakus/crypto"
+	"github.com/ebakus/go-ebakus/event"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/p2p/discover"
+	"github.com/ebakus/go-ebakus/p2p/discv5"
+	"github.com/ebakus/go-ebakus/p2p/enode"
+	"github.com/ebakus/go-ebakus/p2p/enr"
+	"github.com/ebakus/go-ebakus/p2p/nat"
+	"github.com/ebakus/go-ebakus/p2p/netutil"
 )
 
 const (

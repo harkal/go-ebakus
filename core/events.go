@@ -17,8 +17,8 @@
 package core
 
 import (
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core/types"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core/types"
 )
 
 // NewTxsEvent is posted when a batch of transactions enter the transaction pool.

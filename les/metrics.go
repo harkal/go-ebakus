@@ -17,8 +17,8 @@
 package les
 
 import (
-	"github.com/ebakus/node/metrics"
-	"github.com/ebakus/node/p2p"
+	"github.com/ebakus/go-ebakus/metrics"
+	"github.com/ebakus/go-ebakus/p2p"
 )
 
 var (

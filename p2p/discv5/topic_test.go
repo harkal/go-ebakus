@@ -21,8 +21,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/common/mclock"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/common/mclock"
 )
 
 func TestTopicRadius(t *testing.T) {

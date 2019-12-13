@@ -20,8 +20,8 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/common/math"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/common/math"
 )
 
 func TestBlockNumberJSONUnmarshal(t *testing.T) {

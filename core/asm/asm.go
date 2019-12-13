@@ -21,7 +21,7 @@ import (
 	"encoding/hex"
 	"fmt"
 
-	"github.com/ebakus/node/core/vm"
+	"github.com/ebakus/go-ebakus/core/vm"
 )
 
 // Iterator for disassembled EVM instructions

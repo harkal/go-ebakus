@@ -26,17 +26,17 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/ebakus/node/accounts"
-	"github.com/ebakus/node/accounts/external"
-	"github.com/ebakus/node/accounts/keystore"
-	"github.com/ebakus/node/accounts/scwallet"
-	"github.com/ebakus/node/accounts/usbwallet"
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/crypto"
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/p2p"
-	"github.com/ebakus/node/p2p/enode"
-	"github.com/ebakus/node/rpc"
+	"github.com/ebakus/go-ebakus/accounts"
+	"github.com/ebakus/go-ebakus/accounts/external"
+	"github.com/ebakus/go-ebakus/accounts/keystore"
+	"github.com/ebakus/go-ebakus/accounts/scwallet"
+	"github.com/ebakus/go-ebakus/accounts/usbwallet"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/crypto"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/p2p"
+	"github.com/ebakus/go-ebakus/p2p/enode"
+	"github.com/ebakus/go-ebakus/rpc"
 )
 
 const (

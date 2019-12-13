@@ -22,11 +22,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/crypto"
-	"github.com/ebakus/node/p2p/discover"
-	"github.com/ebakus/node/p2p/enode"
-	"github.com/ebakus/node/params"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/crypto"
+	"github.com/ebakus/go-ebakus/p2p/discover"
+	"github.com/ebakus/go-ebakus/p2p/enode"
+	"github.com/ebakus/go-ebakus/params"
 	"gopkg.in/urfave/cli.v1"
 )
 

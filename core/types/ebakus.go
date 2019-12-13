@@ -19,8 +19,8 @@ package types
 import (
 	"encoding/binary"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core/ebkdb"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core/ebkdb"
 	"github.com/harkal/ebakusdb"
 )
 

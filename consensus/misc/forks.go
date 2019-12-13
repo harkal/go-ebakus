@@ -19,9 +19,9 @@ package misc
 import (
 	"fmt"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/params"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/params"
 )
 
 // VerifyForkHashes verifies that blocks conforming to network hard-forks do have

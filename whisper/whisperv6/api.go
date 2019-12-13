@@ -24,12 +24,12 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/common/hexutil"
-	"github.com/ebakus/node/crypto"
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/p2p/enode"
-	"github.com/ebakus/node/rpc"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/common/hexutil"
+	"github.com/ebakus/go-ebakus/crypto"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/p2p/enode"
+	"github.com/ebakus/go-ebakus/rpc"
 )
 
 // List of errors

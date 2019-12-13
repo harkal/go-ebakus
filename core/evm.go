@@ -19,10 +19,10 @@ package core
 import (
 	"math/big"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/consensus"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/core/vm"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/consensus"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/core/vm"
 )
 
 // ChainContext supports retrieving headers and consensus parameters from the

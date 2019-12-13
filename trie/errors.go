@@ -19,7 +19,7 @@ package trie
 import (
 	"fmt"
 
-	"github.com/ebakus/node/common"
+	"github.com/ebakus/go-ebakus/common"
 )
 
 // MissingNodeError is returned by the trie functions (TryGet, TryUpdate, TryDelete)

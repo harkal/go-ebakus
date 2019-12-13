@@ -23,11 +23,11 @@ import (
 	"os"
 	"strings"
 
-	"github.com/ebakus/node/accounts/abi/bind"
-	"github.com/ebakus/node/cmd/utils"
-	"github.com/ebakus/node/common/compiler"
-	"github.com/ebakus/node/crypto"
-	"github.com/ebakus/node/log"
+	"github.com/ebakus/go-ebakus/accounts/abi/bind"
+	"github.com/ebakus/go-ebakus/cmd/utils"
+	"github.com/ebakus/go-ebakus/common/compiler"
+	"github.com/ebakus/go-ebakus/crypto"
+	"github.com/ebakus/go-ebakus/log"
 	"gopkg.in/urfave/cli.v1"
 )
 

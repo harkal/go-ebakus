@@ -20,9 +20,9 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/common/prque"
-	"github.com/ebakus/node/ethdb"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/common/prque"
+	"github.com/ebakus/go-ebakus/ethdb"
 )
 
 // ErrNotRequested is returned by the trie sync when it's requested to process a

@@ -20,10 +20,10 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/ebakus/node/consensus/ethash"
-	"github.com/ebakus/node/core/rawdb"
-	"github.com/ebakus/node/core/vm"
-	"github.com/ebakus/node/params"
+	"github.com/ebakus/go-ebakus/consensus/ethash"
+	"github.com/ebakus/go-ebakus/core/rawdb"
+	"github.com/ebakus/go-ebakus/core/vm"
+	"github.com/ebakus/go-ebakus/params"
 )
 
 // Tests that DAO-fork enabled clients can properly filter out fork-commencing

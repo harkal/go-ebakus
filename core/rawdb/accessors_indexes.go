@@ -19,12 +19,12 @@ package rawdb
 import (
 	"math/big"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/ethdb"
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/params"
-	"github.com/ebakus/node/rlp"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/ethdb"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/params"
+	"github.com/ebakus/go-ebakus/rlp"
 )
 
 // ReadTxLookupEntry retrieves the positional metadata associated with a transaction

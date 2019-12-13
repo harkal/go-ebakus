@@ -20,8 +20,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/crypto"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/crypto"
 )
 
 // Event is an event potentially triggered by the EVM's LOG mechanism. The Event

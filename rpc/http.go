@@ -31,7 +31,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ebakus/node/log"
+	"github.com/ebakus/go-ebakus/log"
 	"github.com/rs/cors"
 )
 

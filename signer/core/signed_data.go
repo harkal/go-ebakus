@@ -30,12 +30,12 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/ebakus/node/accounts"
-	"github.com/ebakus/node/accounts/abi"
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/common/hexutil"
-	"github.com/ebakus/node/common/math"
-	"github.com/ebakus/node/crypto"
+	"github.com/ebakus/go-ebakus/accounts"
+	"github.com/ebakus/go-ebakus/accounts/abi"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/common/hexutil"
+	"github.com/ebakus/go-ebakus/common/math"
+	"github.com/ebakus/go-ebakus/crypto"
 )
 
 type SigFormat struct {
@@ -556,7 +556,7 @@ func (api *SignerAPI) EcRecover(ctx context.Context, data hexutil.Bytes, sig hex
 	// Note, the signature must conform to the secp256k1 curve R, S and V values, where
 	// the V value must be be 27 or 28 for legacy reasons.
 	//
-	// https://github.com/ebakus/node/wiki/Management-APIs#personal_ecRecover
+	// https://github.com/ebakus/go-ebakus/wiki/Management-APIs#personal_ecRecover
 	if len(sig) != 65 {
 		return common.Address{}, fmt.Errorf("signature must be 65 bytes long")
 	}

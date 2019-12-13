@@ -19,10 +19,10 @@ package core
 import (
 	"container/list"
 
-	"github.com/ebakus/node/core/rawdb"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/ethdb"
-	"github.com/ebakus/node/event"
+	"github.com/ebakus/go-ebakus/core/rawdb"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/ethdb"
+	"github.com/ebakus/go-ebakus/event"
 )
 
 // Implement our EthTest Manager

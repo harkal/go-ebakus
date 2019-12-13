@@ -20,9 +20,9 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/rlp"
-	"github.com/ebakus/node/trie"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/rlp"
+	"github.com/ebakus/go-ebakus/trie"
 )
 
 // NodeIterator is an iterator to traverse the entire state trie post-order,

@@ -23,13 +23,13 @@ import (
 	"net"
 	"sync"
 
-	"github.com/ebakus/node/event"
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/node"
-	"github.com/ebakus/node/p2p"
-	"github.com/ebakus/node/p2p/enode"
-	"github.com/ebakus/node/p2p/simulations/pipes"
-	"github.com/ebakus/node/rpc"
+	"github.com/ebakus/go-ebakus/event"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/node"
+	"github.com/ebakus/go-ebakus/p2p"
+	"github.com/ebakus/go-ebakus/p2p/enode"
+	"github.com/ebakus/go-ebakus/p2p/simulations/pipes"
+	"github.com/ebakus/go-ebakus/rpc"
 )
 
 // SimAdapter is a NodeAdapter which creates in-memory simulation nodes and

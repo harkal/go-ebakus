@@ -20,9 +20,9 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/common/hexutil"
-	"github.com/ebakus/node/signer/core"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/common/hexutil"
+	"github.com/ebakus/go-ebakus/signer/core"
 )
 
 func mixAddr(a string) (*common.MixedcaseAddress, error) {

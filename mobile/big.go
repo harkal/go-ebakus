@@ -22,7 +22,7 @@ import (
 	"errors"
 	"math/big"
 
-	"github.com/ebakus/node/common"
+	"github.com/ebakus/go-ebakus/common"
 )
 
 // A BigInt represents a signed multi-precision integer.

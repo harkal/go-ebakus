@@ -19,8 +19,8 @@ package vm
 import (
 	"math/big"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core/types"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core/types"
 )
 
 // StateDB is an EVM database for full state querying.

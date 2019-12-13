@@ -21,8 +21,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/rpc"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/rpc"
 )
 
 func TestUnmarshalJSONNewFilterArgs(t *testing.T) {

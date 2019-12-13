@@ -16,7 +16,7 @@
 
 package core
 
-import "github.com/ebakus/node/common"
+import "github.com/ebakus/go-ebakus/common"
 
 // BadHashes represent a set of manually tracked bad hashes (usually hard forks)
 var BadHashes = map[common.Hash]bool{

@@ -25,10 +25,10 @@ import (
 	"testing"
 
 	"github.com/davecgh/go-spew/spew"
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core/rawdb"
-	"github.com/ebakus/node/core/state"
-	"github.com/ebakus/node/crypto"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core/rawdb"
+	"github.com/ebakus/go-ebakus/core/state"
+	"github.com/ebakus/go-ebakus/crypto"
 )
 
 var dumper = spew.ConfigState{Indent: "    "}

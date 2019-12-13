@@ -22,8 +22,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ebakus/node/accounts/abi"
-	"github.com/ebakus/node/common"
+	"github.com/ebakus/go-ebakus/accounts/abi"
+	"github.com/ebakus/go-ebakus/common"
 )
 
 // Tests that all the selectors contained in the 4byte database are valid.

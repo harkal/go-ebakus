@@ -19,7 +19,7 @@ package vm
 import (
 	"fmt"
 
-	"github.com/ebakus/node/params"
+	"github.com/ebakus/go-ebakus/params"
 )
 
 // EnableEIP enables the given EIP on the config.

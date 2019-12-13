@@ -24,7 +24,7 @@ import (
 	"math/big"
 	"strings"
 
-	"github.com/ebakus/node/rlp"
+	"github.com/ebakus/go-ebakus/rlp"
 )
 
 // RLPTest is the JSON structure of a single RLP test.

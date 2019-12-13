@@ -35,11 +35,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ebakus/node/common/bitutil"
-	"github.com/ebakus/node/crypto"
-	"github.com/ebakus/node/crypto/ecies"
-	"github.com/ebakus/node/metrics"
-	"github.com/ebakus/node/rlp"
+	"github.com/ebakus/go-ebakus/common/bitutil"
+	"github.com/ebakus/go-ebakus/crypto"
+	"github.com/ebakus/go-ebakus/crypto/ecies"
+	"github.com/ebakus/go-ebakus/metrics"
+	"github.com/ebakus/go-ebakus/rlp"
 	"github.com/golang/snappy"
 	"golang.org/x/crypto/sha3"
 )

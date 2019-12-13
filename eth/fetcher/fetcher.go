@@ -22,11 +22,11 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/common/prque"
-	"github.com/ebakus/node/consensus"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/log"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/common/prque"
+	"github.com/ebakus/go-ebakus/consensus"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/log"
 )
 
 const (

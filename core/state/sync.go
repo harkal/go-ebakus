@@ -19,10 +19,10 @@ package state
 import (
 	"bytes"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/ethdb"
-	"github.com/ebakus/node/rlp"
-	"github.com/ebakus/node/trie"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/ethdb"
+	"github.com/ebakus/go-ebakus/rlp"
+	"github.com/ebakus/go-ebakus/trie"
 )
 
 // NewStateSync create a new state trie download scheduler.

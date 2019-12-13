@@ -19,10 +19,10 @@ package core
 import (
 	"fmt"
 
-	"github.com/ebakus/node/consensus"
-	"github.com/ebakus/node/core/state"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/params"
+	"github.com/ebakus/go-ebakus/consensus"
+	"github.com/ebakus/go-ebakus/core/state"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/params"
 )
 
 // BlockValidator is responsible for validating block headers, uncles and

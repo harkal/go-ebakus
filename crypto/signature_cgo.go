@@ -23,8 +23,8 @@ import (
 	"crypto/elliptic"
 	"fmt"
 
-	"github.com/ebakus/node/common/math"
-	"github.com/ebakus/node/crypto/secp256k1"
+	"github.com/ebakus/go-ebakus/common/math"
+	"github.com/ebakus/go-ebakus/crypto/secp256k1"
 )
 
 // Ecrecover returns the uncompressed public key that created the given signature.

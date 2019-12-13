@@ -25,8 +25,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core/types"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core/types"
 )
 
 // Tests whether remote HTTP servers are correctly notified of new work.

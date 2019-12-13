@@ -27,8 +27,8 @@ import (
 	"net"
 	"strings"
 
-	"github.com/ebakus/node/p2p/enr"
-	"github.com/ebakus/node/rlp"
+	"github.com/ebakus/go-ebakus/p2p/enr"
+	"github.com/ebakus/go-ebakus/rlp"
 )
 
 var errMissingPrefix = errors.New("missing 'enr:' prefix for base64-encoded record")

@@ -21,16 +21,16 @@ import (
 	"math/big"
 	"sync"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/eth"
-	"github.com/ebakus/node/ethdb"
-	"github.com/ebakus/node/light"
-	"github.com/ebakus/node/p2p"
-	"github.com/ebakus/node/p2p/discv5"
-	"github.com/ebakus/node/p2p/enode"
-	"github.com/ebakus/node/params"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/eth"
+	"github.com/ebakus/go-ebakus/ethdb"
+	"github.com/ebakus/go-ebakus/light"
+	"github.com/ebakus/go-ebakus/p2p"
+	"github.com/ebakus/go-ebakus/p2p/discv5"
+	"github.com/ebakus/go-ebakus/p2p/enode"
+	"github.com/ebakus/go-ebakus/params"
 )
 
 func errResp(code errCode, format string, v ...interface{}) error {

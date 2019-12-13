@@ -22,10 +22,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/p2p"
-	"github.com/ebakus/node/p2p/enode"
-	"github.com/ebakus/node/p2p/simulations/adapters"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/p2p"
+	"github.com/ebakus/go-ebakus/p2p/enode"
+	"github.com/ebakus/go-ebakus/p2p/simulations/adapters"
 )
 
 var errTimedOut = errors.New("timed out")

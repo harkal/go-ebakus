@@ -25,8 +25,8 @@ import (
 	"sort"
 	"time"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/p2p/enode"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/p2p/enode"
 )
 
 const jsonIndent = "    "

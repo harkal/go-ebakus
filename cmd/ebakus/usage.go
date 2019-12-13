@@ -24,8 +24,8 @@ import (
 
 	"strings"
 
-	"github.com/ebakus/node/cmd/utils"
-	"github.com/ebakus/node/internal/debug"
+	"github.com/ebakus/go-ebakus/cmd/utils"
+	"github.com/ebakus/go-ebakus/internal/debug"
 	cli "gopkg.in/urfave/cli.v1"
 )
 

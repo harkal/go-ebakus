@@ -21,11 +21,11 @@ import (
 	"errors"
 	"math/big"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core"
-	"github.com/ebakus/node/core/rawdb"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/ethdb"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core"
+	"github.com/ebakus/go-ebakus/core/rawdb"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/ethdb"
 )
 
 // NoOdr is the default context passed to an ODR capable function when the ODR

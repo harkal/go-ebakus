@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/ebakus/node/common/math"
+	"github.com/ebakus/go-ebakus/common/math"
 )
 
 // Memory implements a simple memory model for the ebakus virtual machine.

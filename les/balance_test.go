@@ -20,7 +20,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ebakus/node/common/mclock"
+	"github.com/ebakus/go-ebakus/common/mclock"
 )
 
 func TestSetBalance(t *testing.T) {

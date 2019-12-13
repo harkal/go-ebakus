@@ -25,7 +25,7 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/ebakus/node/log"
+	"github.com/ebakus/go-ebakus/log"
 )
 
 // ethstatsDockerfile is the Dockerfile required to build an ethstats backend

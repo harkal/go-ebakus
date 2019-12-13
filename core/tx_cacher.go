@@ -19,7 +19,7 @@ package core
 import (
 	"runtime"
 
-	"github.com/ebakus/node/core/types"
+	"github.com/ebakus/go-ebakus/core/types"
 )
 
 // senderCacher is a concurrent transaction sender recoverer and cacher.

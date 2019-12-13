@@ -25,7 +25,7 @@ import (
 	"sort"
 	"time"
 
-	"github.com/ebakus/node/log"
+	"github.com/ebakus/go-ebakus/log"
 )
 
 const (

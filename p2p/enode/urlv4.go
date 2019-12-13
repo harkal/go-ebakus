@@ -26,9 +26,9 @@ import (
 	"regexp"
 	"strconv"
 
-	"github.com/ebakus/node/common/math"
-	"github.com/ebakus/node/crypto"
-	"github.com/ebakus/node/p2p/enr"
+	"github.com/ebakus/go-ebakus/common/math"
+	"github.com/ebakus/go-ebakus/crypto"
+	"github.com/ebakus/go-ebakus/p2p/enr"
 )
 
 var incompleteNodeURL = regexp.MustCompile("(?i)^(?:enode://)?([0-9a-f]+)$")

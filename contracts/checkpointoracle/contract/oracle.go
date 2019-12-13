@@ -7,12 +7,12 @@ import (
 	"math/big"
 	"strings"
 
-	ebakus "github.com/ebakus/node"
-	"github.com/ebakus/node/accounts/abi"
-	"github.com/ebakus/node/accounts/abi/bind"
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/event"
+	ebakus "github.com/ebakus/go-ebakus"
+	"github.com/ebakus/go-ebakus/accounts/abi"
+	"github.com/ebakus/go-ebakus/accounts/abi/bind"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/event"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.

@@ -23,8 +23,8 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/ethdb"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/ethdb"
 )
 
 var (

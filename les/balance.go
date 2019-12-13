@@ -20,7 +20,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ebakus/node/common/mclock"
+	"github.com/ebakus/go-ebakus/common/mclock"
 )
 
 const (

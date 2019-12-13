@@ -25,17 +25,17 @@ import (
 	"testing"
 	"time"
 
-	ebakus "github.com/ebakus/node"
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/consensus/ethash"
-	"github.com/ebakus/node/core"
-	"github.com/ebakus/node/core/bloombits"
-	"github.com/ebakus/node/core/rawdb"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/ethdb"
-	"github.com/ebakus/node/event"
-	"github.com/ebakus/node/params"
-	"github.com/ebakus/node/rpc"
+	ebakus "github.com/ebakus/go-ebakus"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/consensus/ethash"
+	"github.com/ebakus/go-ebakus/core"
+	"github.com/ebakus/go-ebakus/core/bloombits"
+	"github.com/ebakus/go-ebakus/core/rawdb"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/ethdb"
+	"github.com/ebakus/go-ebakus/event"
+	"github.com/ebakus/go-ebakus/params"
+	"github.com/ebakus/go-ebakus/rpc"
 )
 
 type testBackend struct {

@@ -22,7 +22,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/ebakus/node/metrics"
+	"github.com/ebakus/go-ebakus/metrics"
 )
 
 var (

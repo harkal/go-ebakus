@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ebakus/node/log"
+	"github.com/ebakus/go-ebakus/log"
 )
 
 // Enabled is checked by the constructor functions for all of the

@@ -26,8 +26,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/log"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/log"
 )
 
 // faucetDockerfile is the Dockerfile required to build a faucet container to

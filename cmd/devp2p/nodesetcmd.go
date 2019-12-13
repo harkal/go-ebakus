@@ -21,10 +21,10 @@ import (
 	"net"
 	"time"
 
-	"github.com/ebakus/node/core/forkid"
-	"github.com/ebakus/node/p2p/enr"
-	"github.com/ebakus/node/params"
-	"github.com/ebakus/node/rlp"
+	"github.com/ebakus/go-ebakus/core/forkid"
+	"github.com/ebakus/go-ebakus/p2p/enr"
+	"github.com/ebakus/go-ebakus/params"
+	"github.com/ebakus/go-ebakus/rlp"
 	"gopkg.in/urfave/cli.v1"
 )
 

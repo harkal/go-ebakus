@@ -27,14 +27,14 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ebakus/node/common/mclock"
-	"github.com/ebakus/node/crypto"
-	"github.com/ebakus/node/ethdb"
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/p2p"
-	"github.com/ebakus/node/p2p/discv5"
-	"github.com/ebakus/node/p2p/enode"
-	"github.com/ebakus/node/rlp"
+	"github.com/ebakus/go-ebakus/common/mclock"
+	"github.com/ebakus/go-ebakus/crypto"
+	"github.com/ebakus/go-ebakus/ethdb"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/p2p"
+	"github.com/ebakus/go-ebakus/p2p/discv5"
+	"github.com/ebakus/go-ebakus/p2p/enode"
+	"github.com/ebakus/go-ebakus/rlp"
 )
 
 const (

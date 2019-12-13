@@ -24,8 +24,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/common/hexutil"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/common/hexutil"
 )
 
 // Hash represents the 32 byte Keccak256 hash of arbitrary data.

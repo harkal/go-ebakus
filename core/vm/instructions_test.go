@@ -24,9 +24,9 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/crypto"
-	"github.com/ebakus/node/params"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/crypto"
+	"github.com/ebakus/go-ebakus/params"
 	"github.com/harkal/ebakusdb"
 )
 

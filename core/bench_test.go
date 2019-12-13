@@ -23,15 +23,15 @@ import (
 	"os"
 	"testing"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/common/math"
-	"github.com/ebakus/node/consensus/ethash"
-	"github.com/ebakus/node/core/rawdb"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/core/vm"
-	"github.com/ebakus/node/crypto"
-	"github.com/ebakus/node/ethdb"
-	"github.com/ebakus/node/params"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/common/math"
+	"github.com/ebakus/go-ebakus/consensus/ethash"
+	"github.com/ebakus/go-ebakus/core/rawdb"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/core/vm"
+	"github.com/ebakus/go-ebakus/crypto"
+	"github.com/ebakus/go-ebakus/ethdb"
+	"github.com/ebakus/go-ebakus/params"
 )
 
 func BenchmarkInsertChain_empty_memdb(b *testing.B) {

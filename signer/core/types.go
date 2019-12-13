@@ -22,9 +22,9 @@ import (
 	"math/big"
 	"strings"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/common/hexutil"
-	"github.com/ebakus/node/core/types"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/common/hexutil"
+	"github.com/ebakus/go-ebakus/core/types"
 )
 
 type ValidationInfo struct {

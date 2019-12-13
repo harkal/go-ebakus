@@ -19,7 +19,7 @@ package netutil
 import (
 	"time"
 
-	"github.com/ebakus/node/common/mclock"
+	"github.com/ebakus/go-ebakus/common/mclock"
 )
 
 // IPTracker predicts the external endpoint, i.e. IP address and port, of the local host

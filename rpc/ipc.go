@@ -20,8 +20,8 @@ import (
 	"context"
 	"net"
 
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/p2p/netutil"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/p2p/netutil"
 )
 
 // ServeListener accepts connections on l, serving JSON-RPC on them.

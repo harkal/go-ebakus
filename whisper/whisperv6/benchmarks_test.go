@@ -20,7 +20,7 @@ import (
 	"crypto/sha256"
 	"testing"
 
-	"github.com/ebakus/node/crypto"
+	"github.com/ebakus/go-ebakus/crypto"
 	"golang.org/x/crypto/pbkdf2"
 )
 

@@ -24,10 +24,10 @@ import (
 	"strings"
 	"syscall"
 
-	"github.com/ebakus/node/cmd/utils"
-	"github.com/ebakus/node/console"
-	"github.com/ebakus/node/node"
-	"github.com/ebakus/node/rpc"
+	"github.com/ebakus/go-ebakus/cmd/utils"
+	"github.com/ebakus/go-ebakus/console"
+	"github.com/ebakus/go-ebakus/node"
+	"github.com/ebakus/go-ebakus/rpc"
 	cli "gopkg.in/urfave/cli.v1"
 )
 
@@ -43,7 +43,7 @@ var (
 		Description: `
 The Ebakus console is an interactive shell for the JavaScript runtime environment
 which exposes a node admin interface as well as the Ðapp JavaScript API.
-See https://github.com/ebakus/node/wiki/JavaScript-Console.`,
+See https://github.com/ebakus/go-ebakus/wiki/JavaScript-Console.`,
 	}
 
 	attachCommand = cli.Command{
@@ -56,7 +56,7 @@ See https://github.com/ebakus/node/wiki/JavaScript-Console.`,
 		Description: `
 The Ebakus console is an interactive shell for the JavaScript runtime environment
 which exposes a node admin interface as well as the Ðapp JavaScript API.
-See https://github.com/ebakus/node/wiki/JavaScript-Console.
+See https://github.com/ebakus/go-ebakus/wiki/JavaScript-Console.
 This command allows to open a console on a running ebakus node.`,
 	}
 
@@ -69,7 +69,7 @@ This command allows to open a console on a running ebakus node.`,
 		Category:  "CONSOLE COMMANDS",
 		Description: `
 The JavaScript VM exposes a node admin interface as well as the Ðapp
-JavaScript API. See https://github.com/ebakus/node/wiki/JavaScript-Console`,
+JavaScript API. See https://github.com/ebakus/go-ebakus/wiki/JavaScript-Console`,
 	}
 )
 

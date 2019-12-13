@@ -22,9 +22,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/ebakus/node/cmd/utils"
-	"github.com/ebakus/node/common/fdlimit"
-	"github.com/ebakus/node/log"
+	"github.com/ebakus/go-ebakus/cmd/utils"
+	"github.com/ebakus/go-ebakus/common/fdlimit"
+	"github.com/ebakus/go-ebakus/log"
 	"gopkg.in/urfave/cli.v1"
 )
 

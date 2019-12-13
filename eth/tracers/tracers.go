@@ -21,7 +21,7 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/ebakus/node/eth/tracers/internal/tracers"
+	"github.com/ebakus/go-ebakus/eth/tracers/internal/tracers"
 )
 
 // all contains all the built in JavaScript tracers by name.

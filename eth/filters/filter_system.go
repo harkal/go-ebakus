@@ -25,14 +25,14 @@ import (
 	"sync"
 	"time"
 
-	ebakus "github.com/ebakus/node"
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core"
-	"github.com/ebakus/node/core/rawdb"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/event"
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/rpc"
+	ebakus "github.com/ebakus/go-ebakus"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core"
+	"github.com/ebakus/go-ebakus/core/rawdb"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/event"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/rpc"
 )
 
 // Type determines the kind of filter and is used to put the filter in to

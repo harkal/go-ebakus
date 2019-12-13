@@ -23,10 +23,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ebakus/node/accounts/scwallet"
-	"github.com/ebakus/node/accounts/usbwallet"
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/rpc"
+	"github.com/ebakus/go-ebakus/accounts/scwallet"
+	"github.com/ebakus/go-ebakus/accounts/usbwallet"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/rpc"
 	"github.com/robertkrimen/otto"
 )
 

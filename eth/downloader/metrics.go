@@ -19,7 +19,7 @@
 package downloader
 
 import (
-	"github.com/ebakus/node/metrics"
+	"github.com/ebakus/go-ebakus/metrics"
 )
 
 var (

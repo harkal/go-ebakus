@@ -26,10 +26,10 @@ import (
 	"math/big"
 	"time"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/crypto"
-	"github.com/ebakus/node/crypto/ecies"
-	"github.com/ebakus/node/rlp"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/crypto"
+	"github.com/ebakus/go-ebakus/crypto/ecies"
+	"github.com/ebakus/go-ebakus/rlp"
 )
 
 // Envelope represents a clear-text data packet to transmit through the Whisper

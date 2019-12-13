@@ -22,7 +22,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/ebakus/node/common"
+	"github.com/ebakus/go-ebakus/common"
 )
 
 func TestInterfaceGetSet(t *testing.T) {

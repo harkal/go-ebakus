@@ -21,13 +21,13 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/common/mclock"
-	"github.com/ebakus/node/consensus"
-	"github.com/ebakus/node/core/rawdb"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/light"
-	"github.com/ebakus/node/log"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/common/mclock"
+	"github.com/ebakus/go-ebakus/consensus"
+	"github.com/ebakus/go-ebakus/core/rawdb"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/light"
+	"github.com/ebakus/go-ebakus/log"
 )
 
 const (

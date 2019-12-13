@@ -20,8 +20,8 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/ethdb/memorydb"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/ethdb/memorydb"
 )
 
 // makeTestTrie create a sample test trie to test node-wise reconstruction.

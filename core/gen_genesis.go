@@ -6,10 +6,10 @@ import (
 	"encoding/json"
 	"errors"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/common/hexutil"
-	"github.com/ebakus/node/common/math"
-	"github.com/ebakus/node/params"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/common/hexutil"
+	"github.com/ebakus/go-ebakus/common/math"
+	"github.com/ebakus/go-ebakus/params"
 )
 
 var _ = (*genesisSpecMarshaling)(nil)

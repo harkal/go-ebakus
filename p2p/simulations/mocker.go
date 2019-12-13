@@ -24,9 +24,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/p2p/enode"
-	"github.com/ebakus/node/p2p/simulations/adapters"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/p2p/enode"
+	"github.com/ebakus/go-ebakus/p2p/simulations/adapters"
 )
 
 //a map of mocker names to its function

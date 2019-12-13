@@ -24,7 +24,7 @@ import (
 	"testing"
 
 	"github.com/davecgh/go-spew/spew"
-	"github.com/ebakus/node/core"
+	"github.com/ebakus/go-ebakus/core"
 )
 
 // Tests the ebakus/node to Aleth chainspec conversion for the Stureby testnet.

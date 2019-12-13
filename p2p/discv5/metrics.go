@@ -16,7 +16,7 @@
 
 package discv5
 
-import "github.com/ebakus/node/metrics"
+import "github.com/ebakus/go-ebakus/metrics"
 
 var (
 	ingressTrafficMeter = metrics.NewRegisteredMeter("discv5/InboundTraffic", nil)

@@ -22,12 +22,12 @@ import (
 	"testing"
 
 	"github.com/davecgh/go-spew/spew"
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/consensus/ethash"
-	"github.com/ebakus/node/core/rawdb"
-	"github.com/ebakus/node/core/vm"
-	"github.com/ebakus/node/ethdb"
-	"github.com/ebakus/node/params"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/consensus/ethash"
+	"github.com/ebakus/go-ebakus/core/rawdb"
+	"github.com/ebakus/go-ebakus/core/vm"
+	"github.com/ebakus/go-ebakus/ethdb"
+	"github.com/ebakus/go-ebakus/params"
 )
 
 func TestDefaultGenesisBlock(t *testing.T) {

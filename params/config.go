@@ -21,8 +21,8 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/crypto"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/crypto"
 )
 
 // Genesis hashes to enforce below configs on.

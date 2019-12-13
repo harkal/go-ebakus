@@ -20,7 +20,7 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/ebakus/node/p2p/enode"
+	"github.com/ebakus/go-ebakus/p2p/enode"
 )
 
 var (

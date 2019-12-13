@@ -23,14 +23,14 @@ import (
 	"strings"
 	"testing"
 
-	ebakus "github.com/ebakus/node"
-	"github.com/ebakus/node/accounts/abi"
-	"github.com/ebakus/node/accounts/abi/bind"
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/common/hexutil"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/crypto"
-	"github.com/ebakus/node/rlp"
+	ebakus "github.com/ebakus/go-ebakus"
+	"github.com/ebakus/go-ebakus/accounts/abi"
+	"github.com/ebakus/go-ebakus/accounts/abi/bind"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/common/hexutil"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/crypto"
+	"github.com/ebakus/go-ebakus/rlp"
 )
 
 type mockCaller struct {

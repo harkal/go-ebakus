@@ -23,9 +23,9 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/ebakus/node/accounts/keystore"
-	"github.com/ebakus/node/cmd/utils"
-	"github.com/ebakus/node/crypto"
+	"github.com/ebakus/go-ebakus/accounts/keystore"
+	"github.com/ebakus/go-ebakus/cmd/utils"
+	"github.com/ebakus/go-ebakus/crypto"
 	"github.com/pborman/uuid"
 	"gopkg.in/urfave/cli.v1"
 )

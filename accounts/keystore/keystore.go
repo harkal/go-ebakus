@@ -33,11 +33,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ebakus/node/accounts"
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/crypto"
-	"github.com/ebakus/node/event"
+	"github.com/ebakus/go-ebakus/accounts"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/crypto"
+	"github.com/ebakus/go-ebakus/event"
 )
 
 var (

@@ -35,7 +35,7 @@ package whisperv6
 import (
 	"time"
 
-	"github.com/ebakus/node/crypto"
+	"github.com/ebakus/go-ebakus/crypto"
 )
 
 // Whisper protocol parameters

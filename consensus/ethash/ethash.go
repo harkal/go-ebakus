@@ -34,12 +34,12 @@ import (
 	"unsafe"
 
 	mmap "github.com/edsrzf/mmap-go"
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/consensus"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/metrics"
-	"github.com/ebakus/node/rpc"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/consensus"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/metrics"
+	"github.com/ebakus/go-ebakus/rpc"
 	"github.com/hashicorp/golang-lru/simplelru"
 )
 

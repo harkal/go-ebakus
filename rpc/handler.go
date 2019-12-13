@@ -25,7 +25,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ebakus/node/log"
+	"github.com/ebakus/go-ebakus/log"
 )
 
 // handler handles JSON-RPC messages. There is one handler per connection. Note that

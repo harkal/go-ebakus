@@ -24,7 +24,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ebakus/node/common"
+	"github.com/ebakus/go-ebakus/common"
 	"golang.org/x/crypto/pbkdf2"
 )
 

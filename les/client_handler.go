@@ -21,14 +21,14 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/common/mclock"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/eth/downloader"
-	"github.com/ebakus/node/light"
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/p2p"
-	"github.com/ebakus/node/params"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/common/mclock"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/eth/downloader"
+	"github.com/ebakus/go-ebakus/light"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/p2p"
+	"github.com/ebakus/go-ebakus/params"
 )
 
 // clientHandler is responsible for receiving and processing all incoming server

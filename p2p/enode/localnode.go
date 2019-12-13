@@ -26,9 +26,9 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/p2p/enr"
-	"github.com/ebakus/node/p2p/netutil"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/p2p/enr"
+	"github.com/ebakus/go-ebakus/p2p/netutil"
 )
 
 const (

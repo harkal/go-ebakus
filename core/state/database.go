@@ -19,9 +19,9 @@ package state
 import (
 	"fmt"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/ethdb"
-	"github.com/ebakus/node/trie"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/ethdb"
+	"github.com/ebakus/go-ebakus/trie"
 	lru "github.com/hashicorp/golang-lru"
 )
 

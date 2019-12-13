@@ -20,10 +20,10 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/ethdb"
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/rlp"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/ethdb"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/rlp"
 )
 
 // Prove constructs a merkle proof for key. The result contains all encoded nodes

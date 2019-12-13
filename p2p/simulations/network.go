@@ -27,11 +27,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ebakus/node/event"
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/p2p"
-	"github.com/ebakus/node/p2p/enode"
-	"github.com/ebakus/node/p2p/simulations/adapters"
+	"github.com/ebakus/go-ebakus/event"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/p2p"
+	"github.com/ebakus/go-ebakus/p2p/enode"
+	"github.com/ebakus/go-ebakus/p2p/simulations/adapters"
 )
 
 var DialBanTimeout = 200 * time.Millisecond

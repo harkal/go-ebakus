@@ -25,8 +25,8 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/ebakus/node/accounts"
-	"github.com/ebakus/node/crypto"
+	"github.com/ebakus/go-ebakus/accounts"
+	"github.com/ebakus/go-ebakus/crypto"
 	"github.com/pborman/uuid"
 	"golang.org/x/crypto/pbkdf2"
 )

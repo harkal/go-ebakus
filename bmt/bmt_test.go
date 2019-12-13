@@ -28,7 +28,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ebakus/node/crypto/sha3"
+	"github.com/ebakus/go-ebakus/crypto/sha3"
 )
 
 const (

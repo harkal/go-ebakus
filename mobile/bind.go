@@ -23,12 +23,12 @@ import (
 	"math/big"
 	"strings"
 
-	"github.com/ebakus/node/accounts/abi"
-	"github.com/ebakus/node/accounts/abi/bind"
-	"github.com/ebakus/node/accounts/keystore"
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/crypto"
+	"github.com/ebakus/go-ebakus/accounts/abi"
+	"github.com/ebakus/go-ebakus/accounts/abi/bind"
+	"github.com/ebakus/go-ebakus/accounts/keystore"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/crypto"
 )
 
 // Signer is an interface defining the callback when a contract requires a

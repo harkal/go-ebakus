@@ -22,12 +22,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ebakus/node/accounts/abi/bind"
-	"github.com/ebakus/node/accounts/abi/bind/backends"
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/crypto"
+	"github.com/ebakus/go-ebakus/accounts/abi/bind"
+	"github.com/ebakus/go-ebakus/accounts/abi/bind/backends"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/crypto"
 )
 
 var testKey, _ = crypto.HexToECDSA("b71c71a67e1177ad4e901695e1b4b9ee17ae16c6668d313eac2f96dbcda3f291")

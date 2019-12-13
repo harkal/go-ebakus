@@ -26,17 +26,17 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/common/mclock"
-	"github.com/ebakus/node/core"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/eth"
-	"github.com/ebakus/node/les/flowcontrol"
-	"github.com/ebakus/node/light"
-	"github.com/ebakus/node/p2p"
-	"github.com/ebakus/node/p2p/enode"
-	"github.com/ebakus/node/params"
-	"github.com/ebakus/node/rlp"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/common/mclock"
+	"github.com/ebakus/go-ebakus/core"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/eth"
+	"github.com/ebakus/go-ebakus/les/flowcontrol"
+	"github.com/ebakus/go-ebakus/light"
+	"github.com/ebakus/go-ebakus/p2p"
+	"github.com/ebakus/go-ebakus/p2p/enode"
+	"github.com/ebakus/go-ebakus/params"
+	"github.com/ebakus/go-ebakus/rlp"
 )
 
 var (

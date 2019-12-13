@@ -24,8 +24,8 @@ import (
 	"runtime"
 	"testing"
 
-	"github.com/ebakus/node/crypto"
-	"github.com/ebakus/node/p2p"
+	"github.com/ebakus/go-ebakus/crypto"
+	"github.com/ebakus/go-ebakus/p2p"
 )
 
 // Tests that datadirs can be successfully created, be them manually configured

@@ -20,9 +20,9 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/ebakus/node/node"
-	"github.com/ebakus/node/p2p"
-	"github.com/ebakus/node/rpc"
+	"github.com/ebakus/go-ebakus/node"
+	"github.com/ebakus/go-ebakus/p2p"
+	"github.com/ebakus/go-ebakus/rpc"
 )
 
 // SampleService is a trivial network service that can be attached to a node for

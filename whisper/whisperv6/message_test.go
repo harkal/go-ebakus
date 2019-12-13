@@ -23,9 +23,9 @@ import (
 	mrand "math/rand"
 	"testing"
 
-	"github.com/ebakus/node/common/hexutil"
-	"github.com/ebakus/node/crypto"
-	"github.com/ebakus/node/rlp"
+	"github.com/ebakus/go-ebakus/common/hexutil"
+	"github.com/ebakus/go-ebakus/crypto"
+	"github.com/ebakus/go-ebakus/rlp"
 )
 
 func generateMessageParams() (*MessageParams, error) {

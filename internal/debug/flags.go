@@ -24,9 +24,9 @@ import (
 	"os"
 	"runtime"
 
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/metrics"
-	"github.com/ebakus/node/metrics/exp"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/metrics"
+	"github.com/ebakus/go-ebakus/metrics/exp"
 	"github.com/fjl/memsize/memsizeui"
 	colorable "github.com/mattn/go-colorable"
 	"github.com/mattn/go-isatty"

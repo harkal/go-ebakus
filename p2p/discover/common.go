@@ -20,9 +20,9 @@ import (
 	"crypto/ecdsa"
 	"net"
 
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/p2p/enode"
-	"github.com/ebakus/node/p2p/netutil"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/p2p/enode"
+	"github.com/ebakus/go-ebakus/p2p/netutil"
 )
 
 // UDPConn is a network connection on which discovery can operate.

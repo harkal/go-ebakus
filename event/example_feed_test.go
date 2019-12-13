@@ -19,7 +19,7 @@ package event_test
 import (
 	"fmt"
 
-	"github.com/ebakus/node/event"
+	"github.com/ebakus/go-ebakus/event"
 )
 
 func ExampleFeed_acknowledgedEvents() {

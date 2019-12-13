@@ -20,8 +20,8 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/ebakus/node/common/hexutil"
-	"github.com/ebakus/node/crypto"
+	"github.com/ebakus/go-ebakus/common/hexutil"
+	"github.com/ebakus/go-ebakus/crypto"
 )
 
 type bytesBacked interface {

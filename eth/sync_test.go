@@ -21,9 +21,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ebakus/node/eth/downloader"
-	"github.com/ebakus/node/p2p"
-	"github.com/ebakus/node/p2p/enode"
+	"github.com/ebakus/go-ebakus/eth/downloader"
+	"github.com/ebakus/go-ebakus/p2p"
+	"github.com/ebakus/go-ebakus/p2p/enode"
 )
 
 // Tests that fast sync gets disabled as soon as a real block is successfully

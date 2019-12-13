@@ -21,8 +21,8 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"github.com/ebakus/node/common/mclock"
-	"github.com/ebakus/node/common/prque"
+	"github.com/ebakus/go-ebakus/common/mclock"
+	"github.com/ebakus/go-ebakus/common/prque"
 )
 
 // servingQueue allows running tasks in a limited number of threads and puts the

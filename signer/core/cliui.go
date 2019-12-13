@@ -24,9 +24,9 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/ebakus/node/common/hexutil"
-	"github.com/ebakus/node/internal/ethapi"
-	"github.com/ebakus/node/log"
+	"github.com/ebakus/go-ebakus/common/hexutil"
+	"github.com/ebakus/go-ebakus/internal/ethapi"
+	"github.com/ebakus/go-ebakus/log"
 	"golang.org/x/crypto/ssh/terminal"
 )
 

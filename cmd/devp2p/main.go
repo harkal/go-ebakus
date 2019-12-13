@@ -22,9 +22,9 @@ import (
 	"path/filepath"
 	"sort"
 
-	"github.com/ebakus/node/internal/debug"
-	"github.com/ebakus/node/params"
-	"github.com/ebakus/node/p2p/enode"
+	"github.com/ebakus/go-ebakus/internal/debug"
+	"github.com/ebakus/go-ebakus/params"
+	"github.com/ebakus/go-ebakus/p2p/enode"
 	"gopkg.in/urfave/cli.v1"
 )
 

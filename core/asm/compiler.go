@@ -22,8 +22,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/ebakus/node/common/math"
-	"github.com/ebakus/node/core/vm"
+	"github.com/ebakus/go-ebakus/common/math"
+	"github.com/ebakus/go-ebakus/core/vm"
 )
 
 // Compiler contains information about the parsed source

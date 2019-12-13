@@ -19,7 +19,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/ebakus/node/log"
+	"github.com/ebakus/go-ebakus/log"
 )
 
 // ensureVirtualHost checks whether a reverse-proxy is running on the specified

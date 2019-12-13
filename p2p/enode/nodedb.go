@@ -26,7 +26,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ebakus/node/rlp"
+	"github.com/ebakus/go-ebakus/rlp"
 	"github.com/syndtr/goleveldb/leveldb"
 	"github.com/syndtr/goleveldb/leveldb/errors"
 	"github.com/syndtr/goleveldb/leveldb/iterator"

@@ -20,10 +20,10 @@ import (
 	"errors"
 	"math/big"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/common/math"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/params"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/common/math"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/params"
 	"golang.org/x/crypto/sha3"
 )
 

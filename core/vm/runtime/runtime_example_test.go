@@ -19,8 +19,8 @@ package runtime_test
 import (
 	"fmt"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core/vm/runtime"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core/vm/runtime"
 )
 
 func ExampleExecute() {

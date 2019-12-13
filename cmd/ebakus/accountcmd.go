@@ -20,12 +20,12 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	"github.com/ebakus/node/accounts"
-	"github.com/ebakus/node/accounts/keystore"
-	"github.com/ebakus/node/cmd/utils"
-	"github.com/ebakus/node/console"
-	"github.com/ebakus/node/crypto"
-	"github.com/ebakus/node/log"
+	"github.com/ebakus/go-ebakus/accounts"
+	"github.com/ebakus/go-ebakus/accounts/keystore"
+	"github.com/ebakus/go-ebakus/cmd/utils"
+	"github.com/ebakus/go-ebakus/console"
+	"github.com/ebakus/go-ebakus/crypto"
+	"github.com/ebakus/go-ebakus/log"
 	"gopkg.in/urfave/cli.v1"
 )
 

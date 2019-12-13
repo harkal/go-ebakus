@@ -19,8 +19,8 @@ package les
 import (
 	"time"
 
-	"github.com/ebakus/node/common/bitutil"
-	"github.com/ebakus/node/light"
+	"github.com/ebakus/go-ebakus/common/bitutil"
+	"github.com/ebakus/go-ebakus/light"
 )
 
 const (

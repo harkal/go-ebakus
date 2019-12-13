@@ -23,7 +23,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ebakus/node/common"
+	"github.com/ebakus/go-ebakus/common"
 )
 
 func BenchmarkCutOriginal(b *testing.B) {

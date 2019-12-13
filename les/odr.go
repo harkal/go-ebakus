@@ -20,11 +20,11 @@ import (
 	"context"
 	"time"
 
-	"github.com/ebakus/node/common/mclock"
-	"github.com/ebakus/node/core"
-	"github.com/ebakus/node/ethdb"
-	"github.com/ebakus/node/light"
-	"github.com/ebakus/node/log"
+	"github.com/ebakus/go-ebakus/common/mclock"
+	"github.com/ebakus/go-ebakus/core"
+	"github.com/ebakus/go-ebakus/ethdb"
+	"github.com/ebakus/go-ebakus/light"
+	"github.com/ebakus/go-ebakus/log"
 )
 
 // LesOdr implements light.OdrBackend

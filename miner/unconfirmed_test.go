@@ -19,8 +19,8 @@ package miner
 import (
 	"testing"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core/types"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core/types"
 )
 
 // noopChainRetriever is an implementation of headerRetriever that always

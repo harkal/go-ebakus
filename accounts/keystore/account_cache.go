@@ -28,9 +28,9 @@ import (
 	"time"
 
 	mapset "github.com/deckarep/golang-set"
-	"github.com/ebakus/node/accounts"
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/log"
+	"github.com/ebakus/go-ebakus/accounts"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/log"
 )
 
 // Minimum amount of time between cache reloads. This limit applies if the platform does

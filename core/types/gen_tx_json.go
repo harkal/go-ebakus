@@ -7,8 +7,8 @@ import (
 	"errors"
 	"math/big"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/common/hexutil"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/common/hexutil"
 )
 
 var _ = (*txdataMarshaling)(nil)

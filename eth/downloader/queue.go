@@ -25,11 +25,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/common/prque"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/metrics"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/common/prque"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/metrics"
 )
 
 var (

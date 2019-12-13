@@ -19,8 +19,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/ebakus/node/cmd/utils"
-	"github.com/ebakus/node/common"
+	"github.com/ebakus/go-ebakus/cmd/utils"
+	"github.com/ebakus/go-ebakus/common"
 	"gopkg.in/urfave/cli.v1"
 )
 

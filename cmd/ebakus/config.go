@@ -27,12 +27,12 @@ import (
 
 	cli "gopkg.in/urfave/cli.v1"
 
-	"github.com/ebakus/node/cmd/utils"
-	"github.com/ebakus/node/dashboard"
-	"github.com/ebakus/node/eth"
-	"github.com/ebakus/node/node"
-	"github.com/ebakus/node/params"
-	whisper "github.com/ebakus/node/whisper/whisperv6"
+	"github.com/ebakus/go-ebakus/cmd/utils"
+	"github.com/ebakus/go-ebakus/dashboard"
+	"github.com/ebakus/go-ebakus/eth"
+	"github.com/ebakus/go-ebakus/node"
+	"github.com/ebakus/go-ebakus/params"
+	whisper "github.com/ebakus/go-ebakus/whisper/whisperv6"
 	"github.com/naoina/toml"
 )
 

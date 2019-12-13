@@ -19,7 +19,7 @@ package bloombits
 import (
 	"errors"
 
-	"github.com/ebakus/node/core/types"
+	"github.com/ebakus/go-ebakus/core/types"
 )
 
 var (

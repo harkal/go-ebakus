@@ -20,8 +20,8 @@ import (
 	"hash"
 	"sync"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/rlp"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/rlp"
 	"golang.org/x/crypto/sha3"
 )
 

@@ -40,7 +40,7 @@ import (
 	"io"
 	"sort"
 
-	"github.com/ebakus/node/rlp"
+	"github.com/ebakus/go-ebakus/rlp"
 )
 
 const SizeLimit = 300 // maximum encoded size of a node record in bytes

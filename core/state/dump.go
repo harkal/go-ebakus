@@ -20,11 +20,11 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/common/hexutil"
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/rlp"
-	"github.com/ebakus/node/trie"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/common/hexutil"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/rlp"
+	"github.com/ebakus/go-ebakus/trie"
 )
 
 // DumpAccount represents an account in the state

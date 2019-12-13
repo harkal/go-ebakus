@@ -24,12 +24,12 @@ import (
 	"time"
 
 	mapset "github.com/deckarep/golang-set"
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core/forkid"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/metrics"
-	"github.com/ebakus/node/p2p"
-	"github.com/ebakus/node/rlp"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core/forkid"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/metrics"
+	"github.com/ebakus/go-ebakus/p2p"
+	"github.com/ebakus/go-ebakus/rlp"
 )
 
 var (

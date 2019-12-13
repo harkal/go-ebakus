@@ -23,8 +23,8 @@ import (
 	"io/ioutil"
 	"testing"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/log"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/log"
 	"github.com/mattn/go-colorable"
 )
 

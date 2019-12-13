@@ -21,10 +21,10 @@ import (
 	"errors"
 	"time"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/eth/downloader"
-	"github.com/ebakus/node/light"
-	"github.com/ebakus/node/log"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/eth/downloader"
+	"github.com/ebakus/go-ebakus/light"
+	"github.com/ebakus/go-ebakus/log"
 )
 
 var errInvalidCheckpoint = errors.New("invalid advertised checkpoint")

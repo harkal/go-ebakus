@@ -21,10 +21,10 @@ import (
 	"math"
 	"math/big"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core/vm"
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/params"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core/vm"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/params"
 )
 
 var (

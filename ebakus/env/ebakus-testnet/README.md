@@ -42,13 +42,13 @@ To bring up your ebakus network, you first have to build the image:
 
 ```commandline
 cd $GOPATH/src
-docker build -t ${EBAKUS_CONTAINER_NAME} -f github.com/ebakus/node/ebakus/env/ebakus-testnet/Dockerfile .
+docker build -t ${EBAKUS_CONTAINER_NAME} -f github.com/ebakus/go-ebakus/ebakus/env/ebakus-testnet/Dockerfile .
 ```
 
 and then start it by running:
 
 ```commandline
-cd $GOPATH/src/github.com/ebakus/node/ebakus/env/ebakus-testnet
+cd $GOPATH/src/github.com/ebakus/go-ebakus/ebakus/env/ebakus-testnet
 docker-compose up
 ```
 

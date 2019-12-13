@@ -23,10 +23,10 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/ebakus/node/core/state"
-	"github.com/ebakus/node/core/vm"
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/tests"
+	"github.com/ebakus/go-ebakus/core/state"
+	"github.com/ebakus/go-ebakus/core/vm"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/tests"
 
 	cli "gopkg.in/urfave/cli.v1"
 )

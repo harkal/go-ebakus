@@ -27,17 +27,17 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/common/hexutil"
-	"github.com/ebakus/node/common/math"
-	"github.com/ebakus/node/core"
-	"github.com/ebakus/node/core/rawdb"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/core/vm"
-	"github.com/ebakus/node/crypto"
-	"github.com/ebakus/node/params"
-	"github.com/ebakus/node/rlp"
-	"github.com/ebakus/node/tests"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/common/hexutil"
+	"github.com/ebakus/go-ebakus/common/math"
+	"github.com/ebakus/go-ebakus/core"
+	"github.com/ebakus/go-ebakus/core/rawdb"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/core/vm"
+	"github.com/ebakus/go-ebakus/crypto"
+	"github.com/ebakus/go-ebakus/params"
+	"github.com/ebakus/go-ebakus/rlp"
+	"github.com/ebakus/go-ebakus/tests"
 )
 
 // To generate a new callTracer test, copy paste the makeTest method below into

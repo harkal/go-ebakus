@@ -22,8 +22,8 @@ import (
 	"net/http"
 	"sort"
 
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/metrics"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/metrics"
 )
 
 // Handler returns an HTTP handler which dump metrics in Prometheus format.

@@ -21,8 +21,8 @@ import (
 	"time"
 
 	"github.com/elastic/gosigar"
-	"github.com/ebakus/node/metrics"
-	"github.com/ebakus/node/p2p"
+	"github.com/ebakus/go-ebakus/metrics"
+	"github.com/ebakus/go-ebakus/p2p"
 )
 
 // meterCollector returns a function, which retrieves the count of a specific meter.

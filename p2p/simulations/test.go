@@ -19,10 +19,10 @@ package simulations
 import (
 	"testing"
 
-	"github.com/ebakus/node/p2p"
-	"github.com/ebakus/node/p2p/enode"
-	"github.com/ebakus/node/p2p/enr"
-	"github.com/ebakus/node/rpc"
+	"github.com/ebakus/go-ebakus/p2p"
+	"github.com/ebakus/go-ebakus/p2p/enode"
+	"github.com/ebakus/go-ebakus/p2p/enr"
+	"github.com/ebakus/go-ebakus/rpc"
 )
 
 // NoopService is the service that does not do anything

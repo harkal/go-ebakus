@@ -21,9 +21,9 @@ import (
 	"errors"
 	"math/big"
 
-	ebakus "github.com/ebakus/node"
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core/types"
+	ebakus "github.com/ebakus/go-ebakus"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core/types"
 )
 
 var (

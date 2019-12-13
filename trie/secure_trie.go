@@ -19,8 +19,8 @@ package trie
 import (
 	"fmt"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/log"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/log"
 )
 
 // SecureTrie wraps a trie with key hashing. In a secure trie, all

@@ -26,7 +26,7 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/ebakus/node/common/hexutil"
+	"github.com/ebakus/go-ebakus/common/hexutil"
 	"golang.org/x/crypto/sha3"
 )
 

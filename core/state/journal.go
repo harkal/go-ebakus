@@ -19,7 +19,7 @@ package state
 import (
 	"math/big"
 
-	"github.com/ebakus/node/common"
+	"github.com/ebakus/go-ebakus/common"
 )
 
 // journalEntry is a modification entry in the state change journal that can be

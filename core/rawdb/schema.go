@@ -20,8 +20,8 @@ package rawdb
 import (
 	"encoding/binary"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/metrics"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/metrics"
 )
 
 // The fields below define the low level database schema prefixing.

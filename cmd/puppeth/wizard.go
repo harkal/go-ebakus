@@ -31,9 +31,9 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core"
-	"github.com/ebakus/node/log"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core"
+	"github.com/ebakus/go-ebakus/log"
 	"golang.org/x/crypto/ssh/terminal"
 )
 

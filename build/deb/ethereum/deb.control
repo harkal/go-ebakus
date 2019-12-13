@@ -5,8 +5,8 @@ Maintainer: {{.Author}}
 Build-Depends: debhelper (>= 8.0.0), {{.GoBootPackage}}
 Standards-Version: 3.9.5
 Homepage: https://ebakus.com
-Vcs-Git: git://github.com/ebakus/node.git
-Vcs-Browser: https://github.com/ebakus/node
+Vcs-Git: git://github.com/ebakus/go-ebakus.git
+Vcs-Browser: https://github.com/ebakus/go-ebakus
 
 Package: {{.Name}}
 Architecture: any

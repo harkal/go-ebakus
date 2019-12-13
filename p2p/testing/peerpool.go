@@ -20,8 +20,8 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/p2p/enode"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/p2p/enode"
 )
 
 type TestPeer interface {

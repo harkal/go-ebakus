@@ -25,7 +25,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ebakus/node/log"
+	"github.com/ebakus/go-ebakus/log"
 )
 
 var discard = Protocol{

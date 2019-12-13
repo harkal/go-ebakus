@@ -24,12 +24,12 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/ebakus/node"
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/common/hexutil"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/rlp"
-	"github.com/ebakus/node/rpc"
+	"github.com/ebakus/go-ebakus"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/common/hexutil"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/rlp"
+	"github.com/ebakus/go-ebakus/rpc"
 )
 
 // Client defines typed wrappers for the Ebakus RPC API.

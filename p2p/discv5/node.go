@@ -30,8 +30,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/crypto"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/crypto"
 )
 
 // Node represents a host on the network.

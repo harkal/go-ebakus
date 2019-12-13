@@ -19,7 +19,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/ebakus/node/log"
+	"github.com/ebakus/go-ebakus/log"
 )
 
 // deployDashboard queries the user for various input on deploying a web-service

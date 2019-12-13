@@ -25,16 +25,16 @@ import (
 	"os"
 	"reflect"
 
-	"github.com/ebakus/node/accounts"
-	"github.com/ebakus/node/accounts/keystore"
-	"github.com/ebakus/node/accounts/scwallet"
-	"github.com/ebakus/node/accounts/usbwallet"
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/common/hexutil"
-	"github.com/ebakus/node/internal/ethapi"
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/rlp"
-	"github.com/ebakus/node/signer/storage"
+	"github.com/ebakus/go-ebakus/accounts"
+	"github.com/ebakus/go-ebakus/accounts/keystore"
+	"github.com/ebakus/go-ebakus/accounts/scwallet"
+	"github.com/ebakus/go-ebakus/accounts/usbwallet"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/common/hexutil"
+	"github.com/ebakus/go-ebakus/internal/ethapi"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/rlp"
+	"github.com/ebakus/go-ebakus/signer/storage"
 )
 
 const (

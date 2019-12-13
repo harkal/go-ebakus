@@ -19,8 +19,8 @@
 package ebakus
 
 import (
-	"github.com/ebakus/node/whisper/shhclient"
-	whisper "github.com/ebakus/node/whisper/whisperv6"
+	"github.com/ebakus/go-ebakus/whisper/shhclient"
+	whisper "github.com/ebakus/go-ebakus/whisper/whisperv6"
 )
 
 // WhisperClient provides access to the Ebakus APIs.

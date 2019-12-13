@@ -41,23 +41,23 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ebakus/node/accounts"
-	"github.com/ebakus/node/accounts/keystore"
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/eth"
-	"github.com/ebakus/node/eth/downloader"
-	"github.com/ebakus/node/ethclient"
-	"github.com/ebakus/node/ethstats"
-	"github.com/ebakus/node/les"
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/node"
-	"github.com/ebakus/node/p2p"
-	"github.com/ebakus/node/p2p/discv5"
-	"github.com/ebakus/node/p2p/enode"
-	"github.com/ebakus/node/p2p/nat"
-	"github.com/ebakus/node/params"
+	"github.com/ebakus/go-ebakus/accounts"
+	"github.com/ebakus/go-ebakus/accounts/keystore"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/eth"
+	"github.com/ebakus/go-ebakus/eth/downloader"
+	"github.com/ebakus/go-ebakus/ethclient"
+	"github.com/ebakus/go-ebakus/ethstats"
+	"github.com/ebakus/go-ebakus/les"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/node"
+	"github.com/ebakus/go-ebakus/p2p"
+	"github.com/ebakus/go-ebakus/p2p/discv5"
+	"github.com/ebakus/go-ebakus/p2p/enode"
+	"github.com/ebakus/go-ebakus/p2p/nat"
+	"github.com/ebakus/go-ebakus/params"
 	"golang.org/x/net/websocket"
 )
 
@@ -458,7 +458,7 @@ func (f *faucet) apiHandler(conn *websocket.Conn) {
 		case *noauthFlag:
 			username, avatar, address, err = authNoAuth(msg.URL)
 		default:
-			err = errors.New("Something funky happened, please open an issue at https://github.com/ebakus/node/issues")
+			err = errors.New("Something funky happened, please open an issue at https://github.com/ebakus/go-ebakus/issues")
 		}
 		if err != nil {
 			if err = sendError(conn, err); err != nil {

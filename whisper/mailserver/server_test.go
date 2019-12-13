@@ -25,9 +25,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/crypto"
-	whisper "github.com/ebakus/node/whisper/whisperv6"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/crypto"
+	whisper "github.com/ebakus/go-ebakus/whisper/whisperv6"
 )
 
 const powRequirement = 0.00001

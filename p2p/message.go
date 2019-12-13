@@ -25,9 +25,9 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/ebakus/node/event"
-	"github.com/ebakus/node/p2p/enode"
-	"github.com/ebakus/node/rlp"
+	"github.com/ebakus/go-ebakus/event"
+	"github.com/ebakus/go-ebakus/p2p/enode"
+	"github.com/ebakus/go-ebakus/rlp"
 )
 
 // Msg defines the structure of a p2p message.

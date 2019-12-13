@@ -23,13 +23,13 @@ import (
 	"testing"
 
 	"github.com/davecgh/go-spew/spew"
-	"github.com/ebakus/node/consensus/ethash"
-	"github.com/ebakus/node/core"
-	"github.com/ebakus/node/core/rawdb"
-	"github.com/ebakus/node/core/state"
-	"github.com/ebakus/node/core/vm"
-	"github.com/ebakus/node/params"
-	"github.com/ebakus/node/trie"
+	"github.com/ebakus/go-ebakus/consensus/ethash"
+	"github.com/ebakus/go-ebakus/core"
+	"github.com/ebakus/go-ebakus/core/rawdb"
+	"github.com/ebakus/go-ebakus/core/state"
+	"github.com/ebakus/go-ebakus/core/vm"
+	"github.com/ebakus/go-ebakus/params"
+	"github.com/ebakus/go-ebakus/trie"
 )
 
 func TestNodeIterator(t *testing.T) {

@@ -16,7 +16,7 @@
 
 package downloader
 
-import "github.com/ebakus/node/core/types"
+import "github.com/ebakus/go-ebakus/core/types"
 
 type DoneEvent struct {
 	Latest *types.Header

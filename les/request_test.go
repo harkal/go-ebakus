@@ -21,11 +21,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core/rawdb"
-	"github.com/ebakus/node/crypto"
-	"github.com/ebakus/node/ethdb"
-	"github.com/ebakus/node/light"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core/rawdb"
+	"github.com/ebakus/go-ebakus/crypto"
+	"github.com/ebakus/go-ebakus/ethdb"
+	"github.com/ebakus/go-ebakus/light"
 )
 
 var testBankSecureTrieKey = secAddr(bankAddr)

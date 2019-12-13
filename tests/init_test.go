@@ -31,7 +31,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ebakus/node/params"
+	"github.com/ebakus/go-ebakus/params"
 )
 
 // Command line flags to configure the interpreters.

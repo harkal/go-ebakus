@@ -21,10 +21,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ebakus/node/metrics"
+	"github.com/ebakus/go-ebakus/metrics"
 
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/p2p"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/p2p"
 )
 
 const (

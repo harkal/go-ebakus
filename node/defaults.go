@@ -22,9 +22,9 @@ import (
 	"path/filepath"
 	"runtime"
 
-	"github.com/ebakus/node/p2p"
-	"github.com/ebakus/node/p2p/nat"
-	"github.com/ebakus/node/rpc"
+	"github.com/ebakus/go-ebakus/p2p"
+	"github.com/ebakus/go-ebakus/p2p/nat"
+	"github.com/ebakus/go-ebakus/rpc"
 )
 
 const (

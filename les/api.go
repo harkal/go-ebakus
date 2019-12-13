@@ -19,7 +19,7 @@ package les
 import (
 	"errors"
 
-	"github.com/ebakus/node/common/hexutil"
+	"github.com/ebakus/go-ebakus/common/hexutil"
 )
 
 var (

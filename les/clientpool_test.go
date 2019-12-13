@@ -25,9 +25,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ebakus/node/common/mclock"
-	"github.com/ebakus/node/core/rawdb"
-	"github.com/ebakus/node/p2p/enode"
+	"github.com/ebakus/go-ebakus/common/mclock"
+	"github.com/ebakus/go-ebakus/core/rawdb"
+	"github.com/ebakus/go-ebakus/p2p/enode"
 )
 
 func TestClientPoolL10C100Free(t *testing.T) {

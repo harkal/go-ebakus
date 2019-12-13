@@ -25,16 +25,16 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/ebakus/node"
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core/rawdb"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/ethdb"
-	"github.com/ebakus/node/event"
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/metrics"
-	"github.com/ebakus/node/params"
-	"github.com/ebakus/node/trie"
+	"github.com/ebakus/go-ebakus"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core/rawdb"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/ethdb"
+	"github.com/ebakus/go-ebakus/event"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/metrics"
+	"github.com/ebakus/go-ebakus/params"
+	"github.com/ebakus/go-ebakus/trie"
 )
 
 var (

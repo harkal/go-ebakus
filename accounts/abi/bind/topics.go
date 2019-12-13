@@ -23,9 +23,9 @@ import (
 	"math/big"
 	"reflect"
 
-	"github.com/ebakus/node/accounts/abi"
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/crypto"
+	"github.com/ebakus/go-ebakus/accounts/abi"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/crypto"
 )
 
 // makeTopics converts a filter query argument list into a filter topic set.

@@ -27,16 +27,16 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/common/hexutil"
-	"github.com/ebakus/node/core"
-	"github.com/ebakus/node/core/rawdb"
-	"github.com/ebakus/node/core/state"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/internal/ethapi"
-	"github.com/ebakus/node/rlp"
-	"github.com/ebakus/node/rpc"
-	"github.com/ebakus/node/trie"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/common/hexutil"
+	"github.com/ebakus/go-ebakus/core"
+	"github.com/ebakus/go-ebakus/core/rawdb"
+	"github.com/ebakus/go-ebakus/core/state"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/internal/ethapi"
+	"github.com/ebakus/go-ebakus/rlp"
+	"github.com/ebakus/go-ebakus/rpc"
+	"github.com/ebakus/go-ebakus/trie"
 )
 
 // PublicEbakusAPI provides an API to access Ebakus full node-related

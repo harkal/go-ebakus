@@ -28,9 +28,9 @@ import (
 	"strings"
 	"syscall"
 
-	"github.com/ebakus/node/internal/jsre"
-	"github.com/ebakus/node/internal/web3ext"
-	"github.com/ebakus/node/rpc"
+	"github.com/ebakus/go-ebakus/internal/jsre"
+	"github.com/ebakus/go-ebakus/internal/web3ext"
+	"github.com/ebakus/go-ebakus/rpc"
 	colorable "github.com/mattn/go-colorable"
 	"github.com/peterh/liner"
 	"github.com/robertkrimen/otto"

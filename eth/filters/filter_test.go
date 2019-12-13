@@ -23,14 +23,14 @@ import (
 	"os"
 	"testing"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/consensus/ethash"
-	"github.com/ebakus/node/core"
-	"github.com/ebakus/node/core/rawdb"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/crypto"
-	"github.com/ebakus/node/event"
-	"github.com/ebakus/node/params"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/consensus/ethash"
+	"github.com/ebakus/go-ebakus/core"
+	"github.com/ebakus/go-ebakus/core/rawdb"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/crypto"
+	"github.com/ebakus/go-ebakus/event"
+	"github.com/ebakus/go-ebakus/params"
 )
 
 func makeReceipt(addr common.Address) *types.Receipt {

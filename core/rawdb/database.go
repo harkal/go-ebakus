@@ -23,11 +23,11 @@ import (
 	"os"
 	"time"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/ethdb"
-	"github.com/ebakus/node/ethdb/leveldb"
-	"github.com/ebakus/node/ethdb/memorydb"
-	"github.com/ebakus/node/log"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/ethdb"
+	"github.com/ebakus/go-ebakus/ethdb/leveldb"
+	"github.com/ebakus/go-ebakus/ethdb/memorydb"
+	"github.com/ebakus/go-ebakus/log"
 	"github.com/olekukonko/tablewriter"
 )
 

@@ -4,8 +4,8 @@ Official golang implementation of the Ebakus protocol.
 
 [![API Reference](
 https://camo.githubusercontent.com/915b7be44ada53c290eb157634330494ebe3e30a/68747470733a2f2f676f646f632e6f72672f6769746875622e636f6d2f676f6c616e672f6764646f3f7374617475732e737667
-)](https://godoc.org/github.com/ebakus/node)
-[![Go Report Card](https://goreportcard.com/badge/github.com/ebakus/node)](https://goreportcard.com/report/github.com/ebakus/node)
+)](https://godoc.org/github.com/ebakus/go-ebakus)
+[![Go Report Card](https://goreportcard.com/badge/github.com/ebakus/go-ebakus)](https://goreportcard.com/report/github.com/ebakus/go-ebakus)
 [![Travis](https://travis-ci.org/ebakus/node.svg?branch=master)](https://travis-ci.org/ebakus/node)
 [![Discord](https://img.shields.io/badge/discord-join%20chat-blue.svg)](https://discord.gg/nthXNEv)
 
@@ -14,7 +14,7 @@ archives are published at https://geth.ethereum.org/downloads/.
 
 ## Building the source
 
-For prerequisites and detailed build instructions please read the [Installation Instructions](https://github.com/ebakus/node/wiki/Building-Ebakus) on the wiki.
+For prerequisites and detailed build instructions please read the [Installation Instructions](https://github.com/ebakus/go-ebakus/wiki/Building-Ebakus) on the wiki.
 
 Building `ebakus` requires both a Go (version 1.10 or later) and a C compiler. You can install
 them using your favourite package manager. Once the dependencies are installed, run
@@ -35,8 +35,8 @@ The go-ebakus project comes with several wrappers/executables found in the `cmd`
 
 | Command    | Description |
 |:----------:|-------------|
-| **`ebakus`** | Our main Ebakus CLI client. It is the entry point into the Ebakus network (main-, test- or private net), capable of running as a full node (default) archive node (retaining all historical state) or a light node (retrieving data live). It can be used by other processes as a gateway into the Ebakus network via JSON RPC endpoints exposed on top of HTTP, WebSocket and/or IPC transports. `ebakus --help` and the [CLI Wiki page](https://github.com/ebakus/node/wiki/Command-Line-Options) for command line options. |
-| `abigen` | Source code generator to convert Ebakus contract definitions into easy to use, compile-time type-safe Go packages. It operates on plain [Ebakus contract ABIs](https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI) with expanded functionality if the contract bytecode is also available. However it also accepts Solidity source files, making development much more streamlined. Please see our [Native DApps](https://github.com/ebakus/node/wiki/Native-DApps:-Go-bindings-to-Ebakus-contracts) wiki page for details. |
+| **`ebakus`** | Our main Ebakus CLI client. It is the entry point into the Ebakus network (main-, test- or private net), capable of running as a full node (default) archive node (retaining all historical state) or a light node (retrieving data live). It can be used by other processes as a gateway into the Ebakus network via JSON RPC endpoints exposed on top of HTTP, WebSocket and/or IPC transports. `ebakus --help` and the [CLI Wiki page](https://github.com/ebakus/go-ebakus/wiki/Command-Line-Options) for command line options. |
+| `abigen` | Source code generator to convert Ebakus contract definitions into easy to use, compile-time type-safe Go packages. It operates on plain [Ebakus contract ABIs](https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI) with expanded functionality if the contract bytecode is also available. However it also accepts Solidity source files, making development much more streamlined. Please see our [Native DApps](https://github.com/ebakus/go-ebakus/wiki/Native-DApps:-Go-bindings-to-Ebakus-contracts) wiki page for details. |
 | `bootnode` | Stripped down version of our Ebakus client implementation that only takes part in the network node discovery protocol, but does not run any of the higher level application protocols. It can be used as a lightweight bootstrap node to aid in finding peers in private networks. |
 | `evm` | Developer utility version of the EVM (Ebakus Virtual Machine) that is capable of running bytecode snippets within a configurable environment and execution mode. Its purpose is to allow isolated, fine-grained debugging of EVM opcodes (e.g. `evm --code 60ff60ff --debug`). |
 | `ebakusrpctest` | Developer utility tool to support our [ebakus/rpc-test](https://github.com/ebakus/rpc-tests) test suite which validates baseline conformity to the [Ebakus JSON RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC) specs. Please see the [test suite's readme](https://github.com/ethereum/rpc-tests/blob/master/README.md) for details. |
@@ -46,7 +46,7 @@ The go-ebakus project comes with several wrappers/executables found in the `cmd`
 ## Running ebakus
 
 Going through all the possible command line flags is out of scope here (please consult our
-[CLI Wiki page](https://github.com/ebakus/node/wiki/Command-Line-Options)),
+[CLI Wiki page](https://github.com/ebakus/go-ebakus/wiki/Command-Line-Options)),
 but we've enumerated a few common parameter combos to get you up to speed quickly
 on how you can run your own `ebakus` instance.
 
@@ -66,9 +66,9 @@ This command will:
  * Start `ebakus` in fast sync mode (default, can be changed with the `--syncmode` flag), causing it to
    download more data in exchange for avoiding processing the entire history of the Ebakus network,
    which is very CPU intensive.
- * Start up `ebakus` built-in interactive [JavaScript console](https://github.com/ebakus/node/wiki/JavaScript-Console),
+ * Start up `ebakus` built-in interactive [JavaScript console](https://github.com/ebakus/go-ebakus/wiki/JavaScript-Console),
    (via the trailing `console` subcommand) through which you can invoke all official [`web3` methods](https://github.com/ethereum/wiki/wiki/JavaScript-API)
-   as well as Ebakus' own [management APIs](https://github.com/ebakus/node/wiki/Management-APIs).
+   as well as Ebakus' own [management APIs](https://github.com/ebakus/go-ebakus/wiki/Management-APIs).
    This too is optional and if you leave it out you can always attach to an already running `ebakus` instance
    with `ebakus attach`.
 
@@ -158,7 +158,7 @@ accessible from the outside.
 As a developer, sooner rather than later you'll want to start interacting with `ebakus` and the
 Ebakus network via your own programs and not manually through the console. To aid
 this, `ebakus` has built-in support for a JSON-RPC based APIs ([standard APIs](https://github.com/ethereum/wiki/wiki/JSON-RPC)
-and [`ebakus` specific APIs](https://github.com/ebakus/node/wiki/Management-APIs)).
+and [`ebakus` specific APIs](https://github.com/ebakus/go-ebakus/wiki/Management-APIs)).
 These can be exposed via HTTP, WebSockets and IPC (UNIX sockets on UNIX based
 platforms, and named pipes on Windows).
 
@@ -330,7 +330,7 @@ Please make sure your contributions adhere to our coding guidelines:
  * Commit messages should be prefixed with the package(s) they modify.
    * E.g. "eth, rpc: make trace configs optional"
 
-Please see the [Developers' Guide](https://github.com/ebakus/node/wiki/Developers'-Guide)
+Please see the [Developers' Guide](https://github.com/ebakus/go-ebakus/wiki/Developers'-Guide)
 for more details on configuring your environment, managing project dependencies, and
 testing procedures.
 

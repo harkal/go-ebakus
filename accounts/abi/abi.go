@@ -22,7 +22,7 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/ebakus/node/common"
+	"github.com/ebakus/go-ebakus/common"
 )
 
 type ArgumentsType int

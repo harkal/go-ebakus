@@ -23,10 +23,10 @@ import (
 	"errors"
 	"math/big"
 
-	"github.com/ebakus/node/accounts/abi/bind"
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/contracts/checkpointoracle/contract"
-	"github.com/ebakus/node/core/types"
+	"github.com/ebakus/go-ebakus/accounts/abi/bind"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/contracts/checkpointoracle/contract"
+	"github.com/ebakus/go-ebakus/core/types"
 )
 
 // CheckpointOracle is a Go wrapper around an on-chain light client checkpoint oracle.

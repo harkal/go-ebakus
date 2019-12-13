@@ -26,7 +26,7 @@ import (
 	"path"
 	"strings"
 
-	"github.com/ebakus/node/common/math"
+	"github.com/ebakus/go-ebakus/common/math"
 	"gopkg.in/urfave/cli.v1"
 )
 

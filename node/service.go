@@ -20,15 +20,15 @@ import (
 	"path/filepath"
 	"reflect"
 
-	"github.com/ebakus/node/rlp"
+	"github.com/ebakus/go-ebakus/rlp"
 
-	"github.com/ebakus/node/accounts"
-	"github.com/ebakus/node/core/rawdb"
-	"github.com/ebakus/node/ethdb"
-	"github.com/ebakus/node/event"
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/p2p"
-	"github.com/ebakus/node/rpc"
+	"github.com/ebakus/go-ebakus/accounts"
+	"github.com/ebakus/go-ebakus/core/rawdb"
+	"github.com/ebakus/go-ebakus/ethdb"
+	"github.com/ebakus/go-ebakus/event"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/p2p"
+	"github.com/ebakus/go-ebakus/rpc"
 	"github.com/harkal/ebakusdb"
 )
 

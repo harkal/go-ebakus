@@ -23,8 +23,8 @@ import (
 	"math"
 	"strings"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/common/hexutil"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/common/hexutil"
 )
 
 // API describes the set of methods offered over the RPC interface

@@ -26,7 +26,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/ebakus/node/log"
+	"github.com/ebakus/go-ebakus/log"
 )
 
 // makeWizard creates and returns a new puppeth wizard.

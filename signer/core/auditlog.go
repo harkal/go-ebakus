@@ -19,10 +19,10 @@ package core
 import (
 	"context"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/common/hexutil"
-	"github.com/ebakus/node/internal/ethapi"
-	"github.com/ebakus/node/log"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/common/hexutil"
+	"github.com/ebakus/go-ebakus/internal/ethapi"
+	"github.com/ebakus/go-ebakus/log"
 )
 
 type AuditLogger struct {

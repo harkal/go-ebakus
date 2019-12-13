@@ -23,16 +23,16 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/common/bitutil"
-	"github.com/ebakus/node/core"
-	"github.com/ebakus/node/core/rawdb"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/ethdb"
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/params"
-	"github.com/ebakus/node/rlp"
-	"github.com/ebakus/node/trie"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/common/bitutil"
+	"github.com/ebakus/go-ebakus/core"
+	"github.com/ebakus/go-ebakus/core/rawdb"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/ethdb"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/params"
+	"github.com/ebakus/go-ebakus/rlp"
+	"github.com/ebakus/go-ebakus/trie"
 )
 
 // IndexerConfig includes a set of configs for chain indexers.

@@ -23,9 +23,9 @@ import (
 	"net"
 	"time"
 
-	"github.com/ebakus/node/common/math"
-	"github.com/ebakus/node/crypto"
-	"github.com/ebakus/node/p2p/enode"
+	"github.com/ebakus/go-ebakus/common/math"
+	"github.com/ebakus/go-ebakus/crypto"
+	"github.com/ebakus/go-ebakus/p2p/enode"
 )
 
 // node represents a host on the network.

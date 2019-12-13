@@ -23,7 +23,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ebakus/node/p2p/enr"
+	"github.com/ebakus/go-ebakus/p2p/enr"
 )
 
 func TestReadNodes(t *testing.T) {

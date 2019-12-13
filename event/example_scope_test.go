@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/ebakus/node/event"
+	"github.com/ebakus/go-ebakus/event"
 )
 
 // This example demonstrates how SubscriptionScope can be used to control the lifetime of

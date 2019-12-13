@@ -21,9 +21,9 @@ package ebakus
 import (
 	"encoding/json"
 
-	"github.com/ebakus/node/core"
-	"github.com/ebakus/node/p2p/discv5"
-	"github.com/ebakus/node/params"
+	"github.com/ebakus/go-ebakus/core"
+	"github.com/ebakus/go-ebakus/p2p/discv5"
+	"github.com/ebakus/go-ebakus/params"
 )
 
 // MainnetGenesis returns the JSON spec to use for the main Ebakus network. It

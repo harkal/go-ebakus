@@ -21,9 +21,9 @@ import (
 	"math"
 	"testing"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/params"
-	"github.com/ebakus/node/rlp"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/params"
+	"github.com/ebakus/go-ebakus/rlp"
 )
 
 // TestCreation tests that different genesis and fork rule combinations result in

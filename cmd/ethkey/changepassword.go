@@ -21,8 +21,8 @@ import (
 	"io/ioutil"
 	"strings"
 
-	"github.com/ebakus/node/accounts/keystore"
-	"github.com/ebakus/node/cmd/utils"
+	"github.com/ebakus/go-ebakus/accounts/keystore"
+	"github.com/ebakus/go-ebakus/cmd/utils"
 	"gopkg.in/urfave/cli.v1"
 )
 

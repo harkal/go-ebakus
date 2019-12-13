@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/ebakus/node/cmd/utils"
+	"github.com/ebakus/go-ebakus/cmd/utils"
 	"gopkg.in/urfave/cli.v1"
 )
 

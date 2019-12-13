@@ -21,9 +21,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/log"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/log"
 )
 
 // WaitMined waits for tx to be mined on the blockchain.

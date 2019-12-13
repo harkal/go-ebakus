@@ -19,9 +19,9 @@ package vm
 import (
 	"errors"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/common/math"
-	"github.com/ebakus/node/params"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/common/math"
+	"github.com/ebakus/go-ebakus/params"
 )
 
 // memoryGasCost calculates the quadratic gas for memory expansion. It does so

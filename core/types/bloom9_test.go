@@ -54,7 +54,7 @@ func TestBloom(t *testing.T) {
 import (
 	"testing"
 
-	"github.com/ebakus/node/core/state"
+	"github.com/ebakus/go-ebakus/core/state"
 )
 
 func TestBloom9(t *testing.T) {

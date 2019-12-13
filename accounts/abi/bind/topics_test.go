@@ -20,8 +20,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/ebakus/node/accounts/abi"
-	"github.com/ebakus/node/common"
+	"github.com/ebakus/go-ebakus/accounts/abi"
+	"github.com/ebakus/go-ebakus/common"
 )
 
 func TestMakeTopics(t *testing.T) {

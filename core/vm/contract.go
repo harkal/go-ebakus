@@ -19,7 +19,7 @@ package vm
 import (
 	"math/big"
 
-	"github.com/ebakus/node/common"
+	"github.com/ebakus/go-ebakus/common"
 )
 
 // ContractRef is a reference to the contract's backing object

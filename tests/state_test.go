@@ -23,7 +23,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/ebakus/node/core/vm"
+	"github.com/ebakus/go-ebakus/core/vm"
 )
 
 func TestState(t *testing.T) {

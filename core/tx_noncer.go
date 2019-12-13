@@ -19,8 +19,8 @@ package core
 import (
 	"sync"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core/state"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core/state"
 )
 
 // txNoncer is a tiny virtual state database to manage the executable nonces of

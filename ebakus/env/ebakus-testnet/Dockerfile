@@ -8,8 +8,8 @@ ENV TARGET=fullnode
 
 RUN mkdir -p $GOPATH/src/github.com/ebakus
 COPY ./github.com/harkal/ebakusdb $GOPATH/src/github.com/harkal/ebakusdb
-COPY ./github.com/ebakus/node $GOPATH/src/github.com/ebakus/node
-WORKDIR /go/src/github.com/ebakus/node
+COPY ./github.com/ebakus/go-ebakus $GOPATH/src/github.com/ebakus/go-ebakus
+WORKDIR /go/src/github.com/ebakus/go-ebakus
 RUN go get -d -v ./cmd/ebakus
 RUN go install -v ./cmd/ebakus
 
@@ -20,7 +20,7 @@ RUN mkdir /opt/shared
 VOLUME /opt/shared
 
 WORKDIR /opt/shared
-COPY ./github.com/ebakus/node/ebakus/env/ebakus-testnet/shared_data ./shared_data
+COPY ./github.com/ebakus/go-ebakus/ebakus/env/ebakus-testnet/shared_data ./shared_data
 
 RUN mkdir -p /opt/ebakus
 
@@ -29,7 +29,7 @@ WORKDIR /opt/ebakus
 RUN apk add --no-cache ca-certificates bash
 COPY --from=builder /go/bin/ebakus .
 
-COPY ./github.com/ebakus/node/ebakus/env/ebakus-testnet/run.sh .
+COPY ./github.com/ebakus/go-ebakus/ebakus/env/ebakus-testnet/run.sh .
 RUN chmod a+x ./run.sh
 
 EXPOSE 8545 8546 30401 30403 30404 6060

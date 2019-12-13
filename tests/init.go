@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/ebakus/node/params"
+	"github.com/ebakus/go-ebakus/params"
 )
 
 // Forks table defines supported forks and their chain config.

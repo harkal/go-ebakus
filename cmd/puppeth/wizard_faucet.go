@@ -20,8 +20,8 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/ebakus/node/accounts/keystore"
-	"github.com/ebakus/node/log"
+	"github.com/ebakus/go-ebakus/accounts/keystore"
+	"github.com/ebakus/go-ebakus/log"
 )
 
 // deployFaucet queries the user for various input on deploying a faucet, after

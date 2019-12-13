@@ -7,7 +7,7 @@ import (
 	"regexp"
 	"time"
 
-	"github.com/ebakus/node/metrics"
+	"github.com/ebakus/go-ebakus/metrics"
 )
 
 // a regexp for extracting the unit from time.Duration.String

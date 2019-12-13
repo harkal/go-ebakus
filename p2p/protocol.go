@@ -19,8 +19,8 @@ package p2p
 import (
 	"fmt"
 
-	"github.com/ebakus/node/p2p/enode"
-	"github.com/ebakus/node/p2p/enr"
+	"github.com/ebakus/go-ebakus/p2p/enode"
+	"github.com/ebakus/go-ebakus/p2p/enr"
 )
 
 // Protocol represents a P2P subprotocol implementation.

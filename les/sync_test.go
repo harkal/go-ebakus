@@ -22,11 +22,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ebakus/node/accounts/abi/bind"
-	"github.com/ebakus/node/core"
-	"github.com/ebakus/node/crypto"
-	"github.com/ebakus/node/light"
-	"github.com/ebakus/node/params"
+	"github.com/ebakus/go-ebakus/accounts/abi/bind"
+	"github.com/ebakus/go-ebakus/core"
+	"github.com/ebakus/go-ebakus/crypto"
+	"github.com/ebakus/go-ebakus/light"
+	"github.com/ebakus/go-ebakus/params"
 )
 
 // Test light syncing which will download all headers from genesis.
@@ -184,7 +184,7 @@ func testMissOracleBackend(t *testing.T, hasCheckpoint bool) {
 	// that user wants to unlock something which blocks the oracle backend
 	// initialisation. But at the same time syncing starts.
 	//
-	// See https://github.com/ebakus/node/issues/20097 for more detail.
+	// See https://github.com/ebakus/go-ebakus/issues/20097 for more detail.
 	//
 	// In this case, client should run light sync or legacy checkpoint sync
 	// if hardcoded checkpoint is configured.

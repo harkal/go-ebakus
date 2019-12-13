@@ -26,7 +26,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/ebakus/node/rlp"
+	"github.com/ebakus/go-ebakus/rlp"
 )
 
 var (

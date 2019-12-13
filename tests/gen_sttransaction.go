@@ -6,8 +6,8 @@ import (
 	"encoding/json"
 	"math/big"
 
-	"github.com/ebakus/node/common/hexutil"
-	"github.com/ebakus/node/common/math"
+	"github.com/ebakus/go-ebakus/common/hexutil"
+	"github.com/ebakus/go-ebakus/common/math"
 )
 
 var _ = (*stTransactionMarshaling)(nil)

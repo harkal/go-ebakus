@@ -20,12 +20,12 @@ import (
 	"encoding/binary"
 	"sync/atomic"
 
-	"github.com/ebakus/node/accounts/abi/bind"
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/contracts/checkpointoracle"
-	"github.com/ebakus/node/crypto"
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/params"
+	"github.com/ebakus/go-ebakus/accounts/abi/bind"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/contracts/checkpointoracle"
+	"github.com/ebakus/go-ebakus/crypto"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/params"
 )
 
 // checkpointOracle is responsible for offering the latest stable checkpoint

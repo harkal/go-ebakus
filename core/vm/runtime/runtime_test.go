@@ -21,12 +21,12 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ebakus/node/accounts/abi"
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core/rawdb"
-	"github.com/ebakus/node/core/state"
-	"github.com/ebakus/node/core/vm"
-	"github.com/ebakus/node/params"
+	"github.com/ebakus/go-ebakus/accounts/abi"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core/rawdb"
+	"github.com/ebakus/go-ebakus/core/state"
+	"github.com/ebakus/go-ebakus/core/vm"
+	"github.com/ebakus/go-ebakus/params"
 )
 
 func TestDefaults(t *testing.T) {

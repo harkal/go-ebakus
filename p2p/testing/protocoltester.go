@@ -32,14 +32,14 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/node"
-	"github.com/ebakus/node/p2p"
-	"github.com/ebakus/node/p2p/enode"
-	"github.com/ebakus/node/p2p/simulations"
-	"github.com/ebakus/node/p2p/simulations/adapters"
-	"github.com/ebakus/node/rlp"
-	"github.com/ebakus/node/rpc"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/node"
+	"github.com/ebakus/go-ebakus/p2p"
+	"github.com/ebakus/go-ebakus/p2p/enode"
+	"github.com/ebakus/go-ebakus/p2p/simulations"
+	"github.com/ebakus/go-ebakus/p2p/simulations/adapters"
+	"github.com/ebakus/go-ebakus/rlp"
+	"github.com/ebakus/go-ebakus/rpc"
 )
 
 // ProtocolTester is the tester environment used for unit testing protocol

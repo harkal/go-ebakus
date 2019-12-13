@@ -7,8 +7,8 @@ import (
 	"errors"
 	"math/big"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/common/math"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/common/math"
 )
 
 var _ = (*stEnvMarshaling)(nil)

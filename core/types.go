@@ -17,12 +17,12 @@
 package core
 
 import (
-	"github.com/ebakus/node/common"
+	"github.com/ebakus/go-ebakus/common"
 	"github.com/harkal/ebakusdb"
 
-	"github.com/ebakus/node/core/state"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/core/vm"
+	"github.com/ebakus/go-ebakus/core/state"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/core/vm"
 )
 
 // Validator is an interface which defines the standard for block validation. It

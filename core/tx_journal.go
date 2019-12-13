@@ -21,10 +21,10 @@ import (
 	"io"
 	"os"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/rlp"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/rlp"
 )
 
 // errNoActiveJournal is returned if a transaction is attempted to be inserted

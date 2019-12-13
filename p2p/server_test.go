@@ -26,11 +26,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ebakus/node/crypto"
-	"github.com/ebakus/node/internal/testlog"
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/p2p/enode"
-	"github.com/ebakus/node/p2p/enr"
+	"github.com/ebakus/go-ebakus/crypto"
+	"github.com/ebakus/go-ebakus/internal/testlog"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/p2p/enode"
+	"github.com/ebakus/go-ebakus/p2p/enr"
 	"golang.org/x/crypto/sha3"
 )
 

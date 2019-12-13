@@ -19,8 +19,8 @@ package trie
 import (
 	"testing"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/ethdb/memorydb"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/ethdb/memorydb"
 )
 
 // Tests that the trie database returns a missing trie node error if attempting

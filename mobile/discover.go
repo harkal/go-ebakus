@@ -22,7 +22,7 @@ package ebakus
 import (
 	"errors"
 
-	"github.com/ebakus/node/p2p/discv5"
+	"github.com/ebakus/go-ebakus/p2p/discv5"
 )
 
 // Enode represents a host on the network.

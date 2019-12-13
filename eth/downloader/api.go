@@ -20,9 +20,9 @@ import (
 	"context"
 	"sync"
 
-	ebakus "github.com/ebakus/node"
-	"github.com/ebakus/node/event"
-	"github.com/ebakus/node/rpc"
+	ebakus "github.com/ebakus/go-ebakus"
+	"github.com/ebakus/go-ebakus/event"
+	"github.com/ebakus/go-ebakus/rpc"
 )
 
 // PublicDownloaderAPI provides an API which gives information about the current synchronisation status.

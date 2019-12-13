@@ -20,7 +20,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/ebakus/node/core/asm"
+	"github.com/ebakus/go-ebakus/core/asm"
 )
 
 func Compile(fn string, src []byte, debug bool) (string, error) {

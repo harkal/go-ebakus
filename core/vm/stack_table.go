@@ -17,7 +17,7 @@
 package vm
 
 import (
-	"github.com/ebakus/node/params"
+	"github.com/ebakus/go-ebakus/params"
 )
 
 func minSwapStack(n int) int {

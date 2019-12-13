@@ -21,9 +21,9 @@ package ebakus
 import (
 	"math/big"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/ethclient"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/ethclient"
 )
 
 // EbakusClient provides access to the Ebakus APIs.

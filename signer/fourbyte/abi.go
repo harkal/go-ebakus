@@ -23,8 +23,8 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/ebakus/node/accounts/abi"
-	"github.com/ebakus/node/common"
+	"github.com/ebakus/go-ebakus/accounts/abi"
+	"github.com/ebakus/go-ebakus/common"
 )
 
 // decodedCallData is an internal type to represent a method call parsed according

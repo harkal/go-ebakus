@@ -28,7 +28,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ebakus/node/common"
+	"github.com/ebakus/go-ebakus/common"
 )
 
 // In this test, nodes try to randomly resolve each other.

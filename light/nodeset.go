@@ -20,10 +20,10 @@ import (
 	"errors"
 	"sync"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/crypto"
-	"github.com/ebakus/node/ethdb"
-	"github.com/ebakus/node/rlp"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/crypto"
+	"github.com/ebakus/go-ebakus/ethdb"
+	"github.com/ebakus/go-ebakus/rlp"
 )
 
 // NodeSet stores a set of trie nodes. It implements trie.Database and can also

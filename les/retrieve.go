@@ -24,8 +24,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ebakus/node/common/mclock"
-	"github.com/ebakus/node/light"
+	"github.com/ebakus/go-ebakus/common/mclock"
+	"github.com/ebakus/go-ebakus/light"
 )
 
 var (

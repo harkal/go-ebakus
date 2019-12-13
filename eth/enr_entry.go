@@ -17,10 +17,10 @@
 package eth
 
 import (
-	"github.com/ebakus/node/core"
-	"github.com/ebakus/node/core/forkid"
-	"github.com/ebakus/node/p2p/enode"
-	"github.com/ebakus/node/rlp"
+	"github.com/ebakus/go-ebakus/core"
+	"github.com/ebakus/go-ebakus/core/forkid"
+	"github.com/ebakus/go-ebakus/p2p/enode"
+	"github.com/ebakus/go-ebakus/rlp"
 )
 
 // ethEntry is the "eth" ENR entry which advertises eth protocol

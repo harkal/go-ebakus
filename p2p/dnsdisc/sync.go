@@ -22,8 +22,8 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/ebakus/node/common/mclock"
-	"github.com/ebakus/node/p2p/enode"
+	"github.com/ebakus/go-ebakus/common/mclock"
+	"github.com/ebakus/go-ebakus/p2p/enode"
 )
 
 // clientTree is a full tree being synced.

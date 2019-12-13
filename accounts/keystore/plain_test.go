@@ -27,8 +27,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/crypto"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/crypto"
 )
 
 func tmpKeyStoreIface(t *testing.T, encrypted bool) (dir string, ks keyStore) {

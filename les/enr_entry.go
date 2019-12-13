@@ -17,7 +17,7 @@
 package les
 
 import (
-	"github.com/ebakus/node/rlp"
+	"github.com/ebakus/go-ebakus/rlp"
 )
 
 // lesEntry is the "les" ENR entry. This is set for LES servers only.

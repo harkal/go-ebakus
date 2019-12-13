@@ -22,8 +22,8 @@ package node
 import (
 	"reflect"
 
-	"github.com/ebakus/node/p2p"
-	"github.com/ebakus/node/rpc"
+	"github.com/ebakus/go-ebakus/p2p"
+	"github.com/ebakus/go-ebakus/rpc"
 )
 
 // NoopService is a trivial implementation of the Service interface.

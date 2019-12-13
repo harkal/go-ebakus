@@ -30,8 +30,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ebakus/node/accounts/keystore"
-	"github.com/ebakus/node/core/types"
+	"github.com/ebakus/go-ebakus/accounts/keystore"
+	"github.com/ebakus/go-ebakus/core/types"
 )
 
 // Tests that the account management snippets work correctly.

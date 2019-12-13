@@ -23,12 +23,12 @@ import (
 	"math/big"
 	"strings"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/common/hexutil"
-	math2 "github.com/ebakus/node/common/math"
-	"github.com/ebakus/node/consensus/ethash"
-	"github.com/ebakus/node/core"
-	"github.com/ebakus/node/params"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/common/hexutil"
+	math2 "github.com/ebakus/go-ebakus/common/math"
+	"github.com/ebakus/go-ebakus/consensus/ethash"
+	"github.com/ebakus/go-ebakus/core"
+	"github.com/ebakus/go-ebakus/params"
 )
 
 // alethGenesisSpec represents the genesis specification format used by the

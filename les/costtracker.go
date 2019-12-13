@@ -23,12 +23,12 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/ebakus/node/common/mclock"
-	"github.com/ebakus/node/eth"
-	"github.com/ebakus/node/ethdb"
-	"github.com/ebakus/node/les/flowcontrol"
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/metrics"
+	"github.com/ebakus/go-ebakus/common/mclock"
+	"github.com/ebakus/go-ebakus/eth"
+	"github.com/ebakus/go-ebakus/ethdb"
+	"github.com/ebakus/go-ebakus/les/flowcontrol"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/metrics"
 )
 
 const makeCostStats = false // make request cost statistics during operation

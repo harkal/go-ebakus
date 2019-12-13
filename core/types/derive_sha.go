@@ -19,9 +19,9 @@ package types
 import (
 	"bytes"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/rlp"
-	"github.com/ebakus/node/trie"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/rlp"
+	"github.com/ebakus/go-ebakus/trie"
 )
 
 type DerivableList interface {

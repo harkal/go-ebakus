@@ -22,13 +22,13 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ebakus/node/accounts"
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/common/hexutil"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/internal/ethapi"
-	"github.com/ebakus/node/signer/core"
-	"github.com/ebakus/node/signer/storage"
+	"github.com/ebakus/go-ebakus/accounts"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/common/hexutil"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/internal/ethapi"
+	"github.com/ebakus/go-ebakus/signer/core"
+	"github.com/ebakus/go-ebakus/signer/storage"
 )
 
 const JS = `

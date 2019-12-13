@@ -19,10 +19,10 @@ package shhclient
 import (
 	"context"
 
-	"github.com/ebakus/node"
-	"github.com/ebakus/node/common/hexutil"
-	"github.com/ebakus/node/rpc"
-	whisper "github.com/ebakus/node/whisper/whisperv6"
+	"github.com/ebakus/go-ebakus"
+	"github.com/ebakus/go-ebakus/common/hexutil"
+	"github.com/ebakus/go-ebakus/rpc"
+	whisper "github.com/ebakus/go-ebakus/whisper/whisperv6"
 )
 
 // Client defines typed wrappers for the Whisper v6 RPC API.

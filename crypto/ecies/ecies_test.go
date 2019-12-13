@@ -39,7 +39,7 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/ebakus/node/crypto"
+	"github.com/ebakus/go-ebakus/crypto"
 )
 
 // Ensure the KDF generates appropriately sized keys.

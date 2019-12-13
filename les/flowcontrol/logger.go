@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/ebakus/node/common/mclock"
+	"github.com/ebakus/go-ebakus/common/mclock"
 )
 
 // logger collects events in string format and discards events older than the

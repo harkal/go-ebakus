@@ -19,8 +19,8 @@ package memorydb
 import (
 	"testing"
 
-	"github.com/ebakus/node/ethdb"
-	"github.com/ebakus/node/ethdb/dbtest"
+	"github.com/ebakus/go-ebakus/ethdb"
+	"github.com/ebakus/go-ebakus/ethdb/dbtest"
 )
 
 func TestMemoryDB(t *testing.T) {

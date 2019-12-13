@@ -22,12 +22,12 @@ import (
 	"fmt"
 	"math/big"
 
-	ebakus "github.com/ebakus/node"
-	"github.com/ebakus/node/accounts/abi"
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/crypto"
-	"github.com/ebakus/node/event"
+	ebakus "github.com/ebakus/go-ebakus"
+	"github.com/ebakus/go-ebakus/accounts/abi"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/crypto"
+	"github.com/ebakus/go-ebakus/event"
 )
 
 // SignerFn is a signer function callback when a contract requires a method to

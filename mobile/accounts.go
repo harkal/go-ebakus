@@ -23,10 +23,10 @@ import (
 	"errors"
 	"time"
 
-	"github.com/ebakus/node/accounts"
-	"github.com/ebakus/node/accounts/keystore"
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/crypto"
+	"github.com/ebakus/go-ebakus/accounts"
+	"github.com/ebakus/go-ebakus/accounts/keystore"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/crypto"
 )
 
 const (

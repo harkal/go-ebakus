@@ -24,8 +24,8 @@ import (
 	"testing"
 	"testing/quick"
 
-	"github.com/ebakus/node/p2p/enr"
-	"github.com/ebakus/node/rlp"
+	"github.com/ebakus/go-ebakus/p2p/enr"
+	"github.com/ebakus/go-ebakus/rlp"
 	"github.com/stretchr/testify/assert"
 )
 

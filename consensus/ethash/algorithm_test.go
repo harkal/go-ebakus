@@ -26,9 +26,9 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/common/hexutil"
-	"github.com/ebakus/node/core/types"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/common/hexutil"
+	"github.com/ebakus/go-ebakus/core/types"
 )
 
 // prepare converts an ethash cache or dataset from a byte stream into the internal

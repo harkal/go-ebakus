@@ -21,8 +21,8 @@ import (
 	"hash"
 	"sync/atomic"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/common/math"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/common/math"
 )
 
 // Config are the configuration options for the Interpreter

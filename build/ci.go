@@ -58,9 +58,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ebakus/node/common/hexutil"
-	"github.com/ebakus/node/internal/build"
-	"github.com/ebakus/node/params"
+	"github.com/ebakus/go-ebakus/common/hexutil"
+	"github.com/ebakus/go-ebakus/internal/build"
+	"github.com/ebakus/go-ebakus/params"
 )
 
 var (
@@ -807,7 +807,7 @@ func doAndroidArchive(cmdline []string) {
 	}
 	// Build the Android archive and Maven resources
 	build.MustRun(goTool("get", "golang.org/x/mobile/cmd/gomobile", "golang.org/x/mobile/cmd/gobind"))
-	build.MustRun(gomobileTool("bind", "-ldflags", "-s -w", "--target", "android", "--javapkg", "org.ebakus", "-v", "github.com/ebakus/node/mobile"))
+	build.MustRun(gomobileTool("bind", "-ldflags", "-s -w", "--target", "android", "--javapkg", "org.ebakus", "-v", "github.com/ebakus/go-ebakus/mobile"))
 
 	if *local {
 		// If we're building locally, copy bundle to build dir and skip Maven
@@ -928,7 +928,7 @@ func doXCodeFramework(cmdline []string) {
 	// Build the iOS XCode framework
 	build.MustRun(goTool("get", "golang.org/x/mobile/cmd/gomobile", "golang.org/x/mobile/cmd/gobind"))
 	build.MustRun(gomobileTool("init"))
-	bind := gomobileTool("bind", "-ldflags", "-s -w", "--target", "ios", "-v", "github.com/ebakus/node/mobile")
+	bind := gomobileTool("bind", "-ldflags", "-s -w", "--target", "ios", "-v", "github.com/ebakus/go-ebakus/mobile")
 
 	if *local {
 		// If we're building locally, use the build folder and stop afterwards

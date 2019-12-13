@@ -21,7 +21,7 @@ import (
 	"math/rand"
 	"testing"
 
-	"github.com/ebakus/node/core/types"
+	"github.com/ebakus/go-ebakus/core/types"
 )
 
 // Tests that batched bloom bits are correctly rotated from the input bloom

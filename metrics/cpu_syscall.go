@@ -21,7 +21,7 @@ package metrics
 import (
 	"syscall"
 
-	"github.com/ebakus/node/log"
+	"github.com/ebakus/go-ebakus/log"
 )
 
 // getProcessCPUTime retrieves the process' CPU time since program startup.

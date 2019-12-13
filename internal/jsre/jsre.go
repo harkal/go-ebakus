@@ -26,8 +26,8 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/internal/jsre/deps"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/internal/jsre/deps"
 	"github.com/robertkrimen/otto"
 )
 

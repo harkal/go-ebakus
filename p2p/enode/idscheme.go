@@ -21,10 +21,10 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/ebakus/node/common/math"
-	"github.com/ebakus/node/crypto"
-	"github.com/ebakus/node/p2p/enr"
-	"github.com/ebakus/node/rlp"
+	"github.com/ebakus/go-ebakus/common/math"
+	"github.com/ebakus/go-ebakus/crypto"
+	"github.com/ebakus/go-ebakus/p2p/enr"
+	"github.com/ebakus/go-ebakus/rlp"
 	"golang.org/x/crypto/sha3"
 )
 

@@ -23,8 +23,8 @@ import (
 	"sort"
 	"testing"
 
-	"github.com/ebakus/node/crypto"
-	"github.com/ebakus/node/p2p/enode"
+	"github.com/ebakus/go-ebakus/crypto"
+	"github.com/ebakus/go-ebakus/p2p/enode"
 )
 
 func TestUDPv4_Lookup(t *testing.T) {

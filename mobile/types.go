@@ -23,10 +23,10 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/rlp"
-	whisper "github.com/ebakus/node/whisper/whisperv6"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/rlp"
+	whisper "github.com/ebakus/go-ebakus/whisper/whisperv6"
 )
 
 // Bloom represents a 256 bit bloom filter.

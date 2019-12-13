@@ -21,13 +21,13 @@ import (
 	"math/big"
 	"testing"
 
-	ebakus "github.com/ebakus/node"
-	"github.com/ebakus/node/accounts/abi/bind"
-	"github.com/ebakus/node/accounts/abi/bind/backends"
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/crypto"
+	ebakus "github.com/ebakus/go-ebakus"
+	"github.com/ebakus/go-ebakus/accounts/abi/bind"
+	"github.com/ebakus/go-ebakus/accounts/abi/bind/backends"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/crypto"
 )
 
 func TestSimulatedBackend(t *testing.T) {

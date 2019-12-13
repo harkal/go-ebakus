@@ -19,7 +19,7 @@ package tests
 import (
 	"testing"
 
-	"github.com/ebakus/node/params"
+	"github.com/ebakus/go-ebakus/params"
 )
 
 func TestTransaction(t *testing.T) {

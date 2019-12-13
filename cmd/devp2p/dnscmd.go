@@ -25,11 +25,11 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/ebakus/node/accounts/keystore"
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/console"
-	"github.com/ebakus/node/p2p/dnsdisc"
-	"github.com/ebakus/node/p2p/enode"
+	"github.com/ebakus/go-ebakus/accounts/keystore"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/console"
+	"github.com/ebakus/go-ebakus/p2p/dnsdisc"
+	"github.com/ebakus/go-ebakus/p2p/enode"
 	cli "gopkg.in/urfave/cli.v1"
 )
 

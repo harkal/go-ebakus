@@ -23,10 +23,10 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/ebakus/node/cmd/utils"
-	"github.com/ebakus/node/consensus/ethash"
-	"github.com/ebakus/node/eth"
-	"github.com/ebakus/node/params"
+	"github.com/ebakus/go-ebakus/cmd/utils"
+	"github.com/ebakus/go-ebakus/consensus/ethash"
+	"github.com/ebakus/go-ebakus/eth"
+	"github.com/ebakus/go-ebakus/params"
 	cli "gopkg.in/urfave/cli.v1"
 )
 

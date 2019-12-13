@@ -21,9 +21,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/ebakus/node/accounts/keystore"
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/log"
+	"github.com/ebakus/go-ebakus/accounts/keystore"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/log"
 )
 
 // deployNode creates a new node configuration based on some user input.

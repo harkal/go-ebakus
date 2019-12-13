@@ -19,7 +19,7 @@ package vm
 import (
 	"errors"
 
-	"github.com/ebakus/node/params"
+	"github.com/ebakus/go-ebakus/params"
 )
 
 type (

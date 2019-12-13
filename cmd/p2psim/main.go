@@ -45,12 +45,12 @@ import (
 	"strings"
 	"text/tabwriter"
 
-	"github.com/ebakus/node/crypto"
-	"github.com/ebakus/node/p2p"
-	"github.com/ebakus/node/p2p/enode"
-	"github.com/ebakus/node/p2p/simulations"
-	"github.com/ebakus/node/p2p/simulations/adapters"
-	"github.com/ebakus/node/rpc"
+	"github.com/ebakus/go-ebakus/crypto"
+	"github.com/ebakus/go-ebakus/p2p"
+	"github.com/ebakus/go-ebakus/p2p/enode"
+	"github.com/ebakus/go-ebakus/p2p/simulations"
+	"github.com/ebakus/go-ebakus/p2p/simulations/adapters"
+	"github.com/ebakus/go-ebakus/rpc"
 	"gopkg.in/urfave/cli.v1"
 )
 

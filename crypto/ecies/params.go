@@ -42,7 +42,7 @@ import (
 	"fmt"
 	"hash"
 
-	ethcrypto "github.com/ebakus/node/crypto"
+	ethcrypto "github.com/ebakus/go-ebakus/crypto"
 )
 
 var (

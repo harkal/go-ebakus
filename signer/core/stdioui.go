@@ -20,9 +20,9 @@ import (
 	"context"
 	"sync"
 
-	"github.com/ebakus/node/internal/ethapi"
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/rpc"
+	"github.com/ebakus/go-ebakus/internal/ethapi"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/rpc"
 )
 
 type StdIOUI struct {

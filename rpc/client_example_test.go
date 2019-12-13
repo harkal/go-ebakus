@@ -22,7 +22,7 @@ import (
 	"math/big"
 	"time"
 
-	"github.com/ebakus/node/rpc"
+	"github.com/ebakus/go-ebakus/rpc"
 )
 
 // In this example, our client wishes to track the latest 'block number'

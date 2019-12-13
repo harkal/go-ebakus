@@ -19,7 +19,7 @@ package vm
 import (
 	"testing"
 
-	"github.com/ebakus/node/crypto"
+	"github.com/ebakus/go-ebakus/crypto"
 )
 
 func TestJumpDestAnalysis(t *testing.T) {

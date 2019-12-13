@@ -257,7 +257,7 @@ class Footer extends Component<Props, State> {
             <Typography type="caption" color="inherit">
               <span style={commonStyles.light}>{'Commit '}</span>
               <a
-                href={`https://github.com/ebakus/node/commit/${general.commit}`}
+                href={`https://github.com/ebakus/go-ebakus/commit/${general.commit}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={styles.link}

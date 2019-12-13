@@ -34,7 +34,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ebakus/node/log"
+	"github.com/ebakus/go-ebakus/log"
 )
 
 // Handler is the global debugging handler.

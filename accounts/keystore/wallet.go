@@ -19,10 +19,10 @@ package keystore
 import (
 	"math/big"
 
-	ebakus "github.com/ebakus/node"
-	"github.com/ebakus/node/accounts"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/crypto"
+	ebakus "github.com/ebakus/go-ebakus"
+	"github.com/ebakus/go-ebakus/accounts"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/crypto"
 )
 
 // keystoreWallet implements the accounts.Wallet interface for the original

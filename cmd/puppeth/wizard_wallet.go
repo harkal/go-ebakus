@@ -21,7 +21,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/ebakus/node/log"
+	"github.com/ebakus/go-ebakus/log"
 )
 
 // deployWallet creates a new web wallet based on some user input.

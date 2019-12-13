@@ -19,7 +19,7 @@ package ethapi
 import (
 	"sync"
 
-	"github.com/ebakus/node/common"
+	"github.com/ebakus/go-ebakus/common"
 )
 
 type AddrLocker struct {

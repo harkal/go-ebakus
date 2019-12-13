@@ -3,9 +3,9 @@ InstallDir "$InstDir"
 OutFile "${OUTPUTFILE}" # set through command line arguments
 
 # Links for "Add/Remove Programs"
-!define HELPURL "https://github.com/ebakus/node/issues"
-!define UPDATEURL "https://github.com/ebakus/node/releases"
-!define ABOUTURL "https://github.com/ebakus/node#ebakus-go"
+!define HELPURL "https://github.com/ebakus/go-ebakus/issues"
+!define UPDATEURL "https://github.com/ebakus/go-ebakus/releases"
+!define ABOUTURL "https://github.com/ebakus/go-ebakus#ebakus-go"
 !define /date NOW "%Y%m%d"
 
 PageEx license

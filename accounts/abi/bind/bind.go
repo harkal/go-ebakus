@@ -17,7 +17,7 @@
 // Package bind generates Ebakus contract Go bindings.
 //
 // Detailed usage document and tutorial available on the ebakus/node Wiki page:
-// https://github.com/ebakus/node/wiki/Native-DApps:-Go-bindings-to-Ebakus-contracts
+// https://github.com/ebakus/go-ebakus/wiki/Native-DApps:-Go-bindings-to-Ebakus-contracts
 package bind
 
 import (
@@ -30,8 +30,8 @@ import (
 	"text/template"
 	"unicode"
 
-	"github.com/ebakus/node/accounts/abi"
-	"github.com/ebakus/node/log"
+	"github.com/ebakus/go-ebakus/accounts/abi"
+	"github.com/ebakus/go-ebakus/log"
 )
 
 // Lang is a target programming language selector to generate bindings for.

@@ -26,13 +26,13 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/consensus/ethash"
-	"github.com/ebakus/node/core"
-	"github.com/ebakus/node/eth"
-	"github.com/ebakus/node/internal/jsre"
-	"github.com/ebakus/node/miner"
-	"github.com/ebakus/node/node"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/consensus/ethash"
+	"github.com/ebakus/go-ebakus/core"
+	"github.com/ebakus/go-ebakus/eth"
+	"github.com/ebakus/go-ebakus/internal/jsre"
+	"github.com/ebakus/go-ebakus/miner"
+	"github.com/ebakus/go-ebakus/node"
 )
 
 const (

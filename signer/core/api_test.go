@@ -27,16 +27,16 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ebakus/node/accounts"
-	"github.com/ebakus/node/accounts/keystore"
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/common/hexutil"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/internal/ethapi"
-	"github.com/ebakus/node/rlp"
-	"github.com/ebakus/node/signer/core"
-	"github.com/ebakus/node/signer/fourbyte"
-	"github.com/ebakus/node/signer/storage"
+	"github.com/ebakus/go-ebakus/accounts"
+	"github.com/ebakus/go-ebakus/accounts/keystore"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/common/hexutil"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/internal/ethapi"
+	"github.com/ebakus/go-ebakus/rlp"
+	"github.com/ebakus/go-ebakus/signer/core"
+	"github.com/ebakus/go-ebakus/signer/fourbyte"
+	"github.com/ebakus/go-ebakus/signer/storage"
 )
 
 //Used for testing

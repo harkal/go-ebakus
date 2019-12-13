@@ -35,10 +35,10 @@ import (
 
 	"io"
 
-	"github.com/ebakus/node/log"
-	"github.com/ebakus/node/p2p"
-	"github.com/ebakus/node/params"
-	"github.com/ebakus/node/rpc"
+	"github.com/ebakus/go-ebakus/log"
+	"github.com/ebakus/go-ebakus/p2p"
+	"github.com/ebakus/go-ebakus/params"
+	"github.com/ebakus/go-ebakus/rpc"
 	"github.com/mohae/deepcopy"
 	"golang.org/x/net/websocket"
 )

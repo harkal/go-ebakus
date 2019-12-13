@@ -21,12 +21,12 @@ import (
 	"io"
 	"math/big"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core"
-	"github.com/ebakus/node/core/forkid"
-	"github.com/ebakus/node/core/types"
-	"github.com/ebakus/node/event"
-	"github.com/ebakus/node/rlp"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core"
+	"github.com/ebakus/go-ebakus/core/forkid"
+	"github.com/ebakus/go-ebakus/core/types"
+	"github.com/ebakus/go-ebakus/event"
+	"github.com/ebakus/go-ebakus/rlp"
 )
 
 // Constants to match up protocol versions and messages

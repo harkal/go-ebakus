@@ -6,12 +6,12 @@ import (
 	"math/big"
 	"time"
 
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core"
-	"github.com/ebakus/node/eth/downloader"
-	"github.com/ebakus/node/eth/gasprice"
-	"github.com/ebakus/node/miner"
-	"github.com/ebakus/node/params"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core"
+	"github.com/ebakus/go-ebakus/eth/downloader"
+	"github.com/ebakus/go-ebakus/eth/gasprice"
+	"github.com/ebakus/go-ebakus/miner"
+	"github.com/ebakus/go-ebakus/params"
 )
 
 // MarshalTOML marshals as TOML.

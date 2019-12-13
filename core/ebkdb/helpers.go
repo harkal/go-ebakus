@@ -16,7 +16,7 @@
 
 package ebkdb
 
-import "github.com/ebakus/node/common"
+import "github.com/ebakus/go-ebakus/common"
 
 func GetDBTableName(contractAddress common.Address, name string) string {
 	return contractAddress.Hex()[2:] + "_" + name

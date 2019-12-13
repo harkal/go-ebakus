@@ -17,9 +17,9 @@
 package runtime
 
 import (
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/core"
-	"github.com/ebakus/node/core/vm"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/core"
+	"github.com/ebakus/go-ebakus/core/vm"
 )
 
 func NewEnv(cfg *Config) *vm.EVM {

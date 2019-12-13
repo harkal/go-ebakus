@@ -21,7 +21,7 @@ package ebakus
 import (
 	"errors"
 
-	"github.com/ebakus/node/p2p"
+	"github.com/ebakus/go-ebakus/p2p"
 )
 
 // NodeInfo represents pi short summary of the information known about the host.

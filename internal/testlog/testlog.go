@@ -20,7 +20,7 @@ package testlog
 import (
 	"testing"
 
-	"github.com/ebakus/node/log"
+	"github.com/ebakus/go-ebakus/log"
 )
 
 // Logger returns a logger which logs to the unit test log of t.

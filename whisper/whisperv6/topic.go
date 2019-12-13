@@ -19,8 +19,8 @@
 package whisperv6
 
 import (
-	"github.com/ebakus/node/common"
-	"github.com/ebakus/node/common/hexutil"
+	"github.com/ebakus/go-ebakus/common"
+	"github.com/ebakus/go-ebakus/common/hexutil"
 )
 
 // TopicType represents a cryptographically secure, probabilistic partial

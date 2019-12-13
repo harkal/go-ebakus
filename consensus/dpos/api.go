@@ -19,10 +19,10 @@ package dpos
 import (
 	"context"
 
-	"github.com/ebakus/node/consensus"
-	"github.com/ebakus/node/core/rawdb"
-	"github.com/ebakus/node/core/vm"
-	"github.com/ebakus/node/rpc"
+	"github.com/ebakus/go-ebakus/consensus"
+	"github.com/ebakus/go-ebakus/core/rawdb"
+	"github.com/ebakus/go-ebakus/core/vm"
+	"github.com/ebakus/go-ebakus/rpc"
 )
 
 // API is a user facing RPC API to allow controlling the voting
