@@ -148,6 +148,10 @@ func New(config *params.DPOSConfig, db ethdb.Database, ebakusDb *ebakusdb.DB, ge
 		conf.InitialDistribution = initialDistribution
 	}
 
+	if conf.YearlyInflation == 0 {
+		conf.YearlyInflation = yearlyInflation
+	}
+
 	signatures, _ := lru.NewARC(signatureCacheSize)
 
 	return &DPOS{
@@ -463,7 +467,7 @@ func (d *DPOS) SealHash(header *types.Header) (hash common.Hash) {
 // AccumulateRewards credits the coinbase of the given block with the reward
 func (d *DPOS) AccumulateRewards(config *params.DPOSConfig, state *state.StateDB, header *types.Header, coinbase common.Address) {
 	blockNumber := header.Number.Uint64()
-	yearBlocks := float64(356*24*60*60) / float64(blockPeriod)
+	yearBlocks := float64(356*24*60*60) / float64(config.Period)
 
 	blockRewardFactor := math.Pow(1.0+(yearlyInflation/yearBlocks), float64(blockNumber))
 	if blockNumber > 0 {

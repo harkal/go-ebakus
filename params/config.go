@@ -36,6 +36,7 @@ var (
 		Period:              1,
 		TurnBlockCount:      6,
 		InitialDistribution: 1e9,
+		YearlyInflation:     0.01,
 		DelegateCount:       21,
 		BonusDelegateCount:  100,
 		DelegateEpoch:       1,
@@ -57,6 +58,7 @@ var (
 		Period:              1,
 		TurnBlockCount:      6,
 		InitialDistribution: 1e9,
+		YearlyInflation:     0.01,
 		DelegateCount:       3,
 		BonusDelegateCount:  2,
 		DelegateEpoch:       1,
@@ -167,6 +169,7 @@ type DPOSConfig struct {
 	Period              uint64         `json:"period"`              // Number of seconds between blocks
 	TurnBlockCount      uint64         `json:"turnBlockCount"`      // Number of consecutive blocks per delegate turn
 	InitialDistribution uint64         `json:"initialDistribution"` // Total initial distribution of tokens (in EBK)
+	YearlyInflation     float64        `json:"yearlyInflation"`     // Yearly inflation
 	DelegateCount       uint64         `json:"delegateCount"`       // Number of delegates
 	BonusDelegateCount  uint64         `json:"bonusDelegateCount"`  // Number of delegates to pickup the 21st bonus delegate
 	DelegateEpoch       uint64         `json:"delegateEpoch"`       // Number of blocks each epoch lasts
