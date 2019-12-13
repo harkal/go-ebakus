@@ -1,0 +1,125 @@
+# Parameters:
+# -----------
+#   - EBAKUS_TAG: Specific tag you wish to deploy, defaults to "latest"
+#
+#   - HOST_SHARED_DIR: Local path to directory you would like to use as the ebakus
+#     network shared directory; if not specified, uses a docker volume
+
+version: '3'
+
+services:
+    node-1:
+        image: ${EBAKUS_CONTAINER_NAME:-ebakus/node}:${EBAKUS_CONTAINER_TAG:-latest}
+        command: [
+            "--rpc",
+            "--nodekeyhex", "6987040bfb03aca6f59972b3be66d90f935ae3f326ef87bef6f2388914a737f9"
+        ]
+        volumes:
+            - ${HOST_SHARED_DIR:-shared}:/opt/shared
+        networks:
+            ethnet:
+                ipv4_address: 13.3.7.3
+        ports:
+            - "8545:8545"
+            - "30403:30403"
+        environment:
+            - TARGET=miningnode
+            - NODE_NAME=node-1
+            - GENESIS=1
+            - ETHERBASE=0x4ed2aca4f9b3ee904ff44f03e91fde90829a8381
+
+    node-1-attach:
+        image: ${EBAKUS_CONTAINER_NAME:-ebakus/node}:${EBAKUS_CONTAINER_TAG:-latest}
+        command: [
+            "--preload", "/opt/shared/shared_data/init.js"
+        ]
+        depends_on:
+            - node-1
+            - node-2
+            - node-3
+        volumes:
+            - ${HOST_SHARED_DIR:-shared}:/opt/shared
+        environment:
+            - TARGET=attachnode
+            - NODE_NAME=node-1
+
+    node-2:
+        image: ${EBAKUS_CONTAINER_NAME:-ebakus/node}:${EBAKUS_CONTAINER_TAG:-latest}
+        command: [
+            "--rpc",
+            "--nodekeyhex", "1efe5b7043c264b7d6266cca89f56a3644ff9c45fa50b9e43d814144be8f9273"
+        ]
+        volumes:
+            - ${HOST_SHARED_DIR:-shared}:/opt/shared
+        networks:
+            ethnet:
+                ipv4_address: 13.3.7.4
+        ports:
+            - "8645:8545"
+            - "31403:30403"
+        environment:
+            - TARGET=miningnode
+            - NODE_NAME=node-2
+            - GENESIS=1
+            - ETHERBASE=0x92f00e7fee2211d230afbe4099185efa3a516cbf
+
+    node-2-attach:
+        image: ${EBAKUS_CONTAINER_NAME:-ebakus/node}:${EBAKUS_CONTAINER_TAG:-latest}
+        command: [
+            "--preload", "/opt/shared/shared_data/init.js"
+        ]
+        depends_on:
+            - node-1
+            - node-2
+            - node-3
+        volumes:
+            - ${HOST_SHARED_DIR:-shared}:/opt/shared
+        environment:
+            - TARGET=attachnode
+            - NODE_NAME=node-2
+
+    node-3:
+        image: ${EBAKUS_CONTAINER_NAME:-ebakus/node}:${EBAKUS_CONTAINER_TAG:-latest}
+        command: [
+            "--rpc",
+            "--nodekeyhex", "7dfb87a14157ecb80227c5fa222b5c8b719ab36f01aeef2fd8583526467e3037"
+        ]
+        volumes:
+            - ${HOST_SHARED_DIR:-shared}:/opt/shared
+        networks:
+            ethnet:
+                ipv4_address: 13.3.7.5
+        ports:
+            - "8745:8545"
+            - "32403:30403"
+        environment:
+            - TARGET=miningnode
+            - NODE_NAME=node-3
+            - GENESIS=1
+            - ETHERBASE=0xbc391b1dbc5fb11962b8fb419007b902e0aa6bf5
+
+    node-3-attach:
+        image: ${EBAKUS_CONTAINER_NAME:-ebakus/node}:${EBAKUS_CONTAINER_TAG:-latest}
+        command: [
+            "--preload", "/opt/shared/shared_data/init.js"
+        ]
+        depends_on:
+            - node-1
+            - node-2
+            - node-3
+        volumes:
+            - ${HOST_SHARED_DIR:-shared}:/opt/shared
+        environment:
+            - TARGET=attachnode
+            - NODE_NAME=node-3
+
+networks:
+  ethnet:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 13.3.7.0/16
+        #   gateway: 13.3.7.1
+
+volumes:
+    shared:
