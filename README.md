@@ -141,7 +141,7 @@ Docker:
 ```
 docker run -d --name ebakus-node -v /Users/alice/ebakus:/root \
            -p 8545:8545 -p 30303:30303 \
-           ebakus/node
+           ebakus/go-ebakus
 ```
 
 This will start `ebakus` in fast-sync mode with a DB memory allowance of 1GB just as the

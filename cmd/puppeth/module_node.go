@@ -32,7 +32,7 @@ import (
 
 // nodeDockerfile is the Dockerfile required to run an Ebakus node.
 var nodeDockerfile = `
-FROM ebakus/node:latest
+FROM ebakus/go-ebakus:latest
 
 ADD genesis.json /genesis.json
 {{if .Unlock}}
