@@ -1,18 +1,18 @@
-// Copyright 2017 The ebakus/node Authors
-// This file is part of ebakus/node.
+// Copyright 2019 The ebakus/go-ebakus Authors
+// This file is part of ebakus/go-ebakus.
 //
-// ebakus/node is free software: you can redistribute it and/or modify
+// ebakus/go-ebakus is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// ebakus/node is distributed in the hope that it will be useful,
+// ebakus/go-ebakus is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with ebakus/node. If not, see <http://www.gnu.org/licenses/>.
+// along with ebakus/go-ebakus. If not, see <http://www.gnu.org/licenses/>.
 
 package main
 
@@ -202,7 +202,7 @@ var dashboardContent = `
 									</div>
 									<div class="x_content">
 										<p>The Ebakus Wallet is an <a href="https://electron.atom.io/" target="about:blank">Electron</a> based desktop application to manage your Ebakus accounts and funds. Beside the usual account life-cycle operations you would expect to perform, the wallet also provides a means to send transactions from your accounts and to interact with smart contracts deployed on the network.</p>
-										<p>Under the hood the wallet is backed by a ebakus/node full node, meaning that a mid range machine is assumed. Similarly, synchronization is based on <strong>fast-sync</strong>, which will download all blockchain data from the network and make it available to the wallet. Light nodes cannot currently fully back the wallet, but it's a target actively pursued.</p>
+										<p>Under the hood the wallet is backed by a ebakus/go-ebakus full node, meaning that a mid range machine is assumed. Similarly, synchronization is based on <strong>fast-sync</strong>, which will download all blockchain data from the network and make it available to the wallet. Light nodes cannot currently fully back the wallet, but it's a target actively pursued.</p>
 										<br/>
 										<p>To connect with the Ebakus Wallet, you'll need to initialize your private network first via Ebakus as the wallet does not currently support calling Ebakus directly. To initialize your local chain, download <a href="/{{.EbakusGenesis}}"><code>{{.EbakusGenesis}}</code></a> and run:
 											<pre>ebakus --datadir=$HOME/.{{.Network}} init {{.EbakusGenesis}}</pre>
@@ -223,7 +223,7 @@ var dashboardContent = `
 									</div>
 									<div class="x_content">
 										<p>The Mist browser is an <a href="https://electron.atom.io/" target="about:blank">Electron</a> based desktop application to load and interact with Ebakus enabled third party web DApps. Beside all the functionality provided by the Ebakus Wallet, Mist is an extended web-browser where loaded pages have access to the Ebakus network via a web3.js provider, and may also interact with users' own accounts (given proper authorization and confirmation of course).</p>
-										<p>Under the hood the browser is backed by a ebakus/node full node, meaning that a mid range machine is assumed. Similarly, synchronization is based on <strong>fast-sync</strong>, which will download all blockchain data from the network and make it available to the wallet. Light nodes cannot currently fully back the wallet, but it's a target actively pursued.</p>
+										<p>Under the hood the browser is backed by a ebakus/go-ebakus full node, meaning that a mid range machine is assumed. Similarly, synchronization is based on <strong>fast-sync</strong>, which will download all blockchain data from the network and make it available to the wallet. Light nodes cannot currently fully back the wallet, but it's a target actively pursued.</p>
 										<br/>
 										<p>To connect with the Mist browser, you'll need to initialize your private network first via Ebakus as Mist does not currently support calling Ebakus directly. To initialize your local chain, download <a href="/{{.EbakusGenesis}}"><code>{{.EbakusGenesis}}</code></a> and run:
 											<pre>ebakus --datadir=$HOME/.{{.Network}} init {{.EbakusGenesis}}</pre>
@@ -253,8 +253,8 @@ var dashboardContent = `
 										<div class="clearfix"></div>
 									</div>
 									<div class="x_content">
-										<p>Starting with the 1.5 release of ebakus/node, we've transitioned away from shipping only full blown Ebakus clients and started focusing on releasing the code as reusable packages initially for Go projects, then later for Java based Android projects too. Mobile support is still evolving, hence is bound to change often and hard, but the Ebakus network can nonetheless be accessed from Android too.</p>
-										<p>Under the hood the Android library is backed by a ebakus/node light node, meaning that given a not-too-old Android device, you should be able to join the network without significant issues. Certain functionality is not yet available and rough edges are bound to appear here and there, please report issues if you find any.</p>
+										<p>Starting with the 1.5 release of ebakus/go-ebakus, we've transitioned away from shipping only full blown Ebakus clients and started focusing on releasing the code as reusable packages initially for Go projects, then later for Java based Android projects too. Mobile support is still evolving, hence is bound to change often and hard, but the Ebakus network can nonetheless be accessed from Android too.</p>
+										<p>Under the hood the Android library is backed by a ebakus/go-ebakus light node, meaning that given a not-too-old Android device, you should be able to join the network without significant issues. Certain functionality is not yet available and rough edges are bound to appear here and there, please report issues if you find any.</p>
 										<br/>
 										<p>The stable Android archives are distributed via Maven Central, and the develop snapshots via the Sonatype repositories. Before proceeding, please ensure you have a recent version configured in your Android project. You can find details in <a href="https://github.com/ebakus/go-ebakus/wiki/Mobile:-Introduction#android-archive" target="about:blank">Mobile: Introduction &ndash; Android archive</a>.
 										<p>Before connecting to the Ebakus network, download the <a href="/{{.EbakusGenesis}}"><code>{{.EbakusGenesis}}</code></a> genesis json file and either store it in your Android project as a resource file you can access, or save it as a string in a variable. You're going to need to to initialize your client.</p>
@@ -284,8 +284,8 @@ node.start();
 										<div class="clearfix"></div>
 									</div>
 									<div class="x_content">
-										<p>Starting with the 1.5 release of ebakus/node, we've transitioned away from shipping only full blown Ebakus clients and started focusing on releasing the code as reusable packages initially for Go projects, then later for ObjC/Swift based iOS projects too. Mobile support is still evolving, hence is bound to change often and hard, but the Ebakus network can nonetheless be accessed from iOS too.</p>
-										<p>Under the hood the iOS library is backed by a ebakus/node light node, meaning that given a not-too-old Apple device, you should be able to join the network without significant issues. Certain functionality is not yet available and rough edges are bound to appear here and there, please report issues if you find any.</p>
+										<p>Starting with the 1.5 release of ebakus/go-ebakus, we've transitioned away from shipping only full blown Ebakus clients and started focusing on releasing the code as reusable packages initially for Go projects, then later for ObjC/Swift based iOS projects too. Mobile support is still evolving, hence is bound to change often and hard, but the Ebakus network can nonetheless be accessed from iOS too.</p>
+										<p>Under the hood the iOS library is backed by a ebakus/go-ebakus light node, meaning that given a not-too-old Apple device, you should be able to join the network without significant issues. Certain functionality is not yet available and rough edges are bound to appear here and there, please report issues if you find any.</p>
 										<br/>
 										<p>Both stable and develop builds of the iOS framework are available via CocoaPods. Before proceeding, please ensure you have a recent version configured in your iOS project. You can find details in <a href="https://github.com/ebakus/go-ebakus/wiki/Mobile:-Introduction#ios-framework" target="about:blank">Mobile: Introduction &ndash; iOS framework</a>.
 										<p>Before connecting to the Ebakus network, download the <a href="/{{.EbakusGenesis}}"><code>{{.EbakusGenesis}}</code></a> genesis json file and either store it in your iOS project as a resource file you can access, or save it as a string in a variable. You're going to need to to initialize your client.</p>
@@ -421,7 +421,7 @@ try! node?.start();
 										<br/>
 										<p>Puppeth is distributed as part of the <a href="https://geth.ethereum.com/downloads/" target="about:blank">Ebakus &amp; Tools</a> bundles, but can also be installed separately via:<pre>go get github.com/ebakus/go-ebakus/cmd/puppeth</pre></p>
 										<br/>
-										<p><em>Copyright 2017. The ebakus/node Authors.</em></p>
+										<p><em>Copyright 2017. The ebakus/go-ebakus Authors.</em></p>
 									</div>
 									<div style="display: inline-block; vertical-align: bottom; width: 217px;">
 										<img src="puppeth.png" style="height: 256px; margin: 16px 16px 16px 16px"></img>
@@ -636,7 +636,7 @@ func deployDashboard(client *sshClient, network string, conf *config, config *da
 	})
 	files[filepath.Join(workdir, "index.html")] = indexfile.Bytes()
 
-	// Marshal the genesis spec files for ebakus/node and all the other clients
+	// Marshal the genesis spec files for ebakus/go-ebakus and all the other clients
 	genesis, _ := conf.Genesis.MarshalJSON()
 	files[filepath.Join(workdir, network+".json")] = genesis
 

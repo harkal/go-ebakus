@@ -28,5 +28,5 @@ test:
     - cp ./build/bin/ebakus $HOME/ebakus
 
     # Run hive and move all generated logs into the public artifacts folder
-    - (cd ~/.go_workspace/src/github.com/karalabe/hive && hive --docker-noshell --client=ebakus/node:local --override=$HOME/ebakus --test=. --sim=.)
+    - (cd ~/.go_workspace/src/github.com/karalabe/hive && hive --docker-noshell --client=ebakus/go-ebakus:local --override=$HOME/ebakus --test=. --sim=.)
     - cp -r ~/.go_workspace/src/github.com/karalabe/hive/workspace/logs/* $CIRCLE_ARTIFACTS

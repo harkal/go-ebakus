@@ -30,7 +30,7 @@ Dockerized Ebakus testnets
 # Environment variables
 
 ```commandline
-export EBAKUS_CONTAINER_NAME=ebakus/node
+export EBAKUS_CONTAINER_NAME=ebakus/go-ebakus
 export EBAKUS_CONTAINER_TAG=latest
 ```
 

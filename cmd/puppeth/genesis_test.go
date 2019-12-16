@@ -1,18 +1,18 @@
-// Copyright 2018 The ebakus/node Authors
-// This file is part of ebakus/node.
+// Copyright 2019 The ebakus/go-ebakus Authors
+// This file is part of ebakus/go-ebakus.
 //
-// ebakus/node is free software: you can redistribute it and/or modify
+// ebakus/go-ebakus is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// ebakus/node is distributed in the hope that it will be useful,
+// ebakus/go-ebakus is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with ebakus/node. If not, see <http://www.gnu.org/licenses/>.
+// along with ebakus/go-ebakus. If not, see <http://www.gnu.org/licenses/>.
 
 package main
 
@@ -27,7 +27,7 @@ import (
 	"github.com/ebakus/go-ebakus/core"
 )
 
-// Tests the ebakus/node to Aleth chainspec conversion for the Stureby testnet.
+// Tests the ebakus/go-ebakus to Aleth chainspec conversion for the Stureby testnet.
 func TestAlethSturebyConverter(t *testing.T) {
 	blob, err := ioutil.ReadFile("testdata/stureby_ebakus.json")
 	if err != nil {
@@ -66,7 +66,7 @@ func TestAlethSturebyConverter(t *testing.T) {
 	}
 }
 
-// Tests the ebakus/node to Parity chainspec conversion for the Stureby testnet.
+// Tests the ebakus/go-ebakus to Parity chainspec conversion for the Stureby testnet.
 func TestParitySturebyConverter(t *testing.T) {
 	blob, err := ioutil.ReadFile("testdata/stureby_ebakus.json")
 	if err != nil {

@@ -1,18 +1,18 @@
-// Copyright 2017 The ebakus/node Authors
-// This file is part of ebakus/node.
+// Copyright 2019 The ebakus/go-ebakus Authors
+// This file is part of ebakus/go-ebakus.
 //
-// ebakus/node is free software: you can redistribute it and/or modify
+// ebakus/go-ebakus is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// ebakus/node is distributed in the hope that it will be useful,
+// ebakus/go-ebakus is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with ebakus/node. If not, see <http://www.gnu.org/licenses/>.
+// along with ebakus/go-ebakus. If not, see <http://www.gnu.org/licenses/>.
 
 package main
 
@@ -33,7 +33,7 @@ import (
 // faucetDockerfile is the Dockerfile required to build a faucet container to
 // grant crypto tokens based on GitHub authentications.
 var faucetDockerfile = `
-FROM ebakus/node:alltools-latest
+FROM ebakus/go-ebakus:alltools-latest
 
 ADD genesis.json /genesis.json
 ADD account.json /account.json
@@ -160,7 +160,7 @@ func (info *faucetInfos) Report() map[string]string {
 	report := map[string]string{
 		"Website address":              info.host,
 		"Website listener port":        strconv.Itoa(info.port),
-		"Ebakus listener port":       strconv.Itoa(info.node.port),
+		"Ebakus listener port":         strconv.Itoa(info.node.port),
 		"Funding amount (base tier)":   fmt.Sprintf("%d Ethers", info.amount),
 		"Funding cooldown (base tier)": fmt.Sprintf("%d mins", info.minutes),
 		"Funding tiers":                strconv.Itoa(info.tiers),

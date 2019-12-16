@@ -1,18 +1,18 @@
-// Copyright 2017 The ebakus/node Authors
-// This file is part of ebakus/node.
+// Copyright 2019 The ebakus/go-ebakus Authors
+// This file is part of ebakus/go-ebakus.
 //
-// ebakus/node is free software: you can redistribute it and/or modify
+// ebakus/go-ebakus is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// ebakus/node is distributed in the hope that it will be useful,
+// ebakus/go-ebakus is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with ebakus/node. If not, see <http://www.gnu.org/licenses/>.
+// along with ebakus/go-ebakus. If not, see <http://www.gnu.org/licenses/>.
 
 package main
 
@@ -93,10 +93,10 @@ type alethGenesisSpecLinearPricing struct {
 	Word uint64 `json:"word"`
 }
 
-// newAlethGenesisSpec converts a ebakus/node genesis block into a Aleth-specific
+// newAlethGenesisSpec converts a ebakus/go-ebakus genesis block into a Aleth-specific
 // chain specification format.
 func newAlethGenesisSpec(network string, genesis *core.Genesis) (*alethGenesisSpec, error) {
-	// Only ethash is currently supported between ebakus/node and aleth
+	// Only ethash is currently supported between ebakus/go-ebakus and aleth
 	if genesis.Config.Ethash == nil {
 		return nil, errors.New("unsupported consensus engine")
 	}
@@ -348,10 +348,10 @@ type parityChainSpecBlakePricing struct {
 	GasPerRound uint64 `json:"gas_per_round"`
 }
 
-// newParityChainSpec converts a ebakus/node genesis block into a Parity specific
+// newParityChainSpec converts a ebakus/go-ebakus genesis block into a Parity specific
 // chain specification format.
 func newParityChainSpec(network string, genesis *core.Genesis, bootnodes []string) (*parityChainSpec, error) {
-	// Only ethash is currently supported between ebakus/node and Parity
+	// Only ethash is currently supported between ebakus/go-ebakus and Parity
 	if genesis.Config.Ethash == nil {
 		return nil, errors.New("unsupported consensus engine")
 	}
@@ -536,10 +536,10 @@ type pyEbakusGenesisSpec struct {
 	ParentHash common.Hash       `json:"parentHash"`
 }
 
-// newPyEbakusGenesisSpec converts a ebakus/node genesis block into a Parity specific
+// newPyEbakusGenesisSpec converts a ebakus/go-ebakus genesis block into a Parity specific
 // chain specification format.
 func newPyEbakusGenesisSpec(network string, genesis *core.Genesis) (*pyEbakusGenesisSpec, error) {
-	// Only ethash is currently supported between ebakus/node and pyebakus
+	// Only ethash is currently supported between ebakus/go-ebakus and pyebakus
 	if genesis.Config.Ethash == nil {
 		return nil, errors.New("unsupported consensus engine")
 	}

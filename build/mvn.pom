@@ -10,7 +10,7 @@
   <packaging>aar</packaging>
 
   <name>Android Ethereum Client</name>
-  <description>Android port of the ebakus/node libraries and node</description>
+  <description>Android port of the ebakus/go-ebakus libraries and node</description>
   <url>https://github.com/ebakus/go-ebakus</url>
   <inceptionYear>2015</inceptionYear>
 

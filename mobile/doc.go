@@ -1,23 +1,23 @@
-// Copyright 2016 The ebakus/node Authors
-// This file is part of the ebakus/node library.
+// Copyright 2019 The ebakus/go-ebakus Authors
+// This file is part of the ebakus/go-ebakus library.
 //
-// The ebakus/node library is free software: you can redistribute it and/or modify
+// The ebakus/go-ebakus library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The ebakus/node library is distributed in the hope that it will be useful,
+// The ebakus/go-ebakus library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the ebakus/node library. If not, see <http://www.gnu.org/licenses/>.
+// along with the ebakus/go-ebakus library. If not, see <http://www.gnu.org/licenses/>.
 
-// Package ebakus contains the simplified mobile APIs to ebakus/node.
+// Package ebakus contains the simplified mobile APIs to ebakus/go-ebakus.
 //
 // The scope of this package is *not* to allow writing a custom Ebakus client
-// with pieces plucked from ebakus/node, rather to allow writing native dapps on
+// with pieces plucked from ebakus/go-ebakus, rather to allow writing native dapps on
 // mobile platforms. Keep this in mind when using or extending this package!
 //
 // API limitations
@@ -33,13 +33,13 @@
 // writing custom library generators, but those are out of scope now.
 //
 // Content wise each file in this package corresponds to an entire Go package
-// from the ebakus/node repository. Please adhere to this scoping to prevent this
+// from the ebakus/go-ebakus repository. Please adhere to this scoping to prevent this
 // package getting unmaintainable.
 //
 // Wrapping guidelines:
 //
 // Every type that is to be exposed should be wrapped into its own plain struct,
-// which internally contains a single field: the original ebakus/node version.
+// which internally contains a single field: the original ebakus/go-ebakus version.
 // This is needed because gomobile cannot expose named types for now.
 //
 // Whenever a method argument or a return type is a custom struct, the pointer

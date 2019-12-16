@@ -1,18 +1,18 @@
-// Copyright 2019 The ebakus/node Authors
-// This file is part of the ebakus/node library.
+// Copyright 2019 The ebakus/go-ebakus Authors
+// This file is part of the ebakus/go-ebakus library.
 //
-// The ebakus/node library is free software: you can redistribute it and/or modify
+// The ebakus/go-ebakus library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The ebakus/node library is distributed in the hope that it will be useful,
+// The ebakus/go-ebakus library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the ebakus/node library. If not, see <http://www.gnu.org/licenses/>.
+// along with the ebakus/go-ebakus library. If not, see <http://www.gnu.org/licenses/>.
 
 package rawdb
 
@@ -63,7 +63,7 @@ const (
 //
 // - The append only nature ensures that disk writes are minimized.
 // - The memory mapping ensures we can max out system memory for caching without
-//   reserving it for ebakus/node. This would also reduce the memory requirements
+//   reserving it for ebakus/go-ebakus. This would also reduce the memory requirements
 //   of Ebakus, and thus also GC overhead.
 type freezer struct {
 	// WARNING: The `frozen` field is accessed atomically. On 32 bit platforms, only
