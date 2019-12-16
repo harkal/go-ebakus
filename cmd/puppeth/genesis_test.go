@@ -27,7 +27,7 @@ import (
 	"github.com/ebakus/go-ebakus/core"
 )
 
-// Tests the ebakus/node to Aleth chainspec conversion for the Stureby testnet.
+// Tests the ebakus/go-ebakus to Aleth chainspec conversion for the Stureby testnet.
 func TestAlethSturebyConverter(t *testing.T) {
 	blob, err := ioutil.ReadFile("testdata/stureby_ebakus.json")
 	if err != nil {
@@ -66,7 +66,7 @@ func TestAlethSturebyConverter(t *testing.T) {
 	}
 }
 
-// Tests the ebakus/node to Parity chainspec conversion for the Stureby testnet.
+// Tests the ebakus/go-ebakus to Parity chainspec conversion for the Stureby testnet.
 func TestParitySturebyConverter(t *testing.T) {
 	blob, err := ioutil.ReadFile("testdata/stureby_ebakus.json")
 	if err != nil {

@@ -6,7 +6,7 @@ Official golang implementation of the Ebakus protocol.
 https://camo.githubusercontent.com/915b7be44ada53c290eb157634330494ebe3e30a/68747470733a2f2f676f646f632e6f72672f6769746875622e636f6d2f676f6c616e672f6764646f3f7374617475732e737667
 )](https://godoc.org/github.com/ebakus/go-ebakus)
 [![Go Report Card](https://goreportcard.com/badge/github.com/ebakus/go-ebakus)](https://goreportcard.com/report/github.com/ebakus/go-ebakus)
-[![Travis](https://travis-ci.org/ebakus/node.svg?branch=master)](https://travis-ci.org/ebakus/node)
+[![Travis](https://travis-ci.org/ebakus/go-ebakus.svg?branch=master)](https://travis-ci.org/ebakus/go-ebakus)
 [![Discord](https://img.shields.io/badge/discord-join%20chat-blue.svg)](https://discord.gg/nthXNEv)
 
 Automated builds are available for stable releases and the unstable master branch. Binary
@@ -109,7 +109,7 @@ algorithm. As such, it has certain extra overhead and is more susceptible to reo
 attacks due to the network's low difficulty/security. Go Ebakus also supports connecting
 to a proof-of-authority based test network called [*Rinkeby*](https://www.rinkeby.io)
 (operated by members of the community). This network is lighter, more secure, but is only
-supported by ebakus/node.
+supported by ebakus/go-ebakus.
 
 ```shell
 $ ebakus --rinkeby console
@@ -313,9 +313,9 @@ transactions are accepted at (`--gasprice`).
 Thank you for considering to help out with the source code! We welcome contributions
 from anyone on the internet, and are grateful for even the smallest of fixes!
 
-If you'd like to contribute to ebakus/node, please fork, fix, commit and send a pull request
+If you'd like to contribute to ebakus/go-ebakus, please fork, fix, commit and send a pull request
 for the maintainers to review and merge into the main code base. If you wish to submit
-more complex changes though, please check up with the core devs first on [our gitter channel](https://gitter.im/ebakus/node)
+more complex changes though, please check up with the core devs first on [our gitter channel](https://gitter.im/ebakus/go-ebakus)
 to ensure those changes are in line with the general philosophy of the project and/or get
 some early feedback which can make both your efforts much lighter as well as our review
 and merge procedures quick and simple.
@@ -336,10 +336,10 @@ testing procedures.
 
 ## License
 
-The ebakus/node library (i.e. all code outside of the `cmd` directory) is licensed under the
+The ebakus/go-ebakus library (i.e. all code outside of the `cmd` directory) is licensed under the
 [GNU Lesser General Public License v3.0](https://www.gnu.org/licenses/lgpl-3.0.en.html),
 also included in our repository in the `COPYING.LESSER` file.
 
-The ebakus/node binaries (i.e. all code inside of the `cmd` directory) is licensed under the
+The ebakus/go-ebakus binaries (i.e. all code inside of the `cmd` directory) is licensed under the
 [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html), also
 included in our repository in the `COPYING` file.

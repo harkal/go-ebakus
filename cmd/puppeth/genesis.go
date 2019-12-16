@@ -93,10 +93,10 @@ type alethGenesisSpecLinearPricing struct {
 	Word uint64 `json:"word"`
 }
 
-// newAlethGenesisSpec converts a ebakus/node genesis block into a Aleth-specific
+// newAlethGenesisSpec converts a ebakus/go-ebakus genesis block into a Aleth-specific
 // chain specification format.
 func newAlethGenesisSpec(network string, genesis *core.Genesis) (*alethGenesisSpec, error) {
-	// Only ethash is currently supported between ebakus/node and aleth
+	// Only ethash is currently supported between ebakus/go-ebakus and aleth
 	if genesis.Config.Ethash == nil {
 		return nil, errors.New("unsupported consensus engine")
 	}
@@ -348,10 +348,10 @@ type parityChainSpecBlakePricing struct {
 	GasPerRound uint64 `json:"gas_per_round"`
 }
 
-// newParityChainSpec converts a ebakus/node genesis block into a Parity specific
+// newParityChainSpec converts a ebakus/go-ebakus genesis block into a Parity specific
 // chain specification format.
 func newParityChainSpec(network string, genesis *core.Genesis, bootnodes []string) (*parityChainSpec, error) {
-	// Only ethash is currently supported between ebakus/node and Parity
+	// Only ethash is currently supported between ebakus/go-ebakus and Parity
 	if genesis.Config.Ethash == nil {
 		return nil, errors.New("unsupported consensus engine")
 	}
@@ -536,10 +536,10 @@ type pyEbakusGenesisSpec struct {
 	ParentHash common.Hash       `json:"parentHash"`
 }
 
-// newPyEbakusGenesisSpec converts a ebakus/node genesis block into a Parity specific
+// newPyEbakusGenesisSpec converts a ebakus/go-ebakus genesis block into a Parity specific
 // chain specification format.
 func newPyEbakusGenesisSpec(network string, genesis *core.Genesis) (*pyEbakusGenesisSpec, error) {
-	// Only ethash is currently supported between ebakus/node and pyebakus
+	// Only ethash is currently supported between ebakus/go-ebakus and pyebakus
 	if genesis.Config.Ethash == nil {
 		return nil, errors.New("unsupported consensus engine")
 	}

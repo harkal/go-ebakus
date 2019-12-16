@@ -34,7 +34,7 @@ func TestInterfaceGetSet(t *testing.T) {
 		{"Bool", true, true},
 		{"Bool", false, false},
 		{"Bools", &Bools{[]bool{false, true}}, &Bools{[]bool{false, true}}},
-		{"String", "ebakus/node", "ebakus/node"},
+		{"String", "ebakus/go-ebakus", "ebakus/go-ebakus"},
 		{"Strings", &Strings{strs: []string{"hello", "world"}}, &Strings{strs: []string{"hello", "world"}}},
 		{"Binary", []byte{0x01, 0x02}, []byte{0x01, 0x02}},
 		{"Binaries", &Binaries{[][]byte{{0x01, 0x02}, {0x03, 0x04}}}, &Binaries{[][]byte{{0x01, 0x02}, {0x03, 0x04}}}},

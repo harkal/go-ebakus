@@ -16,7 +16,7 @@
 
 // Package bind generates Ebakus contract Go bindings.
 //
-// Detailed usage document and tutorial available on the ebakus/node Wiki page:
+// Detailed usage document and tutorial available on the ebakus/go-ebakus Wiki page:
 // https://github.com/ebakus/go-ebakus/wiki/Native-DApps:-Go-bindings-to-Ebakus-contracts
 package bind
 

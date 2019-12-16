@@ -11,7 +11,7 @@ Audit reports are published in the `docs` folder: https://github.com/ebakus/go-e
 
 | Scope | Date | Report Link |
 | ------- | ------- | ----------- |
-| `ebakus` | 20170425 | [pdf](https://github.com/ebakus/go-ebakus/blob/master/docs/audits/2017-04-25_Ebakus-audit_Truesec.pdf) |
+| `ebakus` | 20170425 | [pdf](https://github.com/ebakus/go-ebakus/blob/master/docs/audits/2017-04-Geth-audit_Truesec.pdf) |
 | `clef` | 20180914 | [pdf](https://github.com/ebakus/go-ebakus/blob/master/docs/audits/2018-09-14_Clef-audit_NCC.pdf) |
 
 

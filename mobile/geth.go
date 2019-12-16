@@ -40,7 +40,7 @@ import (
 
 // NodeConfig represents the collection of configuration values to fine tune the Ebakus
 // node embedded into a mobile process. The available values are a subset of the
-// entire API provided by ebakus/node to reduce the maintenance surface and dev
+// entire API provided by ebakus/go-ebakus to reduce the maintenance surface and dev
 // complexity.
 type NodeConfig struct {
 	// Bootstrap nodes used to establish connectivity with the rest of the network.

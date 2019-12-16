@@ -11,10 +11,10 @@ fi
 workspace="$PWD/build/_workspace"
 root="$PWD"
 ethdir="$workspace/src/github.com/ebakus"
-if [ ! -L "$ethdir/node" ]; then
+if [ ! -L "$ethdir/go-ebakus" ]; then
     mkdir -p "$ethdir"
     cd "$ethdir"
-    ln -s ../../../../../. node
+    ln -s ../../../../../. go-ebakus
     cd "$root"
 fi
 
@@ -23,8 +23,8 @@ GOPATH="$workspace"
 export GOPATH
 
 # Run the command inside the workspace.
-cd "$ethdir/node"
-PWD="$ethdir/node"
+cd "$ethdir/go-ebakus"
+PWD="$ethdir/go-ebakus"
 
 # Launch the arguments with the configured environment.
 exec "$@"

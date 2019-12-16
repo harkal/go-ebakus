@@ -1037,7 +1037,7 @@ func (bc *BlockChain) InsertReceiptChain(blockChain types.Blocks, receiptChain [
 				logged = time.Now()
 				count  int
 			)
-			// Migrate all ancient blocks. This can happen if someone upgrades from Geth
+			// Migrate all ancient blocks. This can happen if someone upgrades from Ebakus
 			// 1.8.x to 1.9.x mid-fast-sync. Perhaps we can get rid of this path in the
 			// long term.
 			for {

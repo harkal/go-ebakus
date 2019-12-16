@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with the ebakus/go-ebakus library. If not, see <http://www.gnu.org/licenses/>.
 
-// Contains all the wrappers from the ebakus/node root package.
+// Contains all the wrappers from the ebakus/go-ebakus root package.
 
 package ebakus
 
