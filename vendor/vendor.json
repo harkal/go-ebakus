@@ -455,6 +455,12 @@
 			"revisionTime": "2016-06-18T19:32:21Z"
 		},
 		{
+			"checksumSHA1": "fss6rV0XCqWeLGNb/MI9T4DNaVg=",
+			"path": "github.com/shopspring/decimal",
+			"revision": "360f2bc03045d32ba2ae145a16b2820183b54d08",
+			"revisionTime": "2019-11-30T22:07:10Z"
+		},
+		{
 			"checksumSHA1": "I7gkZEZn9PKJ+dzuBYLbFIUzNO4=",
 			"path": "github.com/status-im/keycard-go/derivationpath",
 			"revision": "8537d3370df43a30a3d450c023783d2e43432b89",
