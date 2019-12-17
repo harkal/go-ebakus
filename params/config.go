@@ -172,7 +172,6 @@ type DPOSConfig struct {
 	YearlyInflation     float64        `json:"yearlyInflation"`     // Yearly inflation
 	DelegateCount       uint64         `json:"delegateCount"`       // Number of delegates
 	BonusDelegateCount  uint64         `json:"bonusDelegateCount"`  // Number of delegates to pickup the 21st bonus delegate
-	DelegateEpoch       uint64         `json:"delegateEpoch"`       // Number of blocks each epoch lasts
 	BootProducer        common.Address `json:"bootProducer"`        // Boot producer for genesis block
 }
 
