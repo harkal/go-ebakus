@@ -177,7 +177,14 @@ type DPOSConfig struct {
 
 // String implements the stringer interface, returning the consensus engine details.
 func (c *DPOSConfig) String() string {
-	return "DPOS"
+	return fmt.Sprintf("{DPOS: {DelegateCount: %v BonusDelegateCount %v Period: %v TurnBlockCount: %v InitialDistribution %v YearlyInflation: %v}}",
+		c.DelegateCount,
+		c.BonusDelegateCount,
+		c.Period,
+		c.TurnBlockCount,
+		c.InitialDistribution,
+		c.YearlyInflation,
+	)
 }
 
 // String implements the fmt.Stringer interface.
@@ -191,14 +198,8 @@ func (c *ChainConfig) String() string {
 	default:
 		engine = "unknown"
 	}
-	return fmt.Sprintf("{ChainID: %v EIP150: %v EIP155: %v EIP158: %v Constantinople: %v ConstantinopleFix: %v DPOS: %v Engine: %v}",
+	return fmt.Sprintf("{ChainID: %v Engine: %v}",
 		c.ChainID,
-		c.EIP150Block,
-		c.EIP155Block,
-		c.EIP158Block,
-		c.ConstantinopleBlock,
-		c.PetersburgBlock,
-		c.DPOS,
 		engine,
 	)
 }
