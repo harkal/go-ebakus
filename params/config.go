@@ -39,7 +39,6 @@ var (
 		YearlyInflation:     0.01,
 		DelegateCount:       21,
 		BonusDelegateCount:  100,
-		DelegateEpoch:       1,
 		BootProducer:        common.HexToAddress("0x53e5182e798c5d2a93c526f7c9745a6937a71fcf"),
 	}
 
@@ -61,7 +60,6 @@ var (
 		YearlyInflation:     0.01,
 		DelegateCount:       3,
 		BonusDelegateCount:  2,
-		DelegateEpoch:       1,
 		BootProducer:        common.HexToAddress("0xd53de783b12f12b7852348f2e32c21990746ad02"),
 	}
 
