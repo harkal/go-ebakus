@@ -25,7 +25,7 @@ import (
 	"math/big"
 	"strings"
 
-	"github.com/harkal/ebakusdb"
+	"github.com/ebakus/ebakusdb"
 
 	"github.com/ebakus/go-ebakus/common"
 	"github.com/ebakus/go-ebakus/common/hexutil"

@@ -27,7 +27,7 @@ import (
 	"github.com/ebakus/go-ebakus/common"
 	"github.com/ebakus/go-ebakus/crypto"
 	"github.com/ebakus/go-ebakus/params"
-	"github.com/harkal/ebakusdb"
+	"github.com/ebakus/ebakusdb"
 )
 
 type TwoOperandTestcase struct {

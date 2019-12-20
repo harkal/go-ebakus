@@ -27,7 +27,7 @@ import (
 	"github.com/ebakus/go-ebakus/core/vm"
 	"github.com/ebakus/go-ebakus/ethdb"
 	"github.com/ebakus/go-ebakus/params"
-	"github.com/harkal/ebakusdb"
+	"github.com/ebakus/ebakusdb"
 )
 
 // BlockGen creates blocks for testing.

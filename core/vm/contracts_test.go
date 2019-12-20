@@ -25,7 +25,7 @@ import (
 
 	"github.com/ebakus/go-ebakus/common"
 	"github.com/ebakus/go-ebakus/params"
-	"github.com/harkal/ebakusdb"
+	"github.com/ebakus/ebakusdb"
 )
 
 // precompiledTest defines the input/output pairs for precompiled contract tests.

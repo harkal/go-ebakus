@@ -32,7 +32,7 @@ import (
 	"github.com/ebakus/go-ebakus/log"
 	"github.com/ebakus/go-ebakus/metrics"
 	"github.com/ebakus/go-ebakus/params"
-	"github.com/harkal/ebakusdb"
+	"github.com/ebakus/ebakusdb"
 )
 
 var blockProduceTimer = metrics.GetOrRegisterTimer("worker/blocks/produce", nil)

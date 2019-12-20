@@ -25,7 +25,7 @@ import (
 	"sync/atomic"
 
 	"github.com/ebakus/go-ebakus/consensus/dpos"
-	"github.com/harkal/ebakusdb"
+	"github.com/ebakus/ebakusdb"
 
 	"github.com/ebakus/go-ebakus/accounts"
 	"github.com/ebakus/go-ebakus/accounts/abi/bind"

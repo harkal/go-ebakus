@@ -21,7 +21,7 @@ import (
 
 	"github.com/ebakus/go-ebakus/common"
 	"github.com/ebakus/go-ebakus/core/ebkdb"
-	"github.com/harkal/ebakusdb"
+	"github.com/ebakus/ebakusdb"
 )
 
 var PrecompliledSystemContract = common.BytesToAddress([]byte{1, 1})

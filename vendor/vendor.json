@@ -184,13 +184,13 @@
 		},
 		{
 			"checksumSHA1": "swx59mnuy0DG0NHeDeqoQix7d3k=",
-			"path": "github.com/harkal/ebakusdb",
+			"path": "github.com/ebakus/ebakusdb",
 			"revision": "6af40c037aa817309ca2f746f2c287ecfb141c88",
 			"revisionTime": "2019-07-16T14:07:09Z"
 		},
 		{
 			"checksumSHA1": "xAf8m1he1WKgTyWxcKqykkF3Qy0=",
-			"path": "github.com/harkal/ebakusdb/balloc",
+			"path": "github.com/ebakus/ebakusdb/balloc",
 			"revision": "6af40c037aa817309ca2f746f2c287ecfb141c88",
 			"revisionTime": "2019-07-16T14:07:09Z"
 		},

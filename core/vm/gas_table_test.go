@@ -26,7 +26,7 @@ import (
 	"github.com/ebakus/go-ebakus/core/rawdb"
 	"github.com/ebakus/go-ebakus/core/state"
 	"github.com/ebakus/go-ebakus/params"
-	"github.com/harkal/ebakusdb"
+	"github.com/ebakus/ebakusdb"
 )
 
 func TestMemoryGasCost(t *testing.T) {

@@ -43,7 +43,7 @@ import (
 	"github.com/ebakus/go-ebakus/rlp"
 	"github.com/ebakus/go-ebakus/rpc"
 	"github.com/ebakus/go-ebakus/trie"
-	"github.com/harkal/ebakusdb"
+	"github.com/ebakus/ebakusdb"
 
 	cli "gopkg.in/urfave/cli.v1"
 )

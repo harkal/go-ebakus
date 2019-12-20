@@ -27,7 +27,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/harkal/ebakusdb"
+	"github.com/ebakus/ebakusdb"
 	lru "github.com/hashicorp/golang-lru"
 
 	"github.com/ebakus/go-ebakus/common"

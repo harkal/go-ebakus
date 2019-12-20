@@ -29,7 +29,7 @@ import (
 	"github.com/ebakus/go-ebakus/common"
 	"github.com/ebakus/go-ebakus/crypto"
 	"github.com/ebakus/go-ebakus/rlp"
-	"github.com/harkal/ebakusdb"
+	"github.com/ebakus/ebakusdb"
 )
 
 // The values in those tests are from the Transaction Tests

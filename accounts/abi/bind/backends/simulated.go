@@ -40,7 +40,7 @@ import (
 	"github.com/ebakus/go-ebakus/event"
 	"github.com/ebakus/go-ebakus/params"
 	"github.com/ebakus/go-ebakus/rpc"
-	"github.com/harkal/ebakusdb"
+	"github.com/ebakus/ebakusdb"
 )
 
 // This nil assignment ensures compile time that SimulatedBackend implements bind.ContractBackend.

@@ -31,7 +31,7 @@ import (
 	"github.com/ebakus/go-ebakus/core/types"
 	"github.com/ebakus/go-ebakus/params"
 	"github.com/ebakus/go-ebakus/rlp"
-	"github.com/harkal/ebakusdb"
+	"github.com/ebakus/ebakusdb"
 	"golang.org/x/crypto/sha3"
 )
 

@@ -1,3 +1,3 @@
-[submodule "vendor/github.com/harkal/ebakusdb"]
-	path = vendor/github.com/harkal/ebakusdb
-	url = git@bitbucket.org:harkal/ebakusdb.git
+[submodule "vendor/github.com/ebakus/ebakusdb"]
+	path = vendor/github.com/ebakus/ebakusdb
+	url = git@bitbucket.org:ebakus/ebakusdb.git

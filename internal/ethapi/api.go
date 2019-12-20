@@ -45,7 +45,7 @@ import (
 	"github.com/ebakus/go-ebakus/params"
 	"github.com/ebakus/go-ebakus/rlp"
 	"github.com/ebakus/go-ebakus/rpc"
-	"github.com/harkal/ebakusdb"
+	"github.com/ebakus/ebakusdb"
 	"github.com/tyler-smith/go-bip39"
 )
 

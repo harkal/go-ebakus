@@ -25,7 +25,7 @@ import (
 	"github.com/ebakus/go-ebakus/core/types"
 	"github.com/ebakus/go-ebakus/core/vm"
 	"github.com/ebakus/go-ebakus/params"
-	"github.com/harkal/ebakusdb"
+	"github.com/ebakus/ebakusdb"
 )
 
 // statePrefetcher is a basic Prefetcher, which blindly executes a block on top

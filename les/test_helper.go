@@ -44,7 +44,7 @@ import (
 	"github.com/ebakus/go-ebakus/p2p"
 	"github.com/ebakus/go-ebakus/p2p/enode"
 	"github.com/ebakus/go-ebakus/params"
-	"github.com/harkal/ebakusdb"
+	"github.com/ebakus/ebakusdb"
 )
 
 var (
