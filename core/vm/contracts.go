@@ -35,7 +35,7 @@ import (
 	"github.com/ebakus/go-ebakus/crypto/bn256"
 	"github.com/ebakus/go-ebakus/log"
 	"github.com/ebakus/go-ebakus/params"
-	"github.com/harkal/ebakusdb"
+	"github.com/ebakus/ebakusdb"
 	"golang.org/x/crypto/ripemd160"
 )
 

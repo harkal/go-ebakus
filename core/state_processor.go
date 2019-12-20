@@ -24,7 +24,7 @@ import (
 	"github.com/ebakus/go-ebakus/core/vm"
 	"github.com/ebakus/go-ebakus/crypto"
 	"github.com/ebakus/go-ebakus/params"
-	"github.com/harkal/ebakusdb"
+	"github.com/ebakus/ebakusdb"
 )
 
 // StateProcessor is a basic Processor, which takes care of transitioning

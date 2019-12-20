@@ -62,7 +62,7 @@ import (
 	"github.com/ebakus/go-ebakus/rpc"
 	whisper "github.com/ebakus/go-ebakus/whisper/whisperv6"
 	pcsclite "github.com/gballet/go-libpcsclite"
-	"github.com/harkal/ebakusdb"
+	"github.com/ebakus/ebakusdb"
 	cli "gopkg.in/urfave/cli.v1"
 )
 

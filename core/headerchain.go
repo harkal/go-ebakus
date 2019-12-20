@@ -27,7 +27,7 @@ import (
 	"time"
 
 	"github.com/ebakus/go-ebakus/core/state"
-	"github.com/harkal/ebakusdb"
+	"github.com/ebakus/ebakusdb"
 
 	"github.com/ebakus/go-ebakus/common"
 	"github.com/ebakus/go-ebakus/consensus"

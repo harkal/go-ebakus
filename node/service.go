@@ -29,7 +29,7 @@ import (
 	"github.com/ebakus/go-ebakus/log"
 	"github.com/ebakus/go-ebakus/p2p"
 	"github.com/ebakus/go-ebakus/rpc"
-	"github.com/harkal/ebakusdb"
+	"github.com/ebakus/ebakusdb"
 )
 
 // ServiceContext is a collection of service independent options inherited from

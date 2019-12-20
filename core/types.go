@@ -18,7 +18,7 @@ package core
 
 import (
 	"github.com/ebakus/go-ebakus/common"
-	"github.com/harkal/ebakusdb"
+	"github.com/ebakus/ebakusdb"
 
 	"github.com/ebakus/go-ebakus/core/state"
 	"github.com/ebakus/go-ebakus/core/types"

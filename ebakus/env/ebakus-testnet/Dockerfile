@@ -7,7 +7,7 @@ RUN apk add --no-cache make gcc musl-dev linux-headers git
 ENV TARGET=fullnode
 
 RUN mkdir -p $GOPATH/src/github.com/ebakus
-COPY ./github.com/harkal/ebakusdb $GOPATH/src/github.com/harkal/ebakusdb
+COPY ./github.com/ebakus/ebakusdb $GOPATH/src/github.com/ebakus/ebakusdb
 COPY ./github.com/ebakus/go-ebakus $GOPATH/src/github.com/ebakus/go-ebakus
 WORKDIR /go/src/github.com/ebakus/go-ebakus
 RUN go get -d -v ./cmd/ebakus

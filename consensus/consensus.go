@@ -25,7 +25,7 @@ import (
 	"github.com/ebakus/go-ebakus/core/types"
 	"github.com/ebakus/go-ebakus/params"
 	"github.com/ebakus/go-ebakus/rpc"
-	"github.com/harkal/ebakusdb"
+	"github.com/ebakus/ebakusdb"
 )
 
 // ChainReader defines a small collection of methods needed to access the local

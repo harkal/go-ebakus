@@ -25,7 +25,7 @@ import (
 	"github.com/ebakus/go-ebakus/common"
 	"github.com/ebakus/go-ebakus/crypto"
 	"github.com/ebakus/go-ebakus/params"
-	"github.com/harkal/ebakusdb"
+	"github.com/ebakus/ebakusdb"
 )
 
 // emptyCodeHash is used by create to ensure deployment is disallowed to already

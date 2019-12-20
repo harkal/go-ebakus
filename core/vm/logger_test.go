@@ -23,7 +23,7 @@ import (
 	"github.com/ebakus/go-ebakus/common"
 	"github.com/ebakus/go-ebakus/core/state"
 	"github.com/ebakus/go-ebakus/params"
-	"github.com/harkal/ebakusdb"
+	"github.com/ebakus/ebakusdb"
 )
 
 type dummyContractRef struct {

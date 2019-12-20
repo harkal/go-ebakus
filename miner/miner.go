@@ -32,7 +32,7 @@ import (
 	"github.com/ebakus/go-ebakus/event"
 	"github.com/ebakus/go-ebakus/log"
 	"github.com/ebakus/go-ebakus/params"
-	"github.com/harkal/ebakusdb"
+	"github.com/ebakus/ebakusdb"
 )
 
 // Backend wraps all methods required for mining.

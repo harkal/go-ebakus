@@ -31,7 +31,7 @@ import (
 	"github.com/ebakus/go-ebakus/crypto"
 	"github.com/ebakus/go-ebakus/metrics"
 	"github.com/ebakus/go-ebakus/rlp"
-	"github.com/harkal/ebakusdb"
+	"github.com/ebakus/ebakusdb"
 )
 
 //go:generate gencodec -type txdata -field-override txdataMarshaling -out gen_tx_json.go
