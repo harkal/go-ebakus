@@ -25,6 +25,7 @@ import (
 	"strings"
 	"unsafe"
 
+	"github.com/ebakus/ebakusdb"
 	"github.com/ebakus/go-ebakus/accounts/abi"
 	"github.com/ebakus/go-ebakus/common"
 	"github.com/ebakus/go-ebakus/common/math"
@@ -35,7 +36,6 @@ import (
 	"github.com/ebakus/go-ebakus/crypto/bn256"
 	"github.com/ebakus/go-ebakus/log"
 	"github.com/ebakus/go-ebakus/params"
-	"github.com/ebakus/ebakusdb"
 	"golang.org/x/crypto/ripemd160"
 )
 
