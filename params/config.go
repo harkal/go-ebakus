@@ -39,7 +39,6 @@ var (
 		YearlyInflation:     0.01,
 		DelegateCount:       21,
 		BonusDelegateCount:  100,
-		DelegateEpoch:       1,
 		BootProducer:        common.HexToAddress("0x53e5182e798c5d2a93c526f7c9745a6937a71fcf"),
 	}
 
@@ -61,7 +60,6 @@ var (
 		YearlyInflation:     0.01,
 		DelegateCount:       3,
 		BonusDelegateCount:  2,
-		DelegateEpoch:       1,
 		BootProducer:        common.HexToAddress("0xd53de783b12f12b7852348f2e32c21990746ad02"),
 	}
 
@@ -172,13 +170,19 @@ type DPOSConfig struct {
 	YearlyInflation     float64        `json:"yearlyInflation"`     // Yearly inflation
 	DelegateCount       uint64         `json:"delegateCount"`       // Number of delegates
 	BonusDelegateCount  uint64         `json:"bonusDelegateCount"`  // Number of delegates to pickup the 21st bonus delegate
-	DelegateEpoch       uint64         `json:"delegateEpoch"`       // Number of blocks each epoch lasts
 	BootProducer        common.Address `json:"bootProducer"`        // Boot producer for genesis block
 }
 
 // String implements the stringer interface, returning the consensus engine details.
 func (c *DPOSConfig) String() string {
-	return "DPOS"
+	return fmt.Sprintf("{DPOS: {DelegateCount: %v BonusDelegateCount %v Period: %v TurnBlockCount: %v InitialDistribution %v YearlyInflation: %v}}",
+		c.DelegateCount,
+		c.BonusDelegateCount,
+		c.Period,
+		c.TurnBlockCount,
+		c.InitialDistribution,
+		c.YearlyInflation,
+	)
 }
 
 // String implements the fmt.Stringer interface.
@@ -192,14 +196,8 @@ func (c *ChainConfig) String() string {
 	default:
 		engine = "unknown"
 	}
-	return fmt.Sprintf("{ChainID: %v EIP150: %v EIP155: %v EIP158: %v Constantinople: %v ConstantinopleFix: %v DPOS: %v Engine: %v}",
+	return fmt.Sprintf("{ChainID: %v Engine: %v}",
 		c.ChainID,
-		c.EIP150Block,
-		c.EIP155Block,
-		c.EIP158Block,
-		c.ConstantinopleBlock,
-		c.PetersburgBlock,
-		c.DPOS,
 		engine,
 	)
 }

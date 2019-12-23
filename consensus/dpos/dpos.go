@@ -204,11 +204,7 @@ func (d *DPOS) verifyHeader(chain consensus.ChainReader, header *types.Header, p
 	if blockNum == 0 {
 		return nil
 	}
-	/*
-		if blockNum != d.getEpochBlockNumber(chain, blockNum) && len(header.DelegateDiff) > 0 {
-			return ErrInvalidDelegateUpdateBlock
-		}
-	*/
+
 	// Ensure that the block's timestamp isn't too close to it's parent
 	parent := d.getParent(chain, header, parents)
 	if parent == nil || parent.Number.Uint64() != blockNum-1 || parent.Hash() != header.ParentHash {
@@ -524,12 +520,6 @@ func (d *DPOS) getSignerAtSlot(chain consensus.ChainReader, state *ebakusdb.Snap
 	}
 
 	return common.Address{}
-}
-
-func (d *DPOS) getEpochBlockNumber(chain consensus.ChainReader, blockNum uint64) uint64 {
-	epoch := d.config.DelegateEpoch * d.config.TurnBlockCount * d.config.DelegateCount
-	eBlockNum := (blockNum / epoch) * epoch
-	return eBlockNum
 }
 
 func (d *DPOS) getBlockDensity(chain consensus.ChainReader, number rpc.BlockNumber, lookbackTime uint64) (map[string]interface{}, error) {

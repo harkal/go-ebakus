@@ -588,6 +588,65 @@ const SystemContractABI = `[
   "stateMutability": "view"
 }]`
 
+const SystemContractTablesABI = `[
+{
+  "type": "table",
+  "name": "Witnesses",
+  "inputs": [
+    {
+      "name": "Id",
+      "type": "address"
+    },
+    {
+      "name": "Stake",
+      "type": "uint64"
+    },
+    {
+      "name": "Flags",
+      "type": "uint64"
+    }
+  ]
+},{
+  "type": "table",
+  "name": "Claimable",
+  "inputs": [
+    {
+      "name": "Id",
+      "type": "bytes"
+    },
+    {
+      "name": "Amount",
+      "type": "uint64"
+    },
+    {
+      "name": "Timestamp",
+      "type": "uint64"
+    }
+  ]
+},{
+  "type": "table",
+  "name": "Delegations",
+  "inputs": [
+    {
+      "name": "Id",
+      "type": "bytes40"
+    }
+  ]
+},{
+  "type": "table",
+  "name": "ContractAbi",
+  "inputs": [
+    {
+      "name": "Id",
+      "type": "bytes"
+    },
+    {
+      "name": "Abi",
+      "type": "string"
+    }
+  ]
+}]`
+
 func (c *systemContract) stake(evm *EVM, from common.Address, amount uint64) ([]byte, error) {
 	if amount <= 0 {
 		log.Trace("Can't stake negative or zero amounts")
@@ -1739,25 +1798,33 @@ type selectDef struct {
 }
 
 func GetAbiForTable(db *ebakusdb.Snapshot, contractAddress common.Address, name string) (*abi.ABI, error) {
-	id := GetContractAbiId(contractAddress, "table", name)
+	var abiString string
 
-	where := []byte("Id LIKE ")
-	whereClause, err := db.WhereParser(append(where, id...))
-	if err != nil {
-		return nil, errSystemContractError
+	if contractAddress == types.PrecompliledSystemContract {
+		abiString = SystemContractTablesABI
+	} else {
+		id := GetContractAbiId(contractAddress, "table", name)
+
+		where := []byte("Id LIKE ")
+		whereClause, err := db.WhereParser(append(where, id...))
+		if err != nil {
+			return nil, errSystemContractError
+		}
+
+		iter, err := db.Select(ContractAbiTable, whereClause)
+		if err != nil {
+			return nil, errContractAbiNotFound
+		}
+
+		var contractAbi ContractAbi
+		if iter.Next(&contractAbi) == false {
+			return nil, errContractAbiNotFound
+		}
+
+		abiString = contractAbi.Abi
 	}
 
-	iter, err := db.Select(ContractAbiTable, whereClause)
-	if err != nil {
-		return nil, errContractAbiNotFound
-	}
-
-	var contractAbi ContractAbi
-	if iter.Next(&contractAbi) == false {
-		return nil, errContractAbiNotFound
-	}
-
-	tableABI, err := abi.JSON(strings.NewReader(contractAbi.Abi))
+	tableABI, err := abi.JSON(strings.NewReader(abiString))
 	if err != nil {
 		return nil, errDBContractError
 	}
