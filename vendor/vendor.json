@@ -99,6 +99,18 @@
 			"revisionTime": "2018-06-25T18:44:42Z"
 		},
 		{
+			"checksumSHA1": "SdRlJkRr6NYFfcnc8JO80WL9BVY=",
+			"path": "github.com/ebakus/ebakusdb",
+			"revision": "2dbd69a7001920c37fc9eba4714a8b5207155d81",
+			"revisionTime": "2019-12-23T09:24:26Z"
+		},
+		{
+			"checksumSHA1": "XpRrw26RYHD9cDxq9gd0YH3jBeY=",
+			"path": "github.com/ebakus/ebakusdb/balloc",
+			"revision": "2dbd69a7001920c37fc9eba4714a8b5207155d81",
+			"revisionTime": "2019-12-23T09:24:26Z"
+		},
+		{
 			"checksumSHA1": "zYnPsNAVm1/ViwCkN++dX2JQhBo=",
 			"path": "github.com/edsrzf/mmap-go",
 			"revision": "935e0e8a636ca4ba70b713f3e38a19e1b77739e8",
@@ -181,18 +193,6 @@
 			"path": "github.com/gorilla/websocket",
 			"revision": "ae1634f6a98965ded3b8789c626cb4e0bd78c3de",
 			"revisionTime": "2019-06-29T18:55:28Z"
-		},
-		{
-			"checksumSHA1": "swx59mnuy0DG0NHeDeqoQix7d3k=",
-			"path": "github.com/ebakus/ebakusdb",
-			"revision": "6af40c037aa817309ca2f746f2c287ecfb141c88",
-			"revisionTime": "2019-07-16T14:07:09Z"
-		},
-		{
-			"checksumSHA1": "xAf8m1he1WKgTyWxcKqykkF3Qy0=",
-			"path": "github.com/ebakus/ebakusdb/balloc",
-			"revision": "6af40c037aa817309ca2f746f2c287ecfb141c88",
-			"revisionTime": "2019-07-16T14:07:09Z"
 		},
 		{
 			"checksumSHA1": "d9PxF1XQGLMJZRct2R8qVM/eYlE=",
