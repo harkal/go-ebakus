@@ -345,6 +345,7 @@ func SystemContractSetupDB(db *ebakusdb.Snapshot, address common.Address) error 
 
 	db.CreateTable(ContractAbiTable, &ContractAbi{})
 
+	// it's not trully needed to store the ABIs, though we do this just for occuping the address of the system contracts
 	if _, err := storeAbiAtAddress(db, types.PrecompliledSystemContract, SystemContractABI); err != nil {
 		return err
 	}
