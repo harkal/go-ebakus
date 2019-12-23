@@ -17,6 +17,8 @@
 package node
 
 import (
+	"bytes"
+	"encoding/gob"
 	"os"
 	"os/user"
 	"path/filepath"
@@ -110,4 +112,18 @@ func homeDir() string {
 		return usr.HomeDir
 	}
 	return ""
+}
+
+func GobMarshal(v interface{}) ([]byte, error) {
+	b := new(bytes.Buffer)
+	err := gob.NewEncoder(b).Encode(v)
+	if err != nil {
+		return nil, err
+	}
+	return b.Bytes(), nil
+}
+
+func GobUnmarshal(data []byte, v interface{}) error {
+	b := bytes.NewBuffer(data)
+	return gob.NewDecoder(b).Decode(v)
 }

@@ -20,8 +20,6 @@ import (
 	"path/filepath"
 	"reflect"
 
-	"github.com/ebakus/go-ebakus/rlp"
-
 	"github.com/ebakus/go-ebakus/accounts"
 	"github.com/ebakus/go-ebakus/core/rawdb"
 	"github.com/ebakus/go-ebakus/ethdb"
@@ -85,7 +83,7 @@ func (ctx *ServiceContext) OpenEbakusDatabase(name string, cache int, handles in
 	}
 
 	// Assign custom value encoders to the db
-	db.SetCustomEncoder(rlp.EncodeToBytes, rlp.DecodeBytes)
+	db.SetCustomEncoder(GobMarshal, GobUnmarshal)
 
 	log.Info("Ebakus state database initialized", "database", db.GetPath())
 

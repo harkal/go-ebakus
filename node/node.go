@@ -35,7 +35,6 @@ import (
 	"github.com/ebakus/go-ebakus/internal/debug"
 	"github.com/ebakus/go-ebakus/log"
 	"github.com/ebakus/go-ebakus/p2p"
-	"github.com/ebakus/go-ebakus/rlp"
 	"github.com/ebakus/go-ebakus/rpc"
 	"github.com/prometheus/tsdb/fileutil"
 )
@@ -647,7 +646,7 @@ func (n *Node) OpenEbakusDatabase(name string) (*ebakusdb.DB, error) {
 	}
 
 	// Assign custom value encoders to the db
-	db.SetCustomEncoder(rlp.EncodeToBytes, rlp.DecodeBytes)
+	db.SetCustomEncoder(GobMarshal, GobUnmarshal)
 
 	return db, nil
 }
