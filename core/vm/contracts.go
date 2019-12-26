@@ -660,69 +660,67 @@ func (c *systemContract) stake(evm *EVM, from common.Address, amount uint64) ([]
 	hasEnoughBalance := false
 	amountToBeTransfered := amount
 
+	// Check if user has claimable entries that can be used for staking
+	whereClaimable := []byte("Id LIKE ")
+	whereClauseClaimable, err := db.WhereParser(append(whereClaimable, from.Bytes()...))
+	if err != nil {
+		return nil, errSystemContractError
+	}
+
+	orderClauseClaimable, err := db.OrderParser([]byte("Id DESC"))
+	if err != nil {
+		return nil, errSystemContractError
+	}
+
+	iterClaimable, err := db.Select(ClaimableTable, whereClauseClaimable, orderClauseClaimable)
+	if err != nil {
+		return nil, errSystemContractError
+	}
+
+
+	claimableAmount := uint64(0)
+	claimablesToBeDeleted := make([]Claimable, 0)
+	var claimable Claimable
+
+	for iterClaimable.Next(&claimable) {
+		if amount-claimableAmount >= claimable.Amount {
+			claimableAmount = claimableAmount + claimable.Amount
+
+			claimablesToBeDeleted = append(claimablesToBeDeleted, claimable)
+		} else {
+			claimable.Amount = claimable.Amount - (amount - claimableAmount)
+			claimableAmount = claimableAmount + (amount - claimableAmount)
+
+			if err := db.InsertObj(ClaimableTable, &claimable); err != nil {
+				log.Trace("Claimable entry failed to be updated with new claimable amount", "err", err)
+				return nil, errSystemContractError
+			}
+		}
+
+		if claimableAmount == amount {
+			hasEnoughBalance = true
+			break
+		}
+	}
+
+	amountToBeTransfered = amount - claimableAmount
+
 	// Check account has balance (amount <= balance)
 	balanceWei := evm.StateDB.GetBalance(from)
 	balance := new(big.Int).Div(balanceWei, precisionFactor).Uint64()
-	hasEnoughBalance = amount <= balance
 
-	if !hasEnoughBalance {
-
-		// Check if user has claimable tokens
-		where := []byte("Id LIKE ")
-		whereClause, err := db.WhereParser(append(where, from.Bytes()...))
-		if err != nil {
-			return nil, errSystemContractError
-		}
-
-		orderClause, err := db.OrderParser([]byte("Id DESC"))
-		if err != nil {
-			return nil, errSystemContractError
-		}
-
-		iter, err := db.Select(ClaimableTable, whereClause, orderClause)
-		if err != nil {
-			return nil, errSystemContractError
-		}
-
-		amountToBeTransfered = balance
-		remainderAmount := amount - amountToBeTransfered
-		claimablesToBeDeleted := make([]Claimable, 0)
-		var claimable Claimable
-
-		for iter.Next(&claimable) {
-			if remainderAmount >= claimable.Amount {
-				remainderAmount = remainderAmount - claimable.Amount
-
-				claimablesToBeDeleted = append(claimablesToBeDeleted, claimable)
-			} else {
-				claimable.Amount = claimable.Amount - remainderAmount
-				remainderAmount = remainderAmount - claimable.Amount
-
-				if err := db.InsertObj(ClaimableTable, &claimable); err != nil {
-					log.Trace("Claimable entry failed to be updated with new claimable amount", "err", err)
-					return nil, errSystemContractError
-				}
-			}
-
-			if remainderAmount == 0 {
-				hasEnoughBalance = true
-				break
-			}
-		}
-
-		if hasEnoughBalance {
-			for _, claimableEntry := range claimablesToBeDeleted {
-				if err := db.DeleteObj(ClaimableTable, claimableEntry.Id); err != nil {
-					log.Trace("Claimable tokens failed to delete (staked)", "err", err)
-					return nil, errSystemContractError
-				}
-			}
-		}
-	}
+	hasEnoughBalance = amountToBeTransfered <= balance
 
 	if !hasEnoughBalance {
 		log.Trace("Account doesn't have sufficient balance")
 		return nil, errStakeNotEnoughBalance
+	} else {
+		for _, claimableEntry := range claimablesToBeDeleted {
+			if err := db.DeleteObj(ClaimableTable, claimableEntry.Id); err != nil {
+				log.Trace("Claimable tokens failed to delete (staked)", "err", err)
+				return nil, errSystemContractError
+			}
+		}
 	}
 
 	//  Update whole system staked amount
