@@ -808,13 +808,15 @@ func (c *systemContract) getStaked(evm *EVM, from common.Address) ([]byte, error
 		return nil, errSystemContractError
 	}
 
-	if iter.Next(&staked) == false {
-		return nil, errSystemContractError
+	stakedAmount := uint64(0)
+
+	if iter.Next(&staked) == true {
+		stakedAmount = staked.Amount
 	}
 
-	stakeAmount := make([]byte, 32)
-	binary.BigEndian.PutUint64(stakeAmount[24:], staked.Amount)
-	return stakeAmount, nil
+	stakedAmountBytes := make([]byte, 32)
+	binary.BigEndian.PutUint64(stakedAmountBytes[24:], stakedAmount)
+	return stakedAmountBytes, nil
 }
 
 func (c *systemContract) unstake(evm *EVM, from common.Address, amount uint64) ([]byte, error) {
