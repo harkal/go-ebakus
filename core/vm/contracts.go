@@ -504,6 +504,7 @@ const SystemContractABI = `[
   "inputs": [],
   "outputs": [
     {
+      "name": "staked",
       "type": "uint64"
     }
   ],
@@ -613,7 +614,7 @@ const SystemContractTablesABI = `[
   "inputs": [
     {
       "name": "Id",
-      "type": "bytes"
+      "type": "bytes28"
     },
     {
       "name": "Amount",
