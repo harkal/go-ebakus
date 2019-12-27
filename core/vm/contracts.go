@@ -23,6 +23,7 @@ import (
 	"errors"
 	"math/big"
 	"strings"
+	"sync"
 	"unsafe"
 
 	"github.com/ebakus/ebakusdb"
@@ -63,8 +64,13 @@ var PrecompiledContractsEbakus = map[common.Address]PrecompiledContract{
 	types.PrecompliledDBContract:     &dbContract{},
 }
 
+var systemContractMux sync.Mutex
+
 // RunPrecompiledContract runs and evaluates the output of a precompiled contract.
 func RunPrecompiledContract(evm *EVM, p PrecompiledContract, input []byte, contract *Contract) (ret []byte, err error) {
+	systemContractMux.Lock()
+	defer systemContractMux.Unlock()
+
 	db := evm.EbakusState
 	preUsedMemory := db.GetUsedMemory()
 
