@@ -32,6 +32,7 @@ import (
 	"text/template"
 	"time"
 
+	"github.com/ebakus/ebakusdb"
 	"github.com/ebakus/go-ebakus/accounts"
 	"github.com/ebakus/go-ebakus/accounts/keystore"
 	"github.com/ebakus/go-ebakus/common"
@@ -62,7 +63,6 @@ import (
 	"github.com/ebakus/go-ebakus/rpc"
 	whisper "github.com/ebakus/go-ebakus/whisper/whisperv6"
 	pcsclite "github.com/gballet/go-libpcsclite"
-	"github.com/ebakus/ebakusdb"
 	cli "gopkg.in/urfave/cli.v1"
 )
 
@@ -372,11 +372,6 @@ var (
 		Usage: "Number of CPU threads to use for mining",
 		Value: 0,
 	}
-	MinerLegacyThreadsFlag = cli.IntFlag{
-		Name:  "minerthreads",
-		Usage: "Number of CPU threads to use for mining (deprecated, use --miner.threads)",
-		Value: 0,
-	}
 	MinerNotifyFlag = cli.StringFlag{
 		Name:  "miner.notify",
 		Usage: "Comma separated HTTP URL list to notify of new work packages",
@@ -415,14 +410,6 @@ var (
 		Name:  "etherbase",
 		Usage: "Public address for block mining rewards (default = first account, deprecated, use --miner.etherbase)",
 		Value: "0",
-	}
-	MinerExtraDataFlag = cli.StringFlag{
-		Name:  "miner.extradata",
-		Usage: "Block extra data set by the miner (default = client version)",
-	}
-	MinerLegacyExtraDataFlag = cli.StringFlag{
-		Name:  "extradata",
-		Usage: "Block extra data set by the miner (default = client version, deprecated, use --miner.extradata)",
 	}
 	MinerRecommitIntervalFlag = cli.DurationFlag{
 		Name:  "miner.recommit",
@@ -1232,12 +1219,6 @@ func setTxPool(ctx *cli.Context, cfg *core.TxPoolConfig) {
 func setMiner(ctx *cli.Context, cfg *miner.Config) {
 	if ctx.GlobalIsSet(MinerNotifyFlag.Name) {
 		cfg.Notify = strings.Split(ctx.GlobalString(MinerNotifyFlag.Name), ",")
-	}
-	if ctx.GlobalIsSet(MinerLegacyExtraDataFlag.Name) {
-		cfg.ExtraData = []byte(ctx.GlobalString(MinerLegacyExtraDataFlag.Name))
-	}
-	if ctx.GlobalIsSet(MinerExtraDataFlag.Name) {
-		cfg.ExtraData = []byte(ctx.GlobalString(MinerExtraDataFlag.Name))
 	}
 	if ctx.GlobalIsSet(MinerLegacyGasTargetFlag.Name) {
 		cfg.GasFloor = ctx.GlobalUint64(MinerLegacyGasTargetFlag.Name)

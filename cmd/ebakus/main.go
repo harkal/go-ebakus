@@ -28,7 +28,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/elastic/gosigar"
 	"github.com/ebakus/go-ebakus/accounts"
 	"github.com/ebakus/go-ebakus/accounts/keystore"
 	"github.com/ebakus/go-ebakus/cmd/utils"
@@ -42,6 +41,7 @@ import (
 	"github.com/ebakus/go-ebakus/log"
 	"github.com/ebakus/go-ebakus/metrics"
 	"github.com/ebakus/go-ebakus/node"
+	"github.com/elastic/gosigar"
 	cli "gopkg.in/urfave/cli.v1"
 )
 
@@ -108,7 +108,6 @@ var (
 		utils.MaxPendingPeersFlag,
 		utils.MiningEnabledFlag,
 		utils.MinerThreadsFlag,
-		utils.MinerLegacyThreadsFlag,
 		utils.MinerNotifyFlag,
 		utils.MinerGasTargetFlag,
 		utils.MinerLegacyGasTargetFlag,
@@ -117,8 +116,6 @@ var (
 		utils.MinerLegacyGasPriceFlag,
 		utils.MinerEtherbaseFlag,
 		utils.MinerLegacyEtherbaseFlag,
-		utils.MinerExtraDataFlag,
-		utils.MinerLegacyExtraDataFlag,
 		utils.MinerRecommitIntervalFlag,
 		utils.MinerNoVerfiyFlag,
 		utils.NATFlag,
@@ -432,7 +429,7 @@ func startNode(ctx *cli.Context, stack *node.Node) {
 		}
 		ebakus.TxPool().SetGasPrice(gasprice)
 
-		threads := ctx.GlobalInt(utils.MinerLegacyThreadsFlag.Name)
+		threads := 1
 		if ctx.GlobalIsSet(utils.MinerThreadsFlag.Name) {
 			threads = ctx.GlobalInt(utils.MinerThreadsFlag.Name)
 		}
