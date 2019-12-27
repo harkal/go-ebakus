@@ -123,8 +123,9 @@ var (
 )
 
 var (
-	errSystemContractError    = errors.New("system contract error")
-	errSystemContractAbiError = errors.New("system contract ABI error")
+	errSystemContractError      = errors.New("system contract error")
+	errSystemContractAbiError   = errors.New("system contract ABI error")
+	errSystemContractQueryError = errors.New("system contract query parsing error")
 
 	errStakeMalformed        = errors.New("staking transaction malformed")
 	errStakeNotEnoughBalance = errors.New("not enough balance for staking")
@@ -135,6 +136,7 @@ var (
 
 	errVoteMalformed           = errors.New("voting transaction malformed")
 	errVoteAddressIsNotWitness = errors.New("a voted address is not valid")
+	errVoteNothingStaked       = errors.New("nothing staked")
 	errElectEnableMalformed    = errors.New("elect enable transaction malformed")
 	errContractAbiMalformed    = errors.New("contract abi transaction malformed")
 	errContractAbiNotFound     = errors.New("contract abi not found")
@@ -427,7 +429,7 @@ func unvote(db *ebakusdb.Snapshot, from common.Address, amount uint64) ([]common
 	where := []byte("Id LIKE ")
 	whereClause, err := db.WhereParser(append(where, from.Bytes()...))
 	if err != nil {
-		return nil, errSystemContractError
+		return nil, errSystemContractQueryError
 	}
 
 	iter, err := db.Select(DelegationTable, whereClause)
@@ -450,7 +452,7 @@ func unvote(db *ebakusdb.Snapshot, from common.Address, amount uint64) ([]common
 		where := []byte("Id LIKE ")
 		whereClause, err := db.WhereParser(append(where, witnessAddress.Bytes()...))
 		if err != nil {
-			return nil, errSystemContractError
+			return nil, errSystemContractQueryError
 		}
 
 		iter, err := db.Select(WitnessesTable, whereClause)
@@ -975,7 +977,7 @@ func (c *systemContract) vote(evm *EVM, from common.Address, addresses []common.
 	where := []byte("Id LIKE ")
 	whereClause, err := db.WhereParser(append(where, from.Bytes()...))
 	if err != nil {
-		return nil, errSystemContractError
+		return nil, errSystemContractQueryError
 	}
 
 	iter, err := db.Select(types.StakedTable, whereClause)
@@ -984,15 +986,15 @@ func (c *systemContract) vote(evm *EVM, from common.Address, addresses []common.
 	}
 
 	if iter.Next(&staked) == false {
-		return nil, errSystemContractError
+		return nil, errVoteNothingStaked
 	}
 
 	if _, err := unvote(db, from, staked.Amount); err != nil {
-		return nil, errSystemContractError
+		return nil, err
 	}
 
 	if err := vote(db, from, addresses, staked.Amount); err != nil {
-		return nil, errSystemContractError
+		return nil, err
 	}
 
 	return nil, nil
