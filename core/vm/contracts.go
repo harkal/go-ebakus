@@ -741,21 +741,12 @@ func (c *systemContract) stake(evm *EVM, from common.Address, amount uint64) ([]
 	binary.BigEndian.PutUint64(systemStakedBytesIn[:], systemStaked)
 	db.Insert([]byte(types.SystemStakeDBKey), systemStakedBytesIn)
 
-	var staked types.Staked
-
-	// Handle staked amount
-	where := []byte("Id LIKE ")
-	whereClause, err := db.WhereParser(append(where, from.Bytes()...))
+	staked, err := getStaked(db, from)
 	if err != nil {
-		return nil, errSystemContractError
+		return nil, err
 	}
 
-	iter, err := db.Select(types.StakedTable, whereClause)
-	if err != nil {
-		return nil, errSystemContractError
-	}
-
-	if iter.Next(&staked) == true {
+	if staked != nil {
 		delegatedAddresses, err := unvote(db, from, staked.Amount)
 		if err != nil {
 			return nil, errSystemContractError
@@ -772,7 +763,7 @@ func (c *systemContract) stake(evm *EVM, from common.Address, amount uint64) ([]
 			return nil, errSystemContractError
 		}
 
-		staked = types.Staked{
+		staked = &types.Staked{
 			Id:     from,
 			Amount: amount,
 		}
@@ -782,7 +773,7 @@ func (c *systemContract) stake(evm *EVM, from common.Address, amount uint64) ([]
 		}
 	}
 
-	if err := db.InsertObj(types.StakedTable, &staked); err != nil {
+	if err := db.InsertObj(types.StakedTable, staked); err != nil {
 		return nil, errSystemContractError
 	}
 
@@ -800,28 +791,20 @@ func (c *systemContract) stake(evm *EVM, from common.Address, amount uint64) ([]
 func (c *systemContract) getStaked(evm *EVM, from common.Address) ([]byte, error) {
 	db := evm.EbakusState
 
-	var staked types.Staked
-
-	where := []byte("Id LIKE ")
-	whereClause, err := db.WhereParser(append(where, from.Bytes()...))
+	staked, err := getStaked(db, from)
 	if err != nil {
-		return nil, errSystemContractError
+		return nil, err
 	}
 
-	iter, err := db.Select(types.StakedTable, whereClause)
-	if err != nil {
-		return nil, errSystemContractError
+	amount := uint64(0)
+
+	if staked != nil {
+		amount = staked.Amount
 	}
 
-	stakedAmount := uint64(0)
-
-	if iter.Next(&staked) == true {
-		stakedAmount = staked.Amount
-	}
-
-	stakedAmountBytes := make([]byte, 32)
-	binary.BigEndian.PutUint64(stakedAmountBytes[24:], stakedAmount)
-	return stakedAmountBytes, nil
+	stakeAmount := make([]byte, 32)
+	binary.BigEndian.PutUint64(stakeAmount[24:], amount)
+	return stakeAmount, nil
 }
 
 func (c *systemContract) unstake(evm *EVM, from common.Address, amount uint64) ([]byte, error) {
@@ -975,9 +958,7 @@ func (c *systemContract) claim(evm *EVM, from common.Address) ([]byte, error) {
 	return nil, nil
 }
 
-func (c *systemContract) vote(evm *EVM, from common.Address, addresses []common.Address) ([]byte, error) {
-	db := evm.EbakusState
-
+func getStaked(db *ebakusdb.Snapshot, from common.Address) (*types.Staked, error) {
 	var staked types.Staked
 
 	where := []byte("Id LIKE ")
@@ -992,6 +973,21 @@ func (c *systemContract) vote(evm *EVM, from common.Address, addresses []common.
 	}
 
 	if iter.Next(&staked) == false {
+		return nil, nil
+	}
+
+	return &staked, nil
+}
+
+func (c *systemContract) vote(evm *EVM, from common.Address, addresses []common.Address) ([]byte, error) {
+	db := evm.EbakusState
+
+	staked, err := getStaked(db, from)
+	if err != nil {
+		return nil, err
+	}
+
+	if staked == nil {
 		return nil, errVoteNothingStaked
 	}
 
@@ -1009,21 +1005,13 @@ func (c *systemContract) vote(evm *EVM, from common.Address, addresses []common.
 func (c *systemContract) unvote(evm *EVM, from common.Address) ([]byte, error) {
 	db := evm.EbakusState
 
-	var staked types.Staked
-
-	where := []byte("Id LIKE ")
-	whereClause, err := db.WhereParser(append(where, from.Bytes()...))
+	staked, err := getStaked(db, from)
 	if err != nil {
-		return nil, errSystemContractError
+		return nil, err
 	}
 
-	iter, err := db.Select(types.StakedTable, whereClause)
-	if err != nil {
-		return nil, errSystemContractError
-	}
-
-	if iter.Next(&staked) == false {
-		return nil, errSystemContractError
+	if staked == nil {
+		return nil, errVoteNothingStaked
 	}
 
 	if _, err := unvote(db, from, staked.Amount); err != nil {
