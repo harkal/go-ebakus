@@ -677,7 +677,6 @@ func (c *systemContract) stake(evm *EVM, from common.Address, amount uint64) ([]
 		return nil, errSystemContractError
 	}
 
-
 	claimableAmount := uint64(0)
 	claimablesToBeDeleted := make([]Claimable, 0)
 	var claimable Claimable
@@ -954,7 +953,7 @@ func (c *systemContract) claim(evm *EVM, from common.Address) ([]byte, error) {
 
 	if claimableAmount <= 0 {
 		log.Trace("No amount to be claimed")
-		return nil, errSystemContractError
+		return nil, nil
 	}
 
 	claimableAmountWei := new(big.Int).Mul(new(big.Int).SetUint64(claimableAmount), precisionFactor)
@@ -1164,6 +1163,11 @@ func (c *systemContract) Run(evm *EVM, contract *Contract, input []byte) ([]byte
 		if err != nil {
 			log.Trace("SystemContractABI failed to unpack input", "cmd", cmd, "err", err)
 			return nil, errStakeMalformed
+		}
+
+		_, err := c.claim(evm, from)
+		if err != nil {
+			return nil, err
 		}
 
 		return c.stake(evm, from, amount)
