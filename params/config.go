@@ -39,6 +39,7 @@ var (
 		YearlyInflation:     0.01,
 		DelegateCount:       21,
 		BonusDelegateCount:  100,
+		MaxWitnessesVotes:   20,
 		BootProducer:        common.HexToAddress("0x53e5182e798c5d2a93c526f7c9745a6937a71fcf"),
 	}
 
@@ -60,6 +61,7 @@ var (
 		YearlyInflation:     0.01,
 		DelegateCount:       3,
 		BonusDelegateCount:  2,
+		MaxWitnessesVotes:   20,
 		BootProducer:        common.HexToAddress("0xd53de783b12f12b7852348f2e32c21990746ad02"),
 	}
 
@@ -170,18 +172,20 @@ type DPOSConfig struct {
 	YearlyInflation     float64        `json:"yearlyInflation"`     // Yearly inflation
 	DelegateCount       uint64         `json:"delegateCount"`       // Number of delegates
 	BonusDelegateCount  uint64         `json:"bonusDelegateCount"`  // Number of delegates to pickup the 21st bonus delegate
+	MaxWitnessesVotes   uint64         `json:"maxWitnessesVotes"`   // Max number of witnesses votes per account
 	BootProducer        common.Address `json:"bootProducer"`        // Boot producer for genesis block
 }
 
 // String implements the stringer interface, returning the consensus engine details.
 func (c *DPOSConfig) String() string {
-	return fmt.Sprintf("{DPOS: {DelegateCount: %v BonusDelegateCount %v Period: %v TurnBlockCount: %v InitialDistribution %v YearlyInflation: %v}}",
+	return fmt.Sprintf("{DPOS: {DelegateCount: %v BonusDelegateCount: %v Period: %v TurnBlockCount: %v InitialDistribution: %v YearlyInflation: %v MaxWitnessesVotes: %v}}",
 		c.DelegateCount,
 		c.BonusDelegateCount,
 		c.Period,
 		c.TurnBlockCount,
 		c.InitialDistribution,
 		c.YearlyInflation,
+		c.MaxWitnessesVotes,
 	)
 }
 
