@@ -663,7 +663,7 @@ const SystemContractTablesABI = `[
   ]
 }]`
 
-func (c *systemContract) stake(evm *EVM, from common.Address, amount uint64) ([]byte, error) {
+func (c *systemContract) stakeCmd(evm *EVM, from common.Address, amount uint64) ([]byte, error) {
 	if amount <= 0 {
 		log.Trace("Can't stake negative or zero amounts")
 		return nil, errSystemContractError
@@ -793,7 +793,7 @@ func (c *systemContract) stake(evm *EVM, from common.Address, amount uint64) ([]
 	return nil, nil
 }
 
-func (c *systemContract) getStaked(evm *EVM, from common.Address) ([]byte, error) {
+func (c *systemContract) getStakedCmd(evm *EVM, from common.Address) ([]byte, error) {
 	db := evm.EbakusState
 
 	staked, err := getStaked(db, from)
@@ -812,7 +812,7 @@ func (c *systemContract) getStaked(evm *EVM, from common.Address) ([]byte, error
 	return stakeAmount, nil
 }
 
-func (c *systemContract) unstake(evm *EVM, from common.Address, amount uint64) ([]byte, error) {
+func (c *systemContract) unstakeCmd(evm *EVM, from common.Address, amount uint64) ([]byte, error) {
 	db := evm.EbakusState
 
 	timestamp := evm.Time.Uint64() + unstakeVestingPeriod
@@ -913,7 +913,7 @@ func (c *systemContract) unstake(evm *EVM, from common.Address, amount uint64) (
 	return nil, nil
 }
 
-func (c *systemContract) claim(evm *EVM, from common.Address) ([]byte, error) {
+func (c *systemContract) claimCmd(evm *EVM, from common.Address) ([]byte, error) {
 	db := evm.EbakusState
 
 	// check if user has claimable tokens
@@ -981,7 +981,7 @@ func getStaked(db *ebakusdb.Snapshot, from common.Address) (*types.Staked, error
 	return &staked, nil
 }
 
-func (c *systemContract) vote(evm *EVM, from common.Address, addresses []common.Address) ([]byte, error) {
+func (c *systemContract) voteCmd(evm *EVM, from common.Address, addresses []common.Address) ([]byte, error) {
 	db := evm.EbakusState
 
 	staked, err := getStaked(db, from)
@@ -1004,7 +1004,7 @@ func (c *systemContract) vote(evm *EVM, from common.Address, addresses []common.
 	return nil, nil
 }
 
-func (c *systemContract) unvote(evm *EVM, from common.Address) ([]byte, error) {
+func (c *systemContract) unvoteCmd(evm *EVM, from common.Address) ([]byte, error) {
 	db := evm.EbakusState
 
 	staked, err := getStaked(db, from)
@@ -1023,7 +1023,7 @@ func (c *systemContract) unvote(evm *EVM, from common.Address) ([]byte, error) {
 	return nil, nil
 }
 
-func (c *systemContract) electEnable(evm *EVM, from common.Address, enable bool) ([]byte, error) {
+func (c *systemContract) electEnableCmd(evm *EVM, from common.Address, enable bool) ([]byte, error) {
 	db := evm.EbakusState
 
 	var witness Witness
@@ -1162,14 +1162,14 @@ func (c *systemContract) Run(evm *EVM, contract *Contract, input []byte) ([]byte
 			return nil, errStakeMalformed
 		}
 
-		_, err := c.claim(evm, from)
+		_, err := c.claimCmd(evm, from)
 		if err != nil {
 			return nil, err
 		}
 
-		return c.stake(evm, from, amount)
+		return c.stakeCmd(evm, from, amount)
 	case SystemContractGetStakedCmd:
-		return c.getStaked(evm, from)
+		return c.getStakedCmd(evm, from)
 	case SystemContractUnstakeCmd:
 		var amount uint64
 		err = evmABI.UnpackWithArguments(&amount, cmd, inputData, abi.InputsArgumentsType)
@@ -1178,9 +1178,9 @@ func (c *systemContract) Run(evm *EVM, contract *Contract, input []byte) ([]byte
 			return nil, errUnstakeMalformed
 		}
 
-		return c.unstake(evm, from, amount)
+		return c.unstakeCmd(evm, from, amount)
 	case SystemContractClaimCmd:
-		return c.claim(evm, from)
+		return c.claimCmd(evm, from)
 	case SystemContractVoteCmd:
 		var addresses []common.Address
 		err = evmABI.UnpackWithArguments(&addresses, cmd, inputData, abi.InputsArgumentsType)
@@ -1189,9 +1189,9 @@ func (c *systemContract) Run(evm *EVM, contract *Contract, input []byte) ([]byte
 			return nil, errVoteMalformed
 		}
 
-		return c.vote(evm, from, addresses)
+		return c.voteCmd(evm, from, addresses)
 	case SystemContractUnvoteCmd:
-		return c.unvote(evm, from)
+		return c.unvoteCmd(evm, from)
 	case SystemContractElectEnableCmd:
 		var enable bool
 		err = evmABI.UnpackWithArguments(&enable, cmd, inputData, abi.InputsArgumentsType)
@@ -1199,7 +1199,7 @@ func (c *systemContract) Run(evm *EVM, contract *Contract, input []byte) ([]byte
 			return nil, errElectEnableMalformed
 		}
 
-		return c.electEnable(evm, from, enable)
+		return c.electEnableCmd(evm, from, enable)
 	case SystemContractStoreAbiCmd:
 		type contractAbiInput struct {
 			Address common.Address
