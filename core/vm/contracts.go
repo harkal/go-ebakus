@@ -393,14 +393,22 @@ func DelegateVotingGetDelegates(snap *ebakusdb.Snapshot, maxWitnesses uint64) Wi
 	return res
 }
 
+func makeIDLikeWhereClause(db *ebakusdb.Snapshot, from common.Address) (*ebakusdb.WhereField, error) {
+	where := []byte("Id LIKE ")
+	whereClause, err := db.WhereParser(append(where, from.Bytes()...))
+	if err != nil {
+		return nil, errSystemContractQueryError
+	}
+	return whereClause, nil
+}
+
 func vote(db *ebakusdb.Snapshot, from common.Address, addresses []common.Address, amount uint64) error {
 	for _, address := range addresses {
 		var witness Witness
 
-		where := []byte("Id LIKE ")
-		whereClause, err := db.WhereParser(append(where, address.Bytes()...))
+		whereClause, err := makeIDLikeWhereClause(db, address)
 		if err != nil {
-			return errSystemContractError
+			return err
 		}
 
 		iter, err := db.Select(WitnessesTable, whereClause)
@@ -432,10 +440,9 @@ func vote(db *ebakusdb.Snapshot, from common.Address, addresses []common.Address
 
 func unvote(db *ebakusdb.Snapshot, from common.Address, amount uint64) ([]common.Address, error) {
 
-	where := []byte("Id LIKE ")
-	whereClause, err := db.WhereParser(append(where, from.Bytes()...))
+	whereClause, err := makeIDLikeWhereClause(db, from)
 	if err != nil {
-		return nil, errSystemContractQueryError
+		return nil, err
 	}
 
 	iter, err := db.Select(DelegationTable, whereClause)
@@ -455,10 +462,9 @@ func unvote(db *ebakusdb.Snapshot, from common.Address, amount uint64) ([]common
 
 		var witness Witness
 
-		where := []byte("Id LIKE ")
-		whereClause, err := db.WhereParser(append(where, witnessAddress.Bytes()...))
+		whereClause, err := makeIDLikeWhereClause(db, witnessAddress)
 		if err != nil {
-			return nil, errSystemContractQueryError
+			return nil, err
 		}
 
 		iter, err := db.Select(WitnessesTable, whereClause)
@@ -669,10 +675,9 @@ func (c *systemContract) stake(evm *EVM, from common.Address, amount uint64) ([]
 	amountToBeTransfered := amount
 
 	// Check if user has claimable entries that can be used for staking
-	whereClaimable := []byte("Id LIKE ")
-	whereClauseClaimable, err := db.WhereParser(append(whereClaimable, from.Bytes()...))
+	whereClauseClaimable, err := makeIDLikeWhereClause(db, from)
 	if err != nil {
-		return nil, errSystemContractError
+		return nil, err
 	}
 
 	orderClauseClaimable, err := db.OrderParser([]byte("Id DESC"))
@@ -814,10 +819,9 @@ func (c *systemContract) unstake(evm *EVM, from common.Address, amount uint64) (
 	newClaimableEntryId := GetClaimableId(from, timestamp)
 
 	// get all claimable tokens
-	where := []byte("Id LIKE ")
-	whereClause, err := db.WhereParser(append(where, from.Bytes()...))
+	whereClause, err := makeIDLikeWhereClause(db, from)
 	if err != nil {
-		return nil, errSystemContractError
+		return nil, err
 	}
 
 	iter, err := db.Select(ClaimableTable, whereClause)
@@ -913,10 +917,9 @@ func (c *systemContract) claim(evm *EVM, from common.Address) ([]byte, error) {
 	db := evm.EbakusState
 
 	// check if user has claimable tokens
-	where := []byte("Id LIKE ")
-	whereClause, err := db.WhereParser(append(where, from.Bytes()...))
+	whereClause, err := makeIDLikeWhereClause(db, from)
 	if err != nil {
-		return nil, errSystemContractError
+		return nil, err
 	}
 
 	iter, err := db.Select(ClaimableTable, whereClause)
@@ -961,10 +964,9 @@ func (c *systemContract) claim(evm *EVM, from common.Address) ([]byte, error) {
 func getStaked(db *ebakusdb.Snapshot, from common.Address) (*types.Staked, error) {
 	var staked types.Staked
 
-	where := []byte("Id LIKE ")
-	whereClause, err := db.WhereParser(append(where, from.Bytes()...))
+	whereClause, err := makeIDLikeWhereClause(db, from)
 	if err != nil {
-		return nil, errSystemContractQueryError
+		return nil, err
 	}
 
 	iter, err := db.Select(types.StakedTable, whereClause)
@@ -1026,10 +1028,9 @@ func (c *systemContract) electEnable(evm *EVM, from common.Address, enable bool)
 
 	var witness Witness
 
-	where := []byte("Id LIKE ")
-	whereClause, err := db.WhereParser(append(where, from.Bytes()...))
+	whereClause, err := makeIDLikeWhereClause(db, from)
 	if err != nil {
-		return nil, errSystemContractError
+		return nil, err
 	}
 
 	iter, err := db.Select(WitnessesTable, whereClause)
