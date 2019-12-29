@@ -23,8 +23,10 @@ import (
 	"errors"
 	"math/big"
 	"strings"
+	"sync"
 	"unsafe"
 
+	"github.com/ebakus/ebakusdb"
 	"github.com/ebakus/go-ebakus/accounts/abi"
 	"github.com/ebakus/go-ebakus/common"
 	"github.com/ebakus/go-ebakus/common/math"
@@ -35,7 +37,6 @@ import (
 	"github.com/ebakus/go-ebakus/crypto/bn256"
 	"github.com/ebakus/go-ebakus/log"
 	"github.com/ebakus/go-ebakus/params"
-	"github.com/ebakus/ebakusdb"
 	"golang.org/x/crypto/ripemd160"
 )
 
@@ -63,8 +64,13 @@ var PrecompiledContractsEbakus = map[common.Address]PrecompiledContract{
 	types.PrecompliledDBContract:     &dbContract{},
 }
 
+var systemContractMux sync.Mutex
+
 // RunPrecompiledContract runs and evaluates the output of a precompiled contract.
 func RunPrecompiledContract(evm *EVM, p PrecompiledContract, input []byte, contract *Contract) (ret []byte, err error) {
+	systemContractMux.Lock()
+	defer systemContractMux.Unlock()
+
 	db := evm.EbakusState
 	preUsedMemory := db.GetUsedMemory()
 
@@ -123,8 +129,9 @@ var (
 )
 
 var (
-	errSystemContractError    = errors.New("system contract error")
-	errSystemContractAbiError = errors.New("system contract ABI error")
+	errSystemContractError      = errors.New("system contract error")
+	errSystemContractAbiError   = errors.New("system contract ABI error")
+	errSystemContractQueryError = errors.New("system contract query parsing error")
 
 	errStakeMalformed        = errors.New("staking transaction malformed")
 	errStakeNotEnoughBalance = errors.New("not enough balance for staking")
@@ -135,6 +142,7 @@ var (
 
 	errVoteMalformed           = errors.New("voting transaction malformed")
 	errVoteAddressIsNotWitness = errors.New("a voted address is not valid")
+	errVoteNothingStaked       = errors.New("nothing staked")
 	errElectEnableMalformed    = errors.New("elect enable transaction malformed")
 	errContractAbiMalformed    = errors.New("contract abi transaction malformed")
 	errContractAbiNotFound     = errors.New("contract abi not found")
@@ -345,6 +353,7 @@ func SystemContractSetupDB(db *ebakusdb.Snapshot, address common.Address) error 
 
 	db.CreateTable(ContractAbiTable, &ContractAbi{})
 
+	// it's not trully needed to store the ABIs, though we do this just for occuping the address of the system contracts
 	if _, err := storeAbiAtAddress(db, types.PrecompliledSystemContract, SystemContractABI); err != nil {
 		return err
 	}
@@ -384,14 +393,22 @@ func DelegateVotingGetDelegates(snap *ebakusdb.Snapshot, maxWitnesses uint64) Wi
 	return res
 }
 
+func makeIDLikeWhereClause(db *ebakusdb.Snapshot, from common.Address) (*ebakusdb.WhereField, error) {
+	where := []byte("Id LIKE ")
+	whereClause, err := db.WhereParser(append(where, from.Bytes()...))
+	if err != nil {
+		return nil, errSystemContractQueryError
+	}
+	return whereClause, nil
+}
+
 func vote(db *ebakusdb.Snapshot, from common.Address, addresses []common.Address, amount uint64) error {
 	for _, address := range addresses {
 		var witness Witness
 
-		where := []byte("Id LIKE ")
-		whereClause, err := db.WhereParser(append(where, address.Bytes()...))
+		whereClause, err := makeIDLikeWhereClause(db, address)
 		if err != nil {
-			return errSystemContractError
+			return err
 		}
 
 		iter, err := db.Select(WitnessesTable, whereClause)
@@ -423,10 +440,9 @@ func vote(db *ebakusdb.Snapshot, from common.Address, addresses []common.Address
 
 func unvote(db *ebakusdb.Snapshot, from common.Address, amount uint64) ([]common.Address, error) {
 
-	where := []byte("Id LIKE ")
-	whereClause, err := db.WhereParser(append(where, from.Bytes()...))
+	whereClause, err := makeIDLikeWhereClause(db, from)
 	if err != nil {
-		return nil, errSystemContractError
+		return nil, err
 	}
 
 	iter, err := db.Select(DelegationTable, whereClause)
@@ -446,10 +462,9 @@ func unvote(db *ebakusdb.Snapshot, from common.Address, amount uint64) ([]common
 
 		var witness Witness
 
-		where := []byte("Id LIKE ")
-		whereClause, err := db.WhereParser(append(where, witnessAddress.Bytes()...))
+		whereClause, err := makeIDLikeWhereClause(db, witnessAddress)
 		if err != nil {
-			return nil, errSystemContractError
+			return nil, err
 		}
 
 		iter, err := db.Select(WitnessesTable, whereClause)
@@ -503,6 +518,7 @@ const SystemContractABI = `[
   "inputs": [],
   "outputs": [
     {
+      "name": "staked",
       "type": "uint64"
     }
   ],
@@ -612,7 +628,7 @@ const SystemContractTablesABI = `[
   "inputs": [
     {
       "name": "Id",
-      "type": "bytes"
+      "type": "bytes28"
     },
     {
       "name": "Amount",
@@ -647,7 +663,7 @@ const SystemContractTablesABI = `[
   ]
 }]`
 
-func (c *systemContract) stake(evm *EVM, from common.Address, amount uint64) ([]byte, error) {
+func (c *systemContract) stakeCmd(evm *EVM, from common.Address, amount uint64) ([]byte, error) {
 	if amount <= 0 {
 		log.Trace("Can't stake negative or zero amounts")
 		return nil, errSystemContractError
@@ -658,69 +674,65 @@ func (c *systemContract) stake(evm *EVM, from common.Address, amount uint64) ([]
 	hasEnoughBalance := false
 	amountToBeTransfered := amount
 
+	// Check if user has claimable entries that can be used for staking
+	whereClauseClaimable, err := makeIDLikeWhereClause(db, from)
+	if err != nil {
+		return nil, err
+	}
+
+	orderClauseClaimable, err := db.OrderParser([]byte("Id DESC"))
+	if err != nil {
+		return nil, errSystemContractError
+	}
+
+	iterClaimable, err := db.Select(ClaimableTable, whereClauseClaimable, orderClauseClaimable)
+	if err != nil {
+		return nil, errSystemContractError
+	}
+
+	claimableAmount := uint64(0)
+	claimablesToBeDeleted := make([]Claimable, 0)
+	var claimable Claimable
+
+	for iterClaimable.Next(&claimable) {
+		if amount-claimableAmount >= claimable.Amount {
+			claimableAmount = claimableAmount + claimable.Amount
+
+			claimablesToBeDeleted = append(claimablesToBeDeleted, claimable)
+		} else {
+			claimable.Amount = claimable.Amount - (amount - claimableAmount)
+			claimableAmount = claimableAmount + (amount - claimableAmount)
+
+			if err := db.InsertObj(ClaimableTable, &claimable); err != nil {
+				log.Trace("Claimable entry failed to be updated with new claimable amount", "err", err)
+				return nil, errSystemContractError
+			}
+		}
+
+		if claimableAmount == amount {
+			hasEnoughBalance = true
+			break
+		}
+	}
+
+	amountToBeTransfered = amount - claimableAmount
+
 	// Check account has balance (amount <= balance)
 	balanceWei := evm.StateDB.GetBalance(from)
 	balance := new(big.Int).Div(balanceWei, precisionFactor).Uint64()
-	hasEnoughBalance = amount <= balance
 
-	if !hasEnoughBalance {
-
-		// Check if user has claimable tokens
-		where := []byte("Id LIKE ")
-		whereClause, err := db.WhereParser(append(where, from.Bytes()...))
-		if err != nil {
-			return nil, errSystemContractError
-		}
-
-		orderClause, err := db.OrderParser([]byte("Id DESC"))
-		if err != nil {
-			return nil, errSystemContractError
-		}
-
-		iter, err := db.Select(ClaimableTable, whereClause, orderClause)
-		if err != nil {
-			return nil, errSystemContractError
-		}
-
-		amountToBeTransfered = balance
-		remainderAmount := amount - amountToBeTransfered
-		claimablesToBeDeleted := make([]Claimable, 0)
-		var claimable Claimable
-
-		for iter.Next(&claimable) {
-			if remainderAmount >= claimable.Amount {
-				remainderAmount = remainderAmount - claimable.Amount
-
-				claimablesToBeDeleted = append(claimablesToBeDeleted, claimable)
-			} else {
-				claimable.Amount = claimable.Amount - remainderAmount
-				remainderAmount = remainderAmount - claimable.Amount
-
-				if err := db.InsertObj(ClaimableTable, &claimable); err != nil {
-					log.Trace("Claimable entry failed to be updated with new claimable amount", "err", err)
-					return nil, errSystemContractError
-				}
-			}
-
-			if remainderAmount == 0 {
-				hasEnoughBalance = true
-				break
-			}
-		}
-
-		if hasEnoughBalance {
-			for _, claimableEntry := range claimablesToBeDeleted {
-				if err := db.DeleteObj(ClaimableTable, claimableEntry.Id); err != nil {
-					log.Trace("Claimable tokens failed to delete (staked)", "err", err)
-					return nil, errSystemContractError
-				}
-			}
-		}
-	}
+	hasEnoughBalance = amountToBeTransfered <= balance
 
 	if !hasEnoughBalance {
 		log.Trace("Account doesn't have sufficient balance")
 		return nil, errStakeNotEnoughBalance
+	} else {
+		for _, claimableEntry := range claimablesToBeDeleted {
+			if err := db.DeleteObj(ClaimableTable, claimableEntry.Id); err != nil {
+				log.Trace("Claimable tokens failed to delete (staked)", "err", err)
+				return nil, errSystemContractError
+			}
+		}
 	}
 
 	//  Update whole system staked amount
@@ -734,21 +746,12 @@ func (c *systemContract) stake(evm *EVM, from common.Address, amount uint64) ([]
 	binary.BigEndian.PutUint64(systemStakedBytesIn[:], systemStaked)
 	db.Insert([]byte(types.SystemStakeDBKey), systemStakedBytesIn)
 
-	var staked types.Staked
-
-	// Handle staked amount
-	where := []byte("Id LIKE ")
-	whereClause, err := db.WhereParser(append(where, from.Bytes()...))
+	staked, err := getStaked(db, from)
 	if err != nil {
-		return nil, errSystemContractError
+		return nil, err
 	}
 
-	iter, err := db.Select(types.StakedTable, whereClause)
-	if err != nil {
-		return nil, errSystemContractError
-	}
-
-	if iter.Next(&staked) == true {
+	if staked != nil {
 		delegatedAddresses, err := unvote(db, from, staked.Amount)
 		if err != nil {
 			return nil, errSystemContractError
@@ -765,7 +768,7 @@ func (c *systemContract) stake(evm *EVM, from common.Address, amount uint64) ([]
 			return nil, errSystemContractError
 		}
 
-		staked = types.Staked{
+		staked = &types.Staked{
 			Id:     from,
 			Amount: amount,
 		}
@@ -775,7 +778,7 @@ func (c *systemContract) stake(evm *EVM, from common.Address, amount uint64) ([]
 		}
 	}
 
-	if err := db.InsertObj(types.StakedTable, &staked); err != nil {
+	if err := db.InsertObj(types.StakedTable, staked); err != nil {
 		return nil, errSystemContractError
 	}
 
@@ -790,42 +793,35 @@ func (c *systemContract) stake(evm *EVM, from common.Address, amount uint64) ([]
 	return nil, nil
 }
 
-func (c *systemContract) getStaked(evm *EVM, from common.Address) ([]byte, error) {
+func (c *systemContract) getStakedCmd(evm *EVM, from common.Address) ([]byte, error) {
 	db := evm.EbakusState
 
-	var staked types.Staked
-
-	where := []byte("Id LIKE ")
-	whereClause, err := db.WhereParser(append(where, from.Bytes()...))
+	staked, err := getStaked(db, from)
 	if err != nil {
-		return nil, errSystemContractError
+		return nil, err
 	}
 
-	iter, err := db.Select(types.StakedTable, whereClause)
-	if err != nil {
-		return nil, errSystemContractError
-	}
+	amount := uint64(0)
 
-	if iter.Next(&staked) == false {
-		return nil, errSystemContractError
+	if staked != nil {
+		amount = staked.Amount
 	}
 
 	stakeAmount := make([]byte, 32)
-	binary.BigEndian.PutUint64(stakeAmount[24:], staked.Amount)
+	binary.BigEndian.PutUint64(stakeAmount[24:], amount)
 	return stakeAmount, nil
 }
 
-func (c *systemContract) unstake(evm *EVM, from common.Address, amount uint64) ([]byte, error) {
+func (c *systemContract) unstakeCmd(evm *EVM, from common.Address, amount uint64) ([]byte, error) {
 	db := evm.EbakusState
 
 	timestamp := evm.Time.Uint64() + unstakeVestingPeriod
 	newClaimableEntryId := GetClaimableId(from, timestamp)
 
 	// get all claimable tokens
-	where := []byte("Id LIKE ")
-	whereClause, err := db.WhereParser(append(where, from.Bytes()...))
+	whereClause, err := makeIDLikeWhereClause(db, from)
 	if err != nil {
-		return nil, errSystemContractError
+		return nil, err
 	}
 
 	iter, err := db.Select(ClaimableTable, whereClause)
@@ -917,14 +913,13 @@ func (c *systemContract) unstake(evm *EVM, from common.Address, amount uint64) (
 	return nil, nil
 }
 
-func (c *systemContract) claim(evm *EVM, from common.Address) ([]byte, error) {
+func (c *systemContract) claimCmd(evm *EVM, from common.Address) ([]byte, error) {
 	db := evm.EbakusState
 
 	// check if user has claimable tokens
-	where := []byte("Id LIKE ")
-	whereClause, err := db.WhereParser(append(where, from.Bytes()...))
+	whereClause, err := makeIDLikeWhereClause(db, from)
 	if err != nil {
-		return nil, errSystemContractError
+		return nil, err
 	}
 
 	iter, err := db.Select(ClaimableTable, whereClause)
@@ -952,7 +947,7 @@ func (c *systemContract) claim(evm *EVM, from common.Address) ([]byte, error) {
 
 	if claimableAmount <= 0 {
 		log.Trace("No amount to be claimed")
-		return nil, errSystemContractError
+		return nil, nil
 	}
 
 	claimableAmountWei := new(big.Int).Mul(new(big.Int).SetUint64(claimableAmount), precisionFactor)
@@ -966,15 +961,12 @@ func (c *systemContract) claim(evm *EVM, from common.Address) ([]byte, error) {
 	return nil, nil
 }
 
-func (c *systemContract) vote(evm *EVM, from common.Address, addresses []common.Address) ([]byte, error) {
-	db := evm.EbakusState
-
+func getStaked(db *ebakusdb.Snapshot, from common.Address) (*types.Staked, error) {
 	var staked types.Staked
 
-	where := []byte("Id LIKE ")
-	whereClause, err := db.WhereParser(append(where, from.Bytes()...))
+	whereClause, err := makeIDLikeWhereClause(db, from)
 	if err != nil {
-		return nil, errSystemContractError
+		return nil, err
 	}
 
 	iter, err := db.Select(types.StakedTable, whereClause)
@@ -983,38 +975,45 @@ func (c *systemContract) vote(evm *EVM, from common.Address, addresses []common.
 	}
 
 	if iter.Next(&staked) == false {
-		return nil, errSystemContractError
+		return nil, nil
+	}
+
+	return &staked, nil
+}
+
+func (c *systemContract) voteCmd(evm *EVM, from common.Address, addresses []common.Address) ([]byte, error) {
+	db := evm.EbakusState
+
+	staked, err := getStaked(db, from)
+	if err != nil {
+		return nil, err
+	}
+
+	if staked == nil {
+		return nil, errVoteNothingStaked
 	}
 
 	if _, err := unvote(db, from, staked.Amount); err != nil {
-		return nil, errSystemContractError
+		return nil, err
 	}
 
 	if err := vote(db, from, addresses, staked.Amount); err != nil {
-		return nil, errSystemContractError
+		return nil, err
 	}
 
 	return nil, nil
 }
 
-func (c *systemContract) unvote(evm *EVM, from common.Address) ([]byte, error) {
+func (c *systemContract) unvoteCmd(evm *EVM, from common.Address) ([]byte, error) {
 	db := evm.EbakusState
 
-	var staked types.Staked
-
-	where := []byte("Id LIKE ")
-	whereClause, err := db.WhereParser(append(where, from.Bytes()...))
+	staked, err := getStaked(db, from)
 	if err != nil {
-		return nil, errSystemContractError
+		return nil, err
 	}
 
-	iter, err := db.Select(types.StakedTable, whereClause)
-	if err != nil {
-		return nil, errSystemContractError
-	}
-
-	if iter.Next(&staked) == false {
-		return nil, errSystemContractError
+	if staked == nil {
+		return nil, errVoteNothingStaked
 	}
 
 	if _, err := unvote(db, from, staked.Amount); err != nil {
@@ -1024,15 +1023,14 @@ func (c *systemContract) unvote(evm *EVM, from common.Address) ([]byte, error) {
 	return nil, nil
 }
 
-func (c *systemContract) electEnable(evm *EVM, from common.Address, enable bool) ([]byte, error) {
+func (c *systemContract) electEnableCmd(evm *EVM, from common.Address, enable bool) ([]byte, error) {
 	db := evm.EbakusState
 
 	var witness Witness
 
-	where := []byte("Id LIKE ")
-	whereClause, err := db.WhereParser(append(where, from.Bytes()...))
+	whereClause, err := makeIDLikeWhereClause(db, from)
 	if err != nil {
-		return nil, errSystemContractError
+		return nil, err
 	}
 
 	iter, err := db.Select(WitnessesTable, whereClause)
@@ -1164,9 +1162,14 @@ func (c *systemContract) Run(evm *EVM, contract *Contract, input []byte) ([]byte
 			return nil, errStakeMalformed
 		}
 
-		return c.stake(evm, from, amount)
+		_, err := c.claimCmd(evm, from)
+		if err != nil {
+			return nil, err
+		}
+
+		return c.stakeCmd(evm, from, amount)
 	case SystemContractGetStakedCmd:
-		return c.getStaked(evm, from)
+		return c.getStakedCmd(evm, from)
 	case SystemContractUnstakeCmd:
 		var amount uint64
 		err = evmABI.UnpackWithArguments(&amount, cmd, inputData, abi.InputsArgumentsType)
@@ -1175,9 +1178,9 @@ func (c *systemContract) Run(evm *EVM, contract *Contract, input []byte) ([]byte
 			return nil, errUnstakeMalformed
 		}
 
-		return c.unstake(evm, from, amount)
+		return c.unstakeCmd(evm, from, amount)
 	case SystemContractClaimCmd:
-		return c.claim(evm, from)
+		return c.claimCmd(evm, from)
 	case SystemContractVoteCmd:
 		var addresses []common.Address
 		err = evmABI.UnpackWithArguments(&addresses, cmd, inputData, abi.InputsArgumentsType)
@@ -1186,9 +1189,9 @@ func (c *systemContract) Run(evm *EVM, contract *Contract, input []byte) ([]byte
 			return nil, errVoteMalformed
 		}
 
-		return c.vote(evm, from, addresses)
+		return c.voteCmd(evm, from, addresses)
 	case SystemContractUnvoteCmd:
-		return c.unvote(evm, from)
+		return c.unvoteCmd(evm, from)
 	case SystemContractElectEnableCmd:
 		var enable bool
 		err = evmABI.UnpackWithArguments(&enable, cmd, inputData, abi.InputsArgumentsType)
@@ -1196,7 +1199,7 @@ func (c *systemContract) Run(evm *EVM, contract *Contract, input []byte) ([]byte
 			return nil, errElectEnableMalformed
 		}
 
-		return c.electEnable(evm, from, enable)
+		return c.electEnableCmd(evm, from, enable)
 	case SystemContractStoreAbiCmd:
 		type contractAbiInput struct {
 			Address common.Address
