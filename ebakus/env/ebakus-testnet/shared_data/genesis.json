@@ -12,6 +12,7 @@
       "turnBlockCount": 6,
       "initialDistribution": 1000000000,
       "delegateCount": 3,
+      "maxWitnessesVotes": 20,
       "bootProducer": "0x4ed2aca4f9b3ee904ff44f03e91fde90829a8381"
     }
   },

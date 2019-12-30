@@ -143,6 +143,7 @@ var (
 	errVoteMalformed           = errors.New("voting transaction malformed")
 	errVoteAddressIsNotWitness = errors.New("a voted address is not valid")
 	errVoteNothingStaked       = errors.New("nothing staked")
+	errVoteMaxWitnessesReached = errors.New("not allowed to vote more than 20 witnesses")
 	errElectEnableMalformed    = errors.New("elect enable transaction malformed")
 	errContractAbiMalformed    = errors.New("contract abi transaction malformed")
 	errContractAbiNotFound     = errors.New("contract abi not found")
@@ -983,6 +984,10 @@ func getStaked(db *ebakusdb.Snapshot, from common.Address) (*types.Staked, error
 
 func (c *systemContract) voteCmd(evm *EVM, from common.Address, addresses []common.Address) ([]byte, error) {
 	db := evm.EbakusState
+
+	if len(addresses) > int(evm.chainConfig.DPOS.MaxWitnessesVotes) {
+		return nil, errVoteMaxWitnessesReached
+	}
 
 	staked, err := getStaked(db, from)
 	if err != nil {
