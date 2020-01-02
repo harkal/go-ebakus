@@ -446,7 +446,7 @@ func unvote(db *ebakusdb.Snapshot, from common.Address, amount uint64) ([]common
 		return nil, err
 	}
 
-	iter, err := db.Select(DelegationTable, whereClause)
+	delIter, err := db.Select(DelegationTable, whereClause)
 	if err != nil {
 		return nil, errSystemContractError
 	}
@@ -455,7 +455,7 @@ func unvote(db *ebakusdb.Snapshot, from common.Address, amount uint64) ([]common
 	delegationsAddresses := make([]common.Address, 0)
 	delegationsToBeDeleted := make([]Delegation, 0)
 
-	for iter.Next(&delegation) {
+	for delIter.Next(&delegation) {
 		_, witnessAddress := delegation.Id.Content()
 
 		delegationsToBeDeleted = append(delegationsToBeDeleted, delegation)
