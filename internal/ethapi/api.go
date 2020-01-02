@@ -1768,14 +1768,16 @@ func (api *PublicDBAPI) addEbakusStateIterator(tableName string, iter *ebakusdb.
 	tableIterPointer := tableIter.GetPtr()
 
 	api.ebakusStateIteratorsMux.Lock()
-	defer api.ebakusStateIteratorsMux.Unlock()
-
 	api.ebakusStateIterators[uint64(tableIterPointer)] = &tableIter
+	api.ebakusStateIteratorsMux.Unlock()
 
 	return uint64(tableIterPointer)
 }
 
 func (api *PublicDBAPI) getEbakusStateIterator(handle uint64) (*ebakusStateIterator, error) {
+	api.ebakusStateIteratorsMux.Lock()
+	defer api.ebakusStateIteratorsMux.Unlock()
+
 	stateIter, ok := api.ebakusStateIterators[handle]
 	if !ok {
 		return nil, fmt.Errorf("Failed to find ebakusdb iterator")
@@ -1842,9 +1844,8 @@ func (api *PublicDBAPI) Next(ctx context.Context, iter hexutil.Uint64) (interfac
 	ret, err := vm.EbakusDBNext(ebakusState, tableIter.ContractAddress, tableIter.TableName, tableIter.Iter)
 	if ret == nil {
 		api.ebakusStateIteratorsMux.Lock()
-		defer api.ebakusStateIteratorsMux.Unlock()
-
 		delete(api.ebakusStateIterators, uint64(iter))
+		api.ebakusStateIteratorsMux.Unlock()
 	}
 
 	return ret, nil
