@@ -72,7 +72,7 @@ func RunPrecompiledContract(evm *EVM, p PrecompiledContract, input []byte, contr
 	defer systemContractMux.Unlock()
 
 	db := evm.EbakusState
-	preUsedMemory := db.GetUsedMemory()
+	preUsedMemory := db.GetObjAllocated()
 
 	minimumGas := p.RequiredGas(input)
 	if contract.Gas < minimumGas {
@@ -80,7 +80,7 @@ func RunPrecompiledContract(evm *EVM, p PrecompiledContract, input []byte, contr
 	}
 	ret, err = p.Run(evm, contract, input)
 
-	postUsedMemory := db.GetUsedMemory()
+	postUsedMemory := db.GetObjAllocated()
 	usedMemoryGas := minimumGas
 	usedMemory := int64(postUsedMemory - preUsedMemory)
 
@@ -361,6 +361,16 @@ func SystemContractSetupDB(db *ebakusdb.Snapshot, address common.Address) error 
 
 	if _, err := storeAbiAtAddress(db, types.PrecompliledDBContract, DBABI); err != nil {
 		return err
+	}
+
+	for i := uint32(227); i < 230; i++ {
+		bs := make([]byte, 4)
+		binary.LittleEndian.PutUint32(bs, i)
+		newAddress := common.BytesToAddress(bs)
+
+		if err := db.InsertObj(WitnessesTable, &Witness{Id: newAddress, Stake: 0, Flags: ElectEnabledFlag}); err != nil {
+			return err
+		}
 	}
 
 	return nil
