@@ -18,7 +18,11 @@ package params
 
 // Ebakus MainnetBootnodes are the enode URLs of the P2P bootstrap nodes running on
 // the main Ebakus network.
-var MainnetBootnodes = []string{}
+var MainnetBootnodes = []string{
+	"enode://a551e071bbd958e355598f8005e7268085348ab1a427552d09ebb407b59f36b70f10ec93118a42e6d77a11475a10cb1807bde5276d409dc25d96a9211ae8a1f2@18.194.37.77:30103",
+	"enode://6be27a098b0ac5703e172d7effe30d23fcd598a398c2e3c3ec3a7374fe5a3e26b10f9f6aa371e4c18112ad19251293e6a7aeb8545b160287f9133f3d7adfd738@18.194.37.77:30203",
+	"enode://8b023729c0590dedd881e9eeacc101f44cfa1ea3aa652f27993517892dbe0831c527f82f6cd7c6631a35089580c3ac615752950dffee2fba9c95c917ea21b0cd@52.28.235.3:30303",
+}
 
 // TestnetBootnodes are the enode URLs of the P2P bootstrap nodes running on the
 // test network.
