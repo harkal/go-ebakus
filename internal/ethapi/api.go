@@ -1736,13 +1736,14 @@ func (s *PublicTransactionPoolAPI) GetABIForContract(ctx context.Context, addr c
 }
 
 type PublicDBAPI struct {
-	b                    Backend
-	ebakusStateIterators map[uint64]*ebakusStateIterator
+	b                       Backend
+	ebakusStateIterators    map[uint64]*ebakusStateIterator
+	ebakusStateIteratorsMux sync.Mutex
 }
 
 // NewPublicTransactionPoolAPI creates a new RPC service with methods specific for the transaction pool.
 func NewPublicDBAPI(b Backend) *PublicDBAPI {
-	return &PublicDBAPI{b, make(map[uint64]*ebakusStateIterator, 0)}
+	return &PublicDBAPI{b: b, ebakusStateIterators: make(map[uint64]*ebakusStateIterator, 0)}
 }
 
 type ebakusStateIterator struct {
@@ -1765,6 +1766,9 @@ func (api *PublicDBAPI) addEbakusStateIterator(tableName string, iter *ebakusdb.
 		BlockNumber:     blockNumber,
 	}
 	tableIterPointer := tableIter.GetPtr()
+
+	api.ebakusStateIteratorsMux.Lock()
+	defer api.ebakusStateIteratorsMux.Unlock()
 
 	api.ebakusStateIterators[uint64(tableIterPointer)] = &tableIter
 
