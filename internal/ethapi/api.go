@@ -1824,16 +1824,16 @@ func (api *PublicDBAPI) Select(ctx context.Context, contractAddress common.Addre
 func (api *PublicDBAPI) Next(ctx context.Context, iter hexutil.Uint64) (interface{}, error) {
 	tableIter, err := api.getEbakusStateIterator(uint64(iter))
 	if err != nil {
-		return 0, err
+		return nil, err
 	}
 
 	ebakusState, _, err := api.b.EbakusStateAndHeaderByNumber(ctx, rpc.BlockNumber(tableIter.BlockNumber))
 	if err != nil {
-		return 0, err
+		return nil, err
 	}
 
 	if ebakusState == nil {
-		return 0, fmt.Errorf("Failed to find ebakusdb snapshot")
+		return nil, fmt.Errorf("Failed to find ebakusdb snapshot")
 	}
 	defer ebakusState.Release()
 
