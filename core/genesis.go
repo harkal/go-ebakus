@@ -373,7 +373,8 @@ func DefaultTestnetGenesisBlock() *Genesis {
 func DeveloperGenesisBlock(period uint64, faucet common.Address) *Genesis {
 	// Override the default period to the user requested one
 	config := *params.TestnetChainConfig
-	config.DPOS.DelegateCount = 2
+	config.DPOS.DelegateCount = 1
+	config.DPOS.BonusDelegateCount = 0
 	config.DPOS.BootProducer = faucet
 
 	// Assemble and return the genesis with the precompiles and faucet pre-funded
