@@ -1775,8 +1775,12 @@ func (api *PublicDBAPI) addEbakusStateIterator(tableName string, iter *ebakusdb.
 	return uint64(tableIterPointer)
 }
 
-func (api *PublicDBAPI) getEbakusStateIterator(handle uint64) *ebakusStateIterator {
-	return api.ebakusStateIterators[handle]
+func (api *PublicDBAPI) getEbakusStateIterator(handle uint64) (*ebakusStateIterator, error) {
+	stateIter, ok := api.ebakusStateIterators[handle]
+	if !ok {
+		return nil, fmt.Errorf("Failed to find ebakusdb iterator")
+	}
+	return stateIter, nil
 }
 
 // Get returns EbakusDB table entry based on search criteria
@@ -1818,7 +1822,10 @@ func (api *PublicDBAPI) Select(ctx context.Context, contractAddress common.Addre
 
 // Next returns EbakusDB table iterator next entry
 func (api *PublicDBAPI) Next(ctx context.Context, iter hexutil.Uint64) (interface{}, error) {
-	tableIter := api.getEbakusStateIterator(uint64(iter))
+	tableIter, err := api.getEbakusStateIterator(uint64(iter))
+	if err != nil {
+		return 0, err
+	}
 
 	ebakusState, _, err := api.b.EbakusStateAndHeaderByNumber(ctx, rpc.BlockNumber(tableIter.BlockNumber))
 	if err != nil {
@@ -1830,7 +1837,17 @@ func (api *PublicDBAPI) Next(ctx context.Context, iter hexutil.Uint64) (interfac
 	}
 	defer ebakusState.Release()
 
-	return vm.EbakusDBNext(ebakusState, tableIter.ContractAddress, tableIter.TableName, tableIter.Iter)
+	// fmt.Println("\n1111", tableIter)
+
+	ret, err := vm.EbakusDBNext(ebakusState, tableIter.ContractAddress, tableIter.TableName, tableIter.Iter)
+	if ret == nil {
+		api.ebakusStateIteratorsMux.Lock()
+		defer api.ebakusStateIteratorsMux.Unlock()
+
+		delete(api.ebakusStateIterators, uint64(iter))
+	}
+
+	return ret, nil
 }
 
 // PublicDebugAPI is the collection of Ebakus APIs exposed over the public
