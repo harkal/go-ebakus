@@ -23,10 +23,12 @@ import (
 	"fmt"
 	"math/big"
 	"strings"
+	"sync"
 	"time"
 	"unsafe"
 
 	"github.com/davecgh/go-spew/spew"
+	"github.com/ebakus/ebakusdb"
 	"github.com/ebakus/go-ebakus/accounts"
 	"github.com/ebakus/go-ebakus/accounts/keystore"
 	"github.com/ebakus/go-ebakus/accounts/scwallet"
@@ -45,7 +47,6 @@ import (
 	"github.com/ebakus/go-ebakus/params"
 	"github.com/ebakus/go-ebakus/rlp"
 	"github.com/ebakus/go-ebakus/rpc"
-	"github.com/ebakus/ebakusdb"
 	"github.com/tyler-smith/go-bip39"
 )
 
@@ -1749,14 +1750,14 @@ type ebakusStateIterator struct {
 	Iter      *ebakusdb.ResultIterator
 
 	ContractAddress common.Address
-	BlockNumber     rpc.BlockNumber
+	BlockNumber     uint64
 }
 
 func (ri *ebakusStateIterator) GetPtr() uintptr {
 	return uintptr(unsafe.Pointer(ri))
 }
 
-func (api *PublicDBAPI) addEbakusStateIterator(tableName string, iter *ebakusdb.ResultIterator, contractAddress common.Address, blockNumber rpc.BlockNumber) uint64 {
+func (api *PublicDBAPI) addEbakusStateIterator(tableName string, iter *ebakusdb.ResultIterator, contractAddress common.Address, blockNumber uint64) uint64 {
 	tableIter := ebakusStateIterator{
 		TableName:       tableName,
 		Iter:            iter,
@@ -1791,7 +1792,7 @@ func (api *PublicDBAPI) Get(ctx context.Context, contractAddress common.Address,
 
 // Select returns EbakusDB table iterator based on search criteria
 func (api *PublicDBAPI) Select(ctx context.Context, contractAddress common.Address, tableName string, whereClause string, orderClause string, blockNr rpc.BlockNumber) (hexutil.Uint64, error) {
-	ebakusState, _, err := api.b.EbakusStateAndHeaderByNumber(ctx, rpc.BlockNumber(blockNr))
+	ebakusState, header, err := api.b.EbakusStateAndHeaderByNumber(ctx, rpc.BlockNumber(blockNr))
 	if err != nil {
 		return 0, err
 	}
@@ -1806,7 +1807,7 @@ func (api *PublicDBAPI) Select(ctx context.Context, contractAddress common.Addre
 		return 0, err
 	}
 
-	iterPointer := api.addEbakusStateIterator(tableName, iter, contractAddress, rpc.BlockNumber(blockNr))
+	iterPointer := api.addEbakusStateIterator(tableName, iter, contractAddress, header.Number.Uint64())
 
 	return hexutil.Uint64(iterPointer), nil
 }
@@ -1815,7 +1816,7 @@ func (api *PublicDBAPI) Select(ctx context.Context, contractAddress common.Addre
 func (api *PublicDBAPI) Next(ctx context.Context, iter hexutil.Uint64) (interface{}, error) {
 	tableIter := api.getEbakusStateIterator(uint64(iter))
 
-	ebakusState, _, err := api.b.EbakusStateAndHeaderByNumber(ctx, tableIter.BlockNumber)
+	ebakusState, _, err := api.b.EbakusStateAndHeaderByNumber(ctx, rpc.BlockNumber(tableIter.BlockNumber))
 	if err != nil {
 		return 0, err
 	}
