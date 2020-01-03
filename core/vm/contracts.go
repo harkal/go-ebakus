@@ -363,16 +363,6 @@ func SystemContractSetupDB(db *ebakusdb.Snapshot, address common.Address) error 
 		return err
 	}
 
-	for i := uint32(227); i < 230; i++ {
-		bs := make([]byte, 4)
-		binary.LittleEndian.PutUint32(bs, i)
-		newAddress := common.BytesToAddress(bs)
-
-		if err := db.InsertObj(WitnessesTable, &Witness{Id: newAddress, Stake: 0, Flags: ElectEnabledFlag}); err != nil {
-			return err
-		}
-	}
-
 	return nil
 }
 
