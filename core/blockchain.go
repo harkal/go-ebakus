@@ -1760,6 +1760,7 @@ func (bc *BlockChain) insertSideChain(block *types.Block, it *insertIterator) (i
 			canonical := bc.GetBlockByNumber(number)
 			if canonical != nil && canonical.Hash() == block.Hash() {
 				// Not a sidechain block, this is a re-import of a canon block which has it's state pruned
+				externTd = block.Number()
 				continue
 			}
 			if canonical != nil && canonical.Root() == block.Root() {
