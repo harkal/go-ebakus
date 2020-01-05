@@ -1609,11 +1609,6 @@ func (bc *BlockChain) insertChain(chain types.Blocks, verifySeals bool) (int, []
 		if !bc.cacheConfig.TrieCleanNoPrefetch {
 			if followup, err := it.peek(); followup != nil && err == nil {
 				go func(start time.Time) {
-					// Lock on prefetching, as contract's required gas computation is wrong,
-					// because of ebakusDb used memory.
-					bc.chainmu.Lock()
-					defer bc.chainmu.Unlock()
-
 					throwaway, _ := state.New(parent.Root, bc.stateCache)
 					throwawaySnapshot := parentSnapshot.Snapshot()
 
