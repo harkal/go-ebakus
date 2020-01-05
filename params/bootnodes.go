@@ -19,9 +19,9 @@ package params
 // Ebakus MainnetBootnodes are the enode URLs of the P2P bootstrap nodes running on
 // the main Ebakus network.
 var MainnetBootnodes = []string{
-	"enode://a551e071bbd958e355598f8005e7268085348ab1a427552d09ebb407b59f36b70f10ec93118a42e6d77a11475a10cb1807bde5276d409dc25d96a9211ae8a1f2@18.194.37.77:30103",
-	"enode://6be27a098b0ac5703e172d7effe30d23fcd598a398c2e3c3ec3a7374fe5a3e26b10f9f6aa371e4c18112ad19251293e6a7aeb8545b160287f9133f3d7adfd738@18.194.37.77:30203",
-	"enode://8b023729c0590dedd881e9eeacc101f44cfa1ea3aa652f27993517892dbe0831c527f82f6cd7c6631a35089580c3ac615752950dffee2fba9c95c917ea21b0cd@52.28.235.3:30303",
+	"enode://a551e071bbd958e355598f8005e7268085348ab1a427552d09ebb407b59f36b70f10ec93118a42e6d77a11475a10cb1807bde5276d409dc25d96a9211ae8a1f2@3.125.186.52:30103",
+	"enode://6be27a098b0ac5703e172d7effe30d23fcd598a398c2e3c3ec3a7374fe5a3e26b10f9f6aa371e4c18112ad19251293e6a7aeb8545b160287f9133f3d7adfd738@3.125.186.52:30203",
+	"enode://8b023729c0590dedd881e9eeacc101f44cfa1ea3aa652f27993517892dbe0831c527f82f6cd7c6631a35089580c3ac615752950dffee2fba9c95c917ea21b0cd@3.124.37.129:30303",
 }
 
 // TestnetBootnodes are the enode URLs of the P2P bootstrap nodes running on the
@@ -34,6 +34,4 @@ var TestnetBootnodes = []string{
 
 // DiscoveryV5Bootnodes are the enode URLs of the P2P bootstrap nodes for the
 // experimental RLPx v5 topic-discovery network.
-var DiscoveryV5Bootnodes = []string{
-	"enode://794df227b077e3c5fc80694a3927b7b5fb5fde8115b14bb16d339ac836372aaa427f91bd5930f9365a8ab44369b195ccbeb833f92d78836d4ace3bd69de59de2@172.105.65.124:30303",
-}
+var DiscoveryV5Bootnodes = []string{}
