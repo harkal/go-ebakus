@@ -242,12 +242,12 @@ func init() {
 }
 
 func main() {
-	//f, err := os.Create("ebakus.prof")
-	//if err != nil {
-	//log.Fatal(err)
-	//}
-	//pprof.StartCPUProfile(f)
-	//defer pprof.StopCPUProfile()
+	// f, err := os.Create("ebakus.prof")
+	// if err != nil {
+	// 	fmt.Fprintln(os.Stderr, err)
+	// }
+	// pprof.StartCPUProfile(f)
+	// defer pprof.StopCPUProfile()
 	if err := app.Run(os.Args); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
