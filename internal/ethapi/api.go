@@ -976,7 +976,7 @@ func (s *PublicBlockChainAPI) SuggestDifficulty(ctx context.Context, addr common
 	return diff, nil
 }
 
-// SuggestVirtualDifficulty returns the currently suggested vurtual difficulty needed to execute the
+// SuggestVirtualDifficulty returns the currently suggested virtual difficulty needed to execute the
 // given transaction against the current pending block.
 func (s *PublicBlockChainAPI) suggestVirtualDifficulty(ebakusState *ebakusdb.Snapshot) (float64, error) {
 	var minDv *big.Float
