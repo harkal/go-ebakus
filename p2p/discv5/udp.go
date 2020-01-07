@@ -27,7 +27,6 @@ import (
 	"github.com/ebakus/go-ebakus/common"
 	"github.com/ebakus/go-ebakus/crypto"
 	"github.com/ebakus/go-ebakus/log"
-	"github.com/ebakus/go-ebakus/p2p/nat"
 	"github.com/ebakus/go-ebakus/p2p/netutil"
 	"github.com/ebakus/go-ebakus/rlp"
 )
