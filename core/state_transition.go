@@ -187,7 +187,6 @@ func (st *StateTransition) TransitionDb() (ret []byte, usedGas uint64, failed bo
 	}
 	msg := st.msg
 	sender := vm.AccountRef(msg.From())
-
 	contractCreation := msg.To() == nil
 
 	// Pay intrinsic gas
@@ -195,7 +194,6 @@ func (st *StateTransition) TransitionDb() (ret []byte, usedGas uint64, failed bo
 	if err != nil {
 		return nil, 0, false, err
 	}
-
 	if err = st.useGas(gas); err != nil {
 		return nil, 0, false, err
 	}
@@ -207,7 +205,6 @@ func (st *StateTransition) TransitionDb() (ret []byte, usedGas uint64, failed bo
 		// error.
 		vmerr error
 	)
-
 	if contractCreation {
 		ret, _, st.gas, vmerr = evm.Create(sender, st.data, st.gas, st.value)
 	} else {
@@ -224,7 +221,6 @@ func (st *StateTransition) TransitionDb() (ret []byte, usedGas uint64, failed bo
 			return nil, 0, false, vmerr
 		}
 	}
-
 	st.refundGas()
 	st.state.AddBalance(st.evm.Coinbase, new(big.Int).Mul(new(big.Int).SetUint64(st.gasUsed()), st.gasPrice))
 

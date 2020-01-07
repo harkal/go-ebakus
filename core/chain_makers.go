@@ -20,6 +20,7 @@ import (
 	"fmt"
 	"math/big"
 
+	"github.com/ebakus/ebakusdb"
 	"github.com/ebakus/go-ebakus/common"
 	"github.com/ebakus/go-ebakus/consensus"
 	"github.com/ebakus/go-ebakus/core/state"
@@ -27,7 +28,6 @@ import (
 	"github.com/ebakus/go-ebakus/core/vm"
 	"github.com/ebakus/go-ebakus/ethdb"
 	"github.com/ebakus/go-ebakus/params"
-	"github.com/ebakus/ebakusdb"
 )
 
 // BlockGen creates blocks for testing.
