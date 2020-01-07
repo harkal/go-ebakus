@@ -347,7 +347,7 @@ func DefaultGenesisBlock() *Genesis {
 		Config:    &config,
 		GasLimit:  6283185,
 		Coinbase:  config.DPOS.BootProducer,
-		Timestamp: 1564402815, // 2019-07-29T12:20:15+00:00
+		Timestamp: 1579176000, // 2020-01-16T12:00:00+00:00
 		Alloc:     decodePrealloc(mainnetAllocData),
 	}
 }
@@ -363,7 +363,7 @@ func DefaultTestnetGenesisBlock() *Genesis {
 		Config:    &config,
 		GasLimit:  6283185,
 		Coinbase:  coinbase,
-		Timestamp: 1514489498, // 2017-12-28T19:31:38+00:00
+		Timestamp: 1579176000, // 2020-01-16T12:00:00+00:00
 		Alloc:     decodePrealloc(testnetAllocData),
 	}
 }
