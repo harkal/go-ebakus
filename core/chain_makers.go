@@ -20,6 +20,7 @@ import (
 	"fmt"
 	"math/big"
 
+	"github.com/ebakus/ebakusdb"
 	"github.com/ebakus/go-ebakus/common"
 	"github.com/ebakus/go-ebakus/consensus"
 	"github.com/ebakus/go-ebakus/core/state"
@@ -27,7 +28,6 @@ import (
 	"github.com/ebakus/go-ebakus/core/vm"
 	"github.com/ebakus/go-ebakus/ethdb"
 	"github.com/ebakus/go-ebakus/params"
-	"github.com/ebakus/ebakusdb"
 )
 
 // BlockGen creates blocks for testing.
@@ -185,9 +185,9 @@ func GenerateChain(config *params.ChainConfig, parent *types.Block, engine conse
 		}
 		if b.engine != nil {
 			// Finalize and seal the block
-			ebakusDb := ebakusDb.GetRootSnapshot()
-			block, _ := b.engine.FinalizeAndAssemble(chainreader, b.header, statedb, ebakusDb, b.coinbase, b.txs, b.receipts)
-			ebakusDb.Release()
+			ebakusSnapshot := ebakusDb.GetRootSnapshot()
+			block, _ := b.engine.FinalizeAndAssemble(chainreader, b.header, statedb, ebakusSnapshot, b.coinbase, b.txs, b.receipts)
+			ebakusSnapshot.Release()
 
 			// Write state changes to db
 			root, err := statedb.Commit(config.IsEIP158(b.header.Number))

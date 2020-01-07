@@ -317,12 +317,6 @@ func (t *Transaction) Logs(ctx context.Context) (*[]*Log, error) {
 
 type BlockType int
 
-const (
-	unknown BlockType = iota
-	isCanonical
-	notCanonical
-)
-
 // Block represents an Ebakus block.
 // backend, and either num or hash are mandatory. All other fields are lazily fetched
 // when required.

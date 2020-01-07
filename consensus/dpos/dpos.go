@@ -26,8 +26,6 @@ import (
 	"sync"
 	"time"
 
-	"github.com/shopspring/decimal"
-
 	"github.com/ebakus/ebakusdb"
 
 	"github.com/ebakus/go-ebakus/accounts"
@@ -463,21 +461,7 @@ func (d *DPOS) SealHash(header *types.Header) (hash common.Hash) {
 
 // AccumulateRewards credits the coinbase of the given block with the reward
 func (d *DPOS) AccumulateRewards(config *params.DPOSConfig, state *state.StateDB, header *types.Header, coinbase common.Address) {
-	blockNumber := decimal.NewFromInt(header.Number.Int64())
-	yearSeconds := uint64(356 * 24 * 60 * 60)
-	yearBlocks := decimal.NewFromInt(int64(yearSeconds / config.Period))
-	yearlyInflation := decimal.NewFromFloat(config.YearlyInflation)
-
-	base := decimal.NewFromInt(1).Add(yearlyInflation.Div(yearBlocks))
-
-	blockRewardFactor := base.Pow(blockNumber)
-
-	if blockNumber.IsPositive() {
-		blockRewardFactor = blockRewardFactor.Sub(base.Pow(blockNumber.Sub(decimal.NewFromInt(1))))
-	}
-	blockReward := decimal.NewFromInt(int64(config.InitialDistribution)).Mul(blockRewardFactor).Shift(4)
-
-	reward := new(big.Int).Mul(big.NewInt(blockReward.IntPart()), big.NewInt(1e14)) // Convert to WEI
+	reward := big.NewInt(3171 * 1e14)
 
 	state.AddBalance(coinbase, reward)
 }

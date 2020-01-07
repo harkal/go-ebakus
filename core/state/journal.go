@@ -103,7 +103,6 @@ type (
 		account *common.Address
 		prev    *big.Int
 	}
-
 	nonceChange struct {
 		account *common.Address
 		prev    uint64

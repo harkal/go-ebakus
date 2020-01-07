@@ -346,7 +346,6 @@ func (s *PrivateAccountAPI) LockAccount(addr common.Address) bool {
 // and release it after the transaction has been submitted to the tx pool
 func (s *PrivateAccountAPI) signTransaction(ctx context.Context, args *SendTxArgs, passwd string) (*types.Transaction, error) {
 	// Look up the wallet containing the requested signer
-	log.Info("SendTransaction", "args", args)
 	account := accounts.Account{Address: args.From}
 	wallet, err := s.am.Find(account)
 	if err != nil {
@@ -651,6 +650,7 @@ func (s *PublicBlockChainAPI) GetBlockByNumber(ctx context.Context, number rpc.B
 			}
 		}
 
+		// Get block delegates
 		ebakusState, _, err := s.b.EbakusStateAndHeaderByNumber(ctx, rpc.BlockNumber(block.NumberU64()))
 		if err != nil {
 			return nil, err
@@ -900,8 +900,6 @@ func DoEstimateGas(ctx context.Context, b Backend, args CallArgs, blockNrOrHash 
 	if args.Gas != nil && uint64(*args.Gas) >= params.TxGas {
 		hi = uint64(*args.Gas)
 	} else {
-		// // Retrieve the current pending block to act as the gas ceiling
-		// block, err := s.b.BlockByNumber(ctx, rpc.LatestBlockNumber)
 		// Retrieve the block to act as the gas ceiling
 		block, err := b.BlockByNumberOrHash(ctx, blockNrOrHash)
 		if err != nil {
@@ -918,6 +916,7 @@ func DoEstimateGas(ctx context.Context, b Backend, args CallArgs, blockNrOrHash 
 	// Create a helper to check if a gas allowance results in an executable transaction
 	executable := func(gas uint64) bool {
 		args.Gas = (*hexutil.Uint64)(&gas)
+
 		_, _, failed, err := DoCall(ctx, b, args, blockNrOrHash, nil, vm.Config{}, 0, gasCap)
 		if err != nil || failed {
 			return false

@@ -986,6 +986,7 @@ func (bc *BlockChain) InsertReceiptChain(blockChain types.Blocks, receiptChain [
 	// and returns a indicator whether the inserted blocks are canonical.
 	updateHead := func(head *types.Block) bool {
 		bc.chainmu.Lock()
+
 		// Rewind may have occurred, skip in that case.
 		if bc.CurrentHeader().Number.Cmp(head.Number()) >= 0 {
 			currentFastBlock, td := bc.CurrentFastBlock(), bc.GetBlock(head.Hash(), head.NumberU64())
@@ -1623,7 +1624,6 @@ func (bc *BlockChain) insertChain(chain types.Blocks, verifySeals bool) (int, []
 				}(time.Now())
 			}
 		}
-
 		// Process block using the parent state as reference point
 		substart := time.Now()
 		receipts, logs, usedGas, err := bc.processor.Process(block, statedb, parentSnapshot, coinbase, bc.vmConfig)
@@ -2010,8 +2010,10 @@ func (bc *BlockChain) PostChainEvents(events []interface{}, logs []*types.Log) {
 		switch ev := event.(type) {
 		case ChainEvent:
 			bc.chainFeed.Send(ev)
+
 		case ChainHeadEvent:
 			bc.chainHeadFeed.Send(ev)
+
 		case ChainSideEvent:
 			bc.chainSideFeed.Send(ev)
 		}
