@@ -24,8 +24,8 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"github.com/ebakus/go-ebakus/consensus/dpos"
 	"github.com/ebakus/ebakusdb"
+	"github.com/ebakus/go-ebakus/consensus/dpos"
 
 	"github.com/ebakus/go-ebakus/accounts"
 	"github.com/ebakus/go-ebakus/accounts/abi/bind"
@@ -121,7 +121,7 @@ func New(ctx *node.ServiceContext, config *Config) (*Ebakus, error) {
 	if !config.SyncMode.IsValid() {
 		return nil, fmt.Errorf("invalid sync mode %d", config.SyncMode)
 	}
-	if config.Miner.GasPrice <= 0.0 {
+	if config.Miner.GasPrice < 0.0 {
 		log.Warn("Sanitizing invalid miner gas price", "provided", config.Miner.GasPrice, "updated", DefaultConfig.Miner.GasPrice)
 		config.Miner.GasPrice = DefaultConfig.Miner.GasPrice
 	}
