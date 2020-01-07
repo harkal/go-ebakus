@@ -286,28 +286,6 @@ $ ebakus --datadir=path/to/custom/data/folder --bootnodes=<bootnode-enode-url-fr
 *Note: Since your network will be completely cut off from the main and test networks, you'll
 also need to configure a miner to process transactions and create new blocks for you.*
 
-#### Running a private miner
-
-Mining on the public Ebakus network is a complex task as it's only feasible using GPUs,
-requiring an OpenCL or CUDA enabled `ethminer` instance. For information on such a
-setup, please consult the [EtherMining subreddit](https://www.reddit.com/r/EtherMining/)
-and the [Genoil miner](https://github.com/Genoil/cpp-ebakus) repository.
-
-In a private network setting, however a single CPU miner instance is more than enough for
-practical purposes as it can produce a stable stream of blocks at the correct intervals
-without needing heavy resources (consider running on a single thread, no need for multiple
-ones either). To start a `ebakus` instance for mining, run it with all your usual flags, extended
-by:
-
-```shell
-$ ebakus <usual-flags> --mine --minerthreads=1 --etherbase=0x0000000000000000000000000000000000000000
-```
-
-Which will start mining blocks and transactions on a single CPU thread, crediting all
-proceedings to the account specified by `--etherbase`. You can further tune the mining
-by changing the default gas limit blocks converge to (`--targetgaslimit`) and the price
-transactions are accepted at (`--gasprice`).
-
 ## Contribution
 
 Thank you for considering to help out with the source code! We welcome contributions
