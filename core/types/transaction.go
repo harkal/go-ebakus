@@ -366,7 +366,7 @@ func (tx *Transaction) VirtualDifficulty(from common.Address, ebakusState *ebaku
 	defer transactionVirtualDifficultyTimer.UpdateSince(time.Now())
 	cv := VirtualCapacity(from, ebakusState)
 	txd := tx.CalculateDifficulty()
-	return new(big.Float).SetFloat64(cv * txd)
+	return new(big.Float).SetFloat64(cv * txd / float64(tx.Gas()))
 }
 
 // Cost returns gas * price.

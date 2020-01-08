@@ -1174,7 +1174,7 @@ func newRPCTransaction(tx *types.Transaction, blockHash common.Hash, blockNumber
 	result := &RPCTransaction{
 		From:      from,
 		Gas:       hexutil.Uint64(tx.Gas()),
-		GasPrice:  (*hexutil.Big)(big.NewInt(0)),
+		GasPrice:  (*hexutil.Big)(big.NewInt(int64(tx.GasPrice()))),
 		WorkNonce: hexutil.Uint64(tx.WorkNonce()),
 		Hash:      tx.Hash(),
 		Input:     hexutil.Bytes(tx.Data()),
