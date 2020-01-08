@@ -1148,7 +1148,7 @@ type RPCTransaction struct {
 	BlockNumber      *hexutil.Big    `json:"blockNumber"`
 	From             common.Address  `json:"from"`
 	Gas              hexutil.Uint64  `json:"gas"`
-	GasPrice         *hexutil.Big    `json:"gasPrice"`
+	GasPrice         hexutil.Uint64  `json:"gasPrice"`
 	WorkNonce        hexutil.Uint64  `json:"workNonce"`
 	Hash             common.Hash     `json:"hash"`
 	Input            hexutil.Bytes   `json:"input"`
@@ -1174,7 +1174,7 @@ func newRPCTransaction(tx *types.Transaction, blockHash common.Hash, blockNumber
 	result := &RPCTransaction{
 		From:      from,
 		Gas:       hexutil.Uint64(tx.Gas()),
-		GasPrice:  (*hexutil.Big)(big.NewInt(int64(tx.GasPrice()))),
+		GasPrice:  hexutil.Uint64(tx.GasPrice()),
 		WorkNonce: hexutil.Uint64(tx.WorkNonce()),
 		Hash:      tx.Hash(),
 		Input:     hexutil.Bytes(tx.Data()),
