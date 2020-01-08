@@ -5272,6 +5272,14 @@ var methods = function () {
         outputFormatter: formatters.outputBigNumberFormatter
     });
 
+    var getVirtualDifficultyFactor = new Method({
+        name: 'getVirtualDifficultyFactor',
+        call: 'eth_getVirtualDifficultyFactor',
+        params: 2,
+        inputFormatter: [formatters.inputAddressFormatter, formatters.inputDefaultBlockNumberFormatter],
+        outputFormatter: utils.toDecimal
+    });
+
     var getDelegates = new Method({
         name: 'getDelegates',
         call: 'dpos_getDelegates',
@@ -5437,6 +5445,7 @@ var methods = function () {
 
     return [
         getBalance,
+        getVirtualDifficultyFactor,
         getDelegates,
         getStorageAt,
         getCode,

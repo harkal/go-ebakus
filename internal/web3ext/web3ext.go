@@ -540,6 +540,13 @@ web3._extend({
 			params: 1,
 			inputFormatter: [web3._extend.formatters.inputAddressFormatter]
 		}),
+		new web3._extend.Method({
+			name: 'getVirtualDifficultyFactor',
+			call: 'eth_getVirtualDifficultyFactor',
+			params: 2,
+			inputFormatter: [web3._extend.formatters.inputAddressFormatter, web3._extend.formatters.inputBlockNumberFormatter],
+			outputFormatter: web3._extend.utils.toFloat
+		}),
 	],
 	properties: [
 		new web3._extend.Property({

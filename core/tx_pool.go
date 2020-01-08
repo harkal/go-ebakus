@@ -24,6 +24,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/ebakus/ebakusdb"
 	"github.com/ebakus/go-ebakus/common"
 	"github.com/ebakus/go-ebakus/common/prque"
 	"github.com/ebakus/go-ebakus/core/state"
@@ -118,6 +119,9 @@ type blockChain interface {
 	CurrentBlock() *types.Block
 	GetBlock(hash common.Hash, number uint64) *types.Block
 	StateAt(root common.Hash) (*state.StateDB, error)
+
+	EbakusState() (*ebakusdb.Snapshot, error)
+	EbakusStateAt(hash common.Hash, number uint64) (*ebakusdb.Snapshot, error)
 
 	SubscribeChainHeadEvent(ch chan<- ChainHeadEvent) event.Subscription
 }
@@ -528,10 +532,11 @@ func (pool *TxPool) validateTx(tx *types.Transaction, local bool) error {
 	if !local && pool.gasPrice > tx.GasPrice() {
 		return ErrUnderpriced
 	}
-	// TODO: move this to txpool configuration
-	if tx.CalculateDifficulty() < types.MinimumTargetDifficulty {
+
+	if tx.GasPrice() < types.MinimumTargetDifficulty {
 		return ErrUnderpriced
 	}
+
 	// Ensure the transaction adheres to nonce ordering
 	if pool.currentState.GetNonce(from) > tx.Nonce() {
 		return ErrNonceTooLow

@@ -51,7 +51,8 @@ var (
 )
 
 // MinimumDifficulty for transaction PoW
-const MinimumTargetDifficulty = 1000000
+const MinimumTargetDifficulty = 15
+const MinimumVirtualDifficulty = 0.0
 
 var (
 	ErrInvalidSig = errors.New("invalid transaction v, r, s values")
@@ -246,7 +247,7 @@ func (tx *Transaction) Size() common.StorageSize {
 	return common.StorageSize(c)
 }
 
-// GasPrice is for compatibility will be removed TODO
+// GasPrice is mainly for compatibility
 func (tx *Transaction) GasPrice() float64 {
 	return tx.CalculateDifficulty() / float64(tx.data.GasLimit)
 }

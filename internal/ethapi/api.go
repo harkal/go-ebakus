@@ -158,9 +158,9 @@ func (s *PublicTxPoolAPI) Inspect() map[string]map[string]map[string]string {
 	// Define a formatter to flatten a transaction into a string
 	var format = func(tx *types.Transaction) string {
 		if to := tx.To(); to != nil {
-			return fmt.Sprintf("%s: %v wei + %v gas × %v wei (%v workNonce)", tx.To().Hex(), tx.Value(), tx.Gas(), tx.GasPrice(), tx.WorkNonce())
+			return fmt.Sprintf("%s: %v wei + %v gas × %v difficulty (%v workNonce)", tx.To().Hex(), tx.Value(), tx.Gas(), tx.GasPrice(), tx.WorkNonce())
 		}
-		return fmt.Sprintf("contract creation: %v wei + %v gas × %v wei (%v workNonce)", tx.Value(), tx.Gas(), tx.GasPrice(), tx.WorkNonce())
+		return fmt.Sprintf("contract creation: %v wei + %v gas × %v difficulty (%v workNonce)", tx.Value(), tx.Gas(), tx.GasPrice(), tx.WorkNonce())
 	}
 	// Flatten the pending transactions
 	for account, txs := range pending {
@@ -539,6 +539,24 @@ func (s *PublicBlockChainAPI) GetBalance(ctx context.Context, address common.Add
 		return nil, err
 	}
 	return (*hexutil.Big)(state.GetBalance(address)), state.Error()
+}
+
+// GetVirtualDifficultyFactor returns the factor used when calculating
+// virtual difficulty for a transaction
+func (s *PublicBlockChainAPI) GetVirtualDifficultyFactor(ctx context.Context, address common.Address, blockNrOrHash rpc.BlockNumberOrHash) (float64, error) {
+	ebakusState, _, err := s.b.EbakusStateAndHeaderByNumberOrHash(ctx, blockNrOrHash)
+	if err != nil {
+		return 0.0, err
+	}
+	if ebakusState == nil {
+		return 0.0, fmt.Errorf("Failed to find ebakusdb snapshot")
+	}
+
+	defer ebakusState.Release()
+
+	f := types.VirtualCapacity(address, ebakusState)
+
+	return f, nil
 }
 
 // Result structs for GetProof
@@ -970,7 +988,7 @@ func (s *PublicBlockChainAPI) SuggestDifficulty(ctx context.Context, addr common
 
 	diff := dv / cv
 	if diff < types.MinimumTargetDifficulty {
-		return types.MinimumTargetDifficulty, nil
+		return types.MinimumVirtualDifficulty, nil
 	}
 
 	return diff, nil
@@ -1004,10 +1022,13 @@ func (s *PublicBlockChainAPI) suggestVirtualDifficulty(ebakusState *ebakusdb.Sna
 	}
 
 	if minDv == nil {
-		return 0.0, nil
+		return types.MinimumVirtualDifficulty, nil
 	}
 
 	dv, _ := minDv.Float64()
+	if dv < types.MinimumVirtualDifficulty {
+		return types.MinimumVirtualDifficulty, nil
+	}
 
 	return dv, nil
 }
