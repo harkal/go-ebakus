@@ -1479,6 +1479,11 @@ func (args *SendTxArgs) setDefaults(ctx context.Context, b Backend) error {
 		args.Gas = &estimated
 		log.Trace("Estimate gas usage automatically", "gas", args.Gas)
 	}
+	// Calculate work
+	if args.WorkNonce == nil {
+		// @TODO: maybe allow here auto call to suggest and calculate difficulty to enable easier use of
+		//		  sendTransaction() etc from the console
+	}
 	return nil
 }
 
