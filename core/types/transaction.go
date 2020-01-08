@@ -279,7 +279,7 @@ func (tx *Transaction) CalculateDifficulty() float64 {
 func (tx *Transaction) CalculateWorkNonce(targetDifficulty float64) {
 	defer transactionCalculateWorkNonceTimer.UpdateSince(time.Now())
 
-	if targetDifficulty < MinimumTargetDifficulty {
+	if targetDifficulty < 1.0 {
 		return
 	}
 
