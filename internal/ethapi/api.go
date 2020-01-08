@@ -988,7 +988,7 @@ func (s *PublicBlockChainAPI) SuggestDifficulty(ctx context.Context, addr common
 
 	diff := dv / cv
 	if diff < types.MinimumTargetDifficulty {
-		return types.MinimumVirtualDifficulty, nil
+		return types.MinimumTargetDifficulty, nil
 	}
 
 	return diff, nil
@@ -1473,10 +1473,6 @@ func (args *SendTxArgs) setDefaults(ctx context.Context, b Backend) error {
 			return errors.New(`contract creation without any data provided`)
 		}
 	}
-	if args.Gas == nil {
-		args.Gas = new(hexutil.Uint64)
-		*(*uint64)(args.Gas) = 90000
-	}
 	// Estimate the gas usage if necessary.
 	if args.Gas == nil {
 		// For backwards-compatibility reason, we try both input and data
@@ -1694,6 +1690,8 @@ func (s *PublicTransactionPoolAPI) CalculateWorkNonce(ctx context.Context, args 
 	if err := args.setDefaults(ctx, s.b); err != nil {
 		return nil, err
 	}
+
+	targetDifficulty *= float64(*args.Gas)
 
 	log.Info("Cork", "Diff target:", targetDifficulty)
 
