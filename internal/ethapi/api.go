@@ -1490,9 +1490,9 @@ func (args *SendTxArgs) toTransaction() *types.Transaction {
 		input = *args.Data
 	}
 	if args.To == nil {
-		return types.NewContractCreation(uint64(*args.Nonce), (*big.Int)(args.Value), uint64(*args.Gas), input)
+		return types.NewContractCreation(uint64(*args.WorkNonce), uint64(*args.Nonce), (*big.Int)(args.Value), uint64(*args.Gas), input)
 	}
-	return types.NewTransaction(uint64(*args.Nonce), *args.To, (*big.Int)(args.Value), uint64(*args.Gas), input)
+	return types.NewTransaction(uint64(*args.WorkNonce), uint64(*args.Nonce), *args.To, (*big.Int)(args.Value), uint64(*args.Gas), input)
 }
 
 // SubmitTransaction is a helper function that submits tx to txPool and logs a message.

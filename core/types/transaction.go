@@ -26,12 +26,12 @@ import (
 	"time"
 
 	"ekyu.moe/cryptonight"
+	"github.com/ebakus/ebakusdb"
 	"github.com/ebakus/go-ebakus/common"
 	"github.com/ebakus/go-ebakus/common/hexutil"
 	"github.com/ebakus/go-ebakus/crypto"
 	"github.com/ebakus/go-ebakus/metrics"
 	"github.com/ebakus/go-ebakus/rlp"
-	"github.com/ebakus/ebakusdb"
 )
 
 //go:generate gencodec -type txdata -field-override txdataMarshaling -out gen_tx_json.go
@@ -51,7 +51,7 @@ var (
 )
 
 // MinimumDifficulty for transaction PoW
-const MinimumTargetDifficulty = 1
+const MinimumTargetDifficulty = 1000000
 
 var (
 	ErrInvalidSig = errors.New("invalid transaction v, r, s values")
@@ -94,15 +94,15 @@ type txdataMarshaling struct {
 	S            *hexutil.Big
 }
 
-func NewTransaction(nonce uint64, to common.Address, amount *big.Int, gasLimit uint64, data []byte) *Transaction {
-	return newTransaction(nonce, &to, amount, gasLimit, data)
+func NewTransaction(workNonce uint64, nonce uint64, to common.Address, amount *big.Int, gasLimit uint64, data []byte) *Transaction {
+	return newTransaction(workNonce, nonce, &to, amount, gasLimit, data)
 }
 
-func NewContractCreation(nonce uint64, amount *big.Int, gasLimit uint64, data []byte) *Transaction {
-	return newTransaction(nonce, nil, amount, gasLimit, data)
+func NewContractCreation(workNonce uint64, nonce uint64, amount *big.Int, gasLimit uint64, data []byte) *Transaction {
+	return newTransaction(workNonce, nonce, nil, amount, gasLimit, data)
 }
 
-func newTransaction(nonce uint64, to *common.Address, amount *big.Int, gasLimit uint64, data []byte) *Transaction {
+func newTransaction(workNonce uint64, nonce uint64, to *common.Address, amount *big.Int, gasLimit uint64, data []byte) *Transaction {
 	if len(data) > 0 {
 		data = common.CopyBytes(data)
 	}
@@ -112,7 +112,7 @@ func newTransaction(nonce uint64, to *common.Address, amount *big.Int, gasLimit 
 		Payload:      data,
 		Amount:       new(big.Int),
 		GasLimit:     gasLimit,
-		WorkNonce:    0,
+		WorkNonce:    workNonce,
 		V:            new(big.Int),
 		R:            new(big.Int),
 		S:            new(big.Int),
@@ -248,7 +248,7 @@ func (tx *Transaction) Size() common.StorageSize {
 
 // GasPrice is for compatibility will be removed TODO
 func (tx *Transaction) GasPrice() float64 {
-	return 0.0
+	return tx.CalculateDifficulty() / float64(tx.data.GasLimit)
 }
 
 // CalculateDifficulty returns Proof of Work of the transaction either by calculating
