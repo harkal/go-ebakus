@@ -528,6 +528,10 @@ func (pool *TxPool) validateTx(tx *types.Transaction, local bool) error {
 	if !local && pool.gasPrice > tx.GasPrice() {
 		return ErrUnderpriced
 	}
+	// TODO: move this to txpool configuration
+	if tx.CalculateDifficulty() < types.MinimumTargetDifficulty {
+		return ErrUnderpriced
+	}
 	// Ensure the transaction adheres to nonce ordering
 	if pool.currentState.GetNonce(from) > tx.Nonce() {
 		return ErrNonceTooLow
