@@ -1148,7 +1148,7 @@ type RPCTransaction struct {
 	BlockNumber      *hexutil.Big    `json:"blockNumber"`
 	From             common.Address  `json:"from"`
 	Gas              hexutil.Uint64  `json:"gas"`
-	GasPrice         *hexutil.Big    `json:"gasPrice"`
+	GasPrice         hexutil.Uint64  `json:"gasPrice"`
 	WorkNonce        hexutil.Uint64  `json:"workNonce"`
 	Hash             common.Hash     `json:"hash"`
 	Input            hexutil.Bytes   `json:"input"`
@@ -1174,7 +1174,7 @@ func newRPCTransaction(tx *types.Transaction, blockHash common.Hash, blockNumber
 	result := &RPCTransaction{
 		From:      from,
 		Gas:       hexutil.Uint64(tx.Gas()),
-		GasPrice:  (*hexutil.Big)(big.NewInt(0)),
+		GasPrice:  hexutil.Uint64(tx.GasPrice()),
 		WorkNonce: hexutil.Uint64(tx.WorkNonce()),
 		Hash:      tx.Hash(),
 		Input:     hexutil.Bytes(tx.Data()),
@@ -1479,6 +1479,11 @@ func (args *SendTxArgs) setDefaults(ctx context.Context, b Backend) error {
 		args.Gas = &estimated
 		log.Trace("Estimate gas usage automatically", "gas", args.Gas)
 	}
+	// Calculate work
+	if args.WorkNonce == nil {
+		// @TODO: maybe allow here auto call to suggest and calculate difficulty to enable easier use of
+		//		  sendTransaction() etc from the console
+	}
 	return nil
 }
 
@@ -1490,9 +1495,9 @@ func (args *SendTxArgs) toTransaction() *types.Transaction {
 		input = *args.Data
 	}
 	if args.To == nil {
-		return types.NewContractCreation(uint64(*args.Nonce), (*big.Int)(args.Value), uint64(*args.Gas), input)
+		return types.NewContractCreation(uint64(*args.WorkNonce), uint64(*args.Nonce), (*big.Int)(args.Value), uint64(*args.Gas), input)
 	}
-	return types.NewTransaction(uint64(*args.Nonce), *args.To, (*big.Int)(args.Value), uint64(*args.Gas), input)
+	return types.NewTransaction(uint64(*args.WorkNonce), uint64(*args.Nonce), *args.To, (*big.Int)(args.Value), uint64(*args.Gas), input)
 }
 
 // SubmitTransaction is a helper function that submits tx to txPool and logs a message.

@@ -22,10 +22,10 @@ import (
 	"time"
 	"unsafe"
 
+	"github.com/ebakus/ebakusdb"
 	"github.com/ebakus/go-ebakus/common"
 	"github.com/ebakus/go-ebakus/crypto"
 	"github.com/ebakus/go-ebakus/params"
-	"github.com/ebakus/ebakusdb"
 )
 
 // emptyCodeHash is used by create to ensure deployment is disallowed to already
@@ -276,9 +276,13 @@ func (evm *EVM) CallCode(caller ContractRef, addr common.Address, input []byte, 
 	}
 
 	var (
-		snapshot = evm.StateDB.Snapshot()
-		to       = AccountRef(caller.Address())
+		snapshot       = evm.StateDB.Snapshot()
+		ebakusSnapshot = evm.EbakusState.Snapshot()
+		to             = AccountRef(caller.Address())
 	)
+
+	defer ebakusSnapshot.Release()
+
 	// Initialise a new contract and set the code that is to be used by the EVM.
 	// The contract is a scoped environment for this execution context only.
 	contract := NewContract(caller, to, value, gas)
@@ -287,6 +291,7 @@ func (evm *EVM) CallCode(caller ContractRef, addr common.Address, input []byte, 
 	ret, err = run(evm, contract, input, false)
 	if err != nil {
 		evm.StateDB.RevertToSnapshot(snapshot)
+		evm.EbakusState.ResetTo(ebakusSnapshot)
 		if err != errExecutionReverted {
 			contract.UseGas(contract.Gas)
 		}
@@ -309,9 +314,12 @@ func (evm *EVM) DelegateCall(caller ContractRef, addr common.Address, input []by
 	}
 
 	var (
-		snapshot = evm.StateDB.Snapshot()
-		to       = AccountRef(caller.Address())
+		snapshot       = evm.StateDB.Snapshot()
+		to             = AccountRef(caller.Address())
+		ebakusSnapshot = evm.EbakusState.Snapshot()
 	)
+
+	defer ebakusSnapshot.Release()
 
 	// Initialise a new contract and make initialise the delegate values
 	contract := NewContract(caller, to, nil, gas).AsDelegate()
@@ -320,6 +328,7 @@ func (evm *EVM) DelegateCall(caller ContractRef, addr common.Address, input []by
 	ret, err = run(evm, contract, input, false)
 	if err != nil {
 		evm.StateDB.RevertToSnapshot(snapshot)
+		evm.EbakusState.ResetTo(ebakusSnapshot)
 		if err != errExecutionReverted {
 			contract.UseGas(contract.Gas)
 		}
@@ -341,9 +350,13 @@ func (evm *EVM) StaticCall(caller ContractRef, addr common.Address, input []byte
 	}
 
 	var (
-		to       = AccountRef(addr)
-		snapshot = evm.StateDB.Snapshot()
+		to             = AccountRef(addr)
+		snapshot       = evm.StateDB.Snapshot()
+		ebakusSnapshot = evm.EbakusState.Snapshot()
 	)
+
+	defer ebakusSnapshot.Release()
+
 	// Initialise a new contract and set the code that is to be used by the EVM.
 	// The contract is a scoped environment for this execution context only.
 	contract := NewContract(caller, to, new(big.Int), gas)
@@ -361,6 +374,7 @@ func (evm *EVM) StaticCall(caller ContractRef, addr common.Address, input []byte
 	ret, err = run(evm, contract, input, true)
 	if err != nil {
 		evm.StateDB.RevertToSnapshot(snapshot)
+		evm.EbakusState.ResetTo(ebakusSnapshot)
 		if err != errExecutionReverted {
 			contract.UseGas(contract.Gas)
 		}
@@ -400,6 +414,9 @@ func (evm *EVM) create(caller ContractRef, codeAndHash *codeAndHash, gas uint64,
 	}
 	// Create a new account on the state
 	snapshot := evm.StateDB.Snapshot()
+	ebakusSnapshot := evm.EbakusState.Snapshot()
+	defer ebakusSnapshot.Release()
+
 	evm.StateDB.CreateAccount(address)
 	if evm.chainRules.IsEIP158 {
 		evm.StateDB.SetNonce(address, 1)
@@ -442,6 +459,7 @@ func (evm *EVM) create(caller ContractRef, codeAndHash *codeAndHash, gas uint64,
 	// when we're in homestead this also counts for code storage gas errors.
 	if maxCodeSizeExceeded || err != nil {
 		evm.StateDB.RevertToSnapshot(snapshot)
+		evm.EbakusState.ResetTo(ebakusSnapshot)
 		if err != errExecutionReverted {
 			contract.UseGas(contract.Gas)
 		}

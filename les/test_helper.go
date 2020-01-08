@@ -26,6 +26,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/ebakus/ebakusdb"
 	"github.com/ebakus/go-ebakus/accounts/abi/bind"
 	"github.com/ebakus/go-ebakus/accounts/abi/bind/backends"
 	"github.com/ebakus/go-ebakus/common"
@@ -44,7 +45,6 @@ import (
 	"github.com/ebakus/go-ebakus/p2p"
 	"github.com/ebakus/go-ebakus/p2p/enode"
 	"github.com/ebakus/go-ebakus/params"
-	"github.com/ebakus/ebakusdb"
 )
 
 var (
@@ -112,43 +112,43 @@ func prepare(n int, backend *backends.SimulatedBackend) {
 			registrarAddr, _, _, _ = contract.DeployCheckpointOracle(bind.NewKeyedTransactor(bankKey), backend, []common.Address{signerAddr}, sectionSize, processConfirms, big.NewInt(1))
 			// bankUser transfers some ether to user1
 			nonce, _ := backend.PendingNonceAt(ctx, bankAddr)
-			tx, _ := types.SignTx(types.NewTransaction(nonce, userAddr1, big.NewInt(10000), params.TxGas, nil), signer, bankKey)
+			tx, _ := types.SignTx(types.NewTransaction(0, nonce, userAddr1, big.NewInt(10000), params.TxGas, nil), signer, bankKey)
 			backend.SendTransaction(ctx, tx)
 		case 1:
 			bankNonce, _ := backend.PendingNonceAt(ctx, bankAddr)
 			userNonce1, _ := backend.PendingNonceAt(ctx, userAddr1)
 
 			// bankUser transfers more ether to user1
-			tx1, _ := types.SignTx(types.NewTransaction(bankNonce, userAddr1, big.NewInt(1000), params.TxGas, nil), signer, bankKey)
+			tx1, _ := types.SignTx(types.NewTransaction(0, bankNonce, userAddr1, big.NewInt(1000), params.TxGas, nil), signer, bankKey)
 			backend.SendTransaction(ctx, tx1)
 
 			// user1 relays ether to user2
-			tx2, _ := types.SignTx(types.NewTransaction(userNonce1, userAddr2, big.NewInt(1000), params.TxGas, nil), signer, userKey1)
+			tx2, _ := types.SignTx(types.NewTransaction(0, userNonce1, userAddr2, big.NewInt(1000), params.TxGas, nil), signer, userKey1)
 			backend.SendTransaction(ctx, tx2)
 
 			// user1 deploys a test contract
-			tx3, _ := types.SignTx(types.NewContractCreation(userNonce1+1, big.NewInt(0), 200000, testContractCode), signer, userKey1)
+			tx3, _ := types.SignTx(types.NewContractCreation(0, userNonce1+1, big.NewInt(0), 200000, testContractCode), signer, userKey1)
 			backend.SendTransaction(ctx, tx3)
 			testContractAddr = crypto.CreateAddress(userAddr1, userNonce1+1)
 
 			// user1 deploys a event contract
-			tx4, _ := types.SignTx(types.NewContractCreation(userNonce1+2, big.NewInt(0), 200000, testEventEmitterCode), signer, userKey1)
+			tx4, _ := types.SignTx(types.NewContractCreation(0, userNonce1+2, big.NewInt(0), 200000, testEventEmitterCode), signer, userKey1)
 			backend.SendTransaction(ctx, tx4)
 		case 2:
 			// bankUser transfer some ether to signer
 			bankNonce, _ := backend.PendingNonceAt(ctx, bankAddr)
-			tx1, _ := types.SignTx(types.NewTransaction(bankNonce, signerAddr, big.NewInt(1000000000), params.TxGas, nil), signer, bankKey)
+			tx1, _ := types.SignTx(types.NewTransaction(0, bankNonce, signerAddr, big.NewInt(1000000000), params.TxGas, nil), signer, bankKey)
 			backend.SendTransaction(ctx, tx1)
 
 			// invoke test contract
 			data := common.Hex2Bytes("C16431B900000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001")
-			tx2, _ := types.SignTx(types.NewTransaction(bankNonce+1, testContractAddr, big.NewInt(0), 100000, data), signer, bankKey)
+			tx2, _ := types.SignTx(types.NewTransaction(0, bankNonce+1, testContractAddr, big.NewInt(0), 100000, data), signer, bankKey)
 			backend.SendTransaction(ctx, tx2)
 		case 3:
 			// invoke test contract
 			bankNonce, _ := backend.PendingNonceAt(ctx, bankAddr)
 			data := common.Hex2Bytes("C16431B900000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000002")
-			tx, _ := types.SignTx(types.NewTransaction(bankNonce, testContractAddr, big.NewInt(0), 100000, data), signer, bankKey)
+			tx, _ := types.SignTx(types.NewTransaction(0, bankNonce, testContractAddr, big.NewInt(0), 100000, data), signer, bankKey)
 			backend.SendTransaction(ctx, tx)
 		}
 		backend.Commit()

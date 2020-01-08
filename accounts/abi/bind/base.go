@@ -219,9 +219,10 @@ func (c *BoundContract) transact(opts *TransactOpts, contract *common.Address, i
 	// Create the transaction, sign it and schedule it for execution
 	var rawTx *types.Transaction
 	if contract == nil {
-		rawTx = types.NewContractCreation(nonce, value, gasLimit, input)
+		// TODO: calculate actual work
+		rawTx = types.NewContractCreation(0, nonce, value, gasLimit, input)
 	} else {
-		rawTx = types.NewTransaction(nonce, c.address, value, gasLimit, input)
+		rawTx = types.NewTransaction(0, nonce, c.address, value, gasLimit, input)
 	}
 	if opts.Signer == nil {
 		return nil, errors.New("no signer to authorize the transaction with")
