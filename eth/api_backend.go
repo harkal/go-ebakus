@@ -210,10 +210,6 @@ func (b *EthAPIBackend) EbakusStateAndHeaderByNumberOrHash(ctx context.Context, 
 	return nil, nil, errors.New("invalid arguments; neither block nor hash specified")
 }
 
-func (b *EthAPIBackend) GetBlock(ctx context.Context, hash common.Hash) (*types.Block, error) {
-	return b.eth.blockchain.GetBlockByHash(hash), nil
-}
-
 func (b *EthAPIBackend) GetBlockAuthor(header *types.Header) (common.Address, error) {
 	return b.eth.engine.Author(header)
 }

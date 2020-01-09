@@ -21,6 +21,7 @@ import (
 	"context"
 	"math/big"
 
+	"github.com/ebakus/ebakusdb"
 	"github.com/ebakus/go-ebakus/accounts"
 	"github.com/ebakus/go-ebakus/common"
 	"github.com/ebakus/go-ebakus/core"
@@ -33,7 +34,6 @@ import (
 	"github.com/ebakus/go-ebakus/event"
 	"github.com/ebakus/go-ebakus/params"
 	"github.com/ebakus/go-ebakus/rpc"
-	"github.com/ebakus/ebakusdb"
 )
 
 // Backend interface provides the common API services (that are provided by
@@ -61,7 +61,6 @@ type Backend interface {
 	StateAndHeaderByNumberOrHash(ctx context.Context, blockNrOrHash rpc.BlockNumberOrHash) (*state.StateDB, *types.Header, error)
 	EbakusStateAndHeaderByNumber(ctx context.Context, blockNr rpc.BlockNumber) (*ebakusdb.Snapshot, *types.Header, error)
 	EbakusStateAndHeaderByNumberOrHash(ctx context.Context, blockNrOrHash rpc.BlockNumberOrHash) (*ebakusdb.Snapshot, *types.Header, error)
-	GetBlock(ctx context.Context, blockHash common.Hash) (*types.Block, error)
 	GetBlockAuthor(header *types.Header) (common.Address, error)
 	GetReceipts(ctx context.Context, blockHash common.Hash) (types.Receipts, error)
 	GetEVM(ctx context.Context, msg core.Message, state *state.StateDB, ebakusState *ebakusdb.Snapshot, header *types.Header) (*vm.EVM, func() error, error)

@@ -21,6 +21,7 @@ import (
 	"errors"
 	"math/big"
 
+	"github.com/ebakus/ebakusdb"
 	"github.com/ebakus/go-ebakus/accounts"
 	"github.com/ebakus/go-ebakus/common"
 	"github.com/ebakus/go-ebakus/common/math"
@@ -37,7 +38,6 @@ import (
 	"github.com/ebakus/go-ebakus/light"
 	"github.com/ebakus/go-ebakus/params"
 	"github.com/ebakus/go-ebakus/rpc"
-	"github.com/ebakus/ebakusdb"
 )
 
 type LesApiBackend struct {
@@ -163,10 +163,6 @@ func (b *LesApiBackend) EbakusStateAndHeaderByNumberOrHash(ctx context.Context, 
 		return b.EbakusStateAndHeaderByNumber(ctx, blockNr)
 	}
 	return nil, nil, errors.New("ebakus state for hash not supported")
-}
-
-func (b *LesApiBackend) GetBlock(ctx context.Context, blockHash common.Hash) (*types.Block, error) {
-	return b.eth.blockchain.GetBlockByHash(ctx, blockHash)
 }
 
 func (b *LesApiBackend) GetBlockAuthor(header *types.Header) (common.Address, error) {
