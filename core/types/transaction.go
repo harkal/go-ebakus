@@ -51,7 +51,7 @@ var (
 )
 
 // MinimumDifficulty for transaction PoW
-const MinimumTargetDifficulty = 15
+const MinimumTargetDifficulty = 2
 const MinimumVirtualDifficulty = 0.0
 
 var (

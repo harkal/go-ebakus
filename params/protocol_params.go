@@ -111,7 +111,7 @@ const (
 
 	MaxCodeSize = 24576 // Maximum bytecode to permit for a contract
 
-	EbakusDBMemoryUsageGas uint64 = 10 // Multiplied by ebakusDb memory used
+	EbakusDBMemoryUsageGas uint64 = 650 // Cost per EbakusDb byte used
 
 	// Precompiled contract gas prices
 	SystemContractBaseGas        uint64 = 500 // Base price for not fine grained System contract commands
