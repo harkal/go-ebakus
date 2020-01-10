@@ -7,7 +7,7 @@ https://camo.githubusercontent.com/915b7be44ada53c290eb157634330494ebe3e30a/6874
 )](https://godoc.org/github.com/ebakus/go-ebakus)
 [![Go Report Card](https://goreportcard.com/badge/github.com/ebakus/go-ebakus)](https://goreportcard.com/report/github.com/ebakus/go-ebakus)
 [![Travis](https://travis-ci.org/ebakus/go-ebakus.svg?branch=master)](https://travis-ci.org/ebakus/go-ebakus)
-[![Discord](https://img.shields.io/badge/discord-join%20chat-blue.svg)](https://discord.gg/nthXNEv)
+[![Discord](https://img.shields.io/badge/discord-join%20chat-blue.svg)](https://discord.me/ebakus)
 
 Automated builds are available for stable releases and the unstable master branch. Binary
 archives are published at https://geth.ethereum.org/downloads/.
