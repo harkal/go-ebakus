@@ -1680,7 +1680,7 @@ func (s *PublicTransactionPoolAPI) PendingTransactions() ([]*RPCTransaction, err
 }
 
 // CalculateWorkNonce does the needed PoW for this transaction.
-func (s *PublicTransactionPoolAPI) CalculateWorkNonce(ctx context.Context, args SendTxArgs, targetDifficulty float64) (*types.Transaction, error) {
+func (s *PublicTransactionPoolAPI) CalculateWorkNonce(ctx context.Context, args SendTxArgs, targetDifficulty float64) (*SendTxArgs, error) {
 	if args.Gas == nil {
 		return nil, fmt.Errorf("gas not specified")
 	}
@@ -1699,7 +1699,10 @@ func (s *PublicTransactionPoolAPI) CalculateWorkNonce(ctx context.Context, args 
 	tx := args.toTransaction()
 	tx.CalculateWorkNonce(targetDifficulty)
 
-	return tx, nil
+	workNonce := tx.WorkNonce()
+	args.WorkNonce = (*hexutil.Uint64)(&workNonce)
+
+	return &args, nil
 }
 
 // Resend accepts an existing transaction and a new gas price and limit. It will remove
