@@ -388,6 +388,7 @@ func DelegateVotingGetDelegates(snap *ebakusdb.Snapshot, maxWitnesses uint64) Wi
 			continue
 		}
 		res = append(res, w)
+		w = Witness{}
 		i++
 	}
 
@@ -710,6 +711,8 @@ func (c *systemContract) stakeCmd(evm *EVM, from common.Address, amount uint64) 
 			}
 		}
 
+		claimable = Claimable{}
+
 		if claimableAmount == amount {
 			hasEnoughBalance = true
 			break
@@ -938,6 +941,7 @@ func (c *systemContract) claimCmd(evm *EVM, from common.Address) ([]byte, error)
 
 			claimablesToBeDeleted = append(claimablesToBeDeleted, claimable)
 		}
+		claimable = Claimable{}
 	}
 
 	for _, claimableEntry := range claimablesToBeDeleted {

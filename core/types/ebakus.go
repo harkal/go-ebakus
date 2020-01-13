@@ -19,9 +19,9 @@ package types
 import (
 	"encoding/binary"
 
+	"github.com/ebakus/ebakusdb"
 	"github.com/ebakus/go-ebakus/common"
 	"github.com/ebakus/go-ebakus/core/ebkdb"
-	"github.com/ebakus/ebakusdb"
 )
 
 var PrecompliledSystemContract = common.BytesToAddress([]byte{1, 1})
@@ -43,11 +43,11 @@ var StakedTable = ebkdb.GetDBTableName(PrecompliledSystemContract, "Staked")
 
 func VirtualCapacity(from common.Address, ebakusState *ebakusdb.Snapshot) float64 {
 	accountStaked := uint64(0)
-	var staked Staked
 
 	where := []byte("Id LIKE ")
 	if whereClause, err := ebakusState.WhereParser(append(where, from.Bytes()...)); err == nil {
 		if iter, err := ebakusState.Select(StakedTable, whereClause); err == nil {
+			var staked Staked
 			if iter.Next(&staked) {
 				accountStaked = staked.Amount
 			}
