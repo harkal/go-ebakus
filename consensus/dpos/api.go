@@ -21,6 +21,7 @@ import (
 
 	"github.com/ebakus/go-ebakus/consensus"
 	"github.com/ebakus/go-ebakus/core/rawdb"
+	"github.com/ebakus/go-ebakus/core/types"
 	"github.com/ebakus/go-ebakus/core/vm"
 	"github.com/ebakus/go-ebakus/rpc"
 )
@@ -48,7 +49,13 @@ func (api *API) rpcOutputWitnesses(wits *vm.WitnessArray) []interface{} {
 
 // GetDelegates retrieves the list of delegates at the specified block.
 func (api *API) GetDelegates(ctx context.Context, number rpc.BlockNumber) ([]interface{}, error) {
-	header := api.chain.GetHeaderByNumber(uint64(number))
+	var header *types.Header
+	if number == rpc.LatestBlockNumber {
+		header = api.chain.CurrentHeader()
+	} else {
+		header = api.chain.GetHeaderByNumber(uint64(number))
+	}
+
 	if header == nil {
 		return nil, consensus.ErrFutureBlock
 	}
