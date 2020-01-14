@@ -317,7 +317,7 @@ func (d *DPOS) Prepare(chain consensus.ChainReader, stop <-chan struct{}) (*type
 			header := &types.Header{
 				ParentHash: headHash,
 				Number:     num.Add(num, common.Big1),
-				GasLimit:   core.CalcGasLimit(head.Header(), head.GasLimit(), head.GasLimit()),
+				GasLimit:   0,
 				GasUsed:    0,
 				Time:       uint64(slot * float64(d.config.Period)),
 			}

@@ -313,6 +313,8 @@ func (w *worker) commitNewWork() {
 		return
 	}
 
+	header.GasLimit = core.CalcGasLimit(parent.Header(), w.config.GasFloor, w.config.GasCeil)
+
 	// Could potentially happen if starting to mine in an odd state.
 	err = w.makeCurrent(parent, header)
 	if err != nil {
