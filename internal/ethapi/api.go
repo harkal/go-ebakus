@@ -547,11 +547,7 @@ func (s *PublicBlockChainAPI) GetBalance(ctx context.Context, address common.Add
 func (s *PublicBlockChainAPI) GetStaked(ctx context.Context, address common.Address, blockNrOrHash rpc.BlockNumberOrHash) (uint64, error) {
 	ebakusState, _, err := s.b.EbakusStateAndHeaderByNumberOrHash(ctx, blockNrOrHash)
 	if err != nil {
-		return 0, err
-	}
-
-	if ebakusState == nil {
-		return 0, fmt.Errorf("Failed to find ebakusdb snapshot")
+		return 0, fmt.Errorf("Failed to get ebakusdb snapshot")
 	}
 	defer ebakusState.Release()
 
@@ -568,12 +564,8 @@ func (s *PublicBlockChainAPI) GetStaked(ctx context.Context, address common.Addr
 func (s *PublicBlockChainAPI) GetVirtualDifficultyFactor(ctx context.Context, address common.Address, blockNrOrHash rpc.BlockNumberOrHash) (float64, error) {
 	ebakusState, _, err := s.b.EbakusStateAndHeaderByNumberOrHash(ctx, blockNrOrHash)
 	if err != nil {
-		return 0.0, err
-	}
-	if ebakusState == nil {
 		return 0.0, fmt.Errorf("Failed to find ebakusdb snapshot")
 	}
-
 	defer ebakusState.Release()
 
 	f := types.VirtualCapacity(address, ebakusState)
@@ -810,7 +802,7 @@ func DoCall(ctx context.Context, b Backend, args CallArgs, blockNrOrHash rpc.Blo
 	}
 
 	ebakusState, header, err := b.EbakusStateAndHeaderByNumberOrHash(ctx, blockNrOrHash)
-	if ebakusState == nil || err != nil {
+	if err != nil {
 		return nil, 0, false, err
 	}
 	defer ebakusState.Release()
