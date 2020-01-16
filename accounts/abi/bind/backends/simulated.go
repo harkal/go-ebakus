@@ -24,6 +24,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/ebakus/ebakusdb"
 	ebakus "github.com/ebakus/go-ebakus"
 	"github.com/ebakus/go-ebakus/accounts/abi/bind"
 	"github.com/ebakus/go-ebakus/common"
@@ -40,7 +41,6 @@ import (
 	"github.com/ebakus/go-ebakus/event"
 	"github.com/ebakus/go-ebakus/params"
 	"github.com/ebakus/go-ebakus/rpc"
-	"github.com/ebakus/ebakusdb"
 )
 
 // This nil assignment ensures compile time that SimulatedBackend implements bind.ContractBackend.
@@ -226,6 +226,7 @@ func (b *SimulatedBackend) CallContract(ctx context.Context, call ebakus.CallMsg
 	if err != nil {
 		return nil, err
 	}
+	ebakusState.Release()
 	rval, _, _, err := b.callContract(ctx, call, b.blockchain.CurrentBlock(), state, ebakusState)
 	return rval, err
 }

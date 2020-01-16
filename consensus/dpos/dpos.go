@@ -18,6 +18,7 @@ package dpos
 
 import (
 	"bytes"
+	"encoding/binary"
 	"errors"
 	"fmt"
 	"io"
@@ -266,6 +267,7 @@ func (d *DPOS) verifySeal(chain consensus.ChainReader, header *types.Header, par
 	}
 
 	signer := d.getSignerAtSlot(chain, ebakusState, parentBlockNumber, slot)
+	ebakusState.Release()
 
 	blockSigner, err := ecrecover(header, d.signatures)
 	if err != nil {
@@ -307,6 +309,7 @@ func (d *DPOS) Prepare(chain consensus.ChainReader, stop <-chan struct{}) (*type
 		}
 
 		inTurnSigner := d.getSignerAtSlot(chain, ebakusState, headBlockNumber, slot)
+		ebakusState.Release()
 
 		log.Trace("Check turn", "slot", slot, "signer", signer, "turn for", inTurnSigner)
 
@@ -605,24 +608,12 @@ func GetDelegates(blockNumber uint64, snap *ebakusdb.Snapshot, maxWitnesses uint
 		bonusCandidateDelegates := delegates[maxWitnesses-1:]
 		delegates = delegates[:maxWitnesses-1] // excluding the last bonus position from maxWitnesses
 
-		// Bonus producer seed pickup logic
-		// Requirements:
-		// 1. we need to fetch a random seed (block.Root)
-		// 2. bonus producer has to produce a number of blocks in a row (turnBlockCount)
-		//
-		// For this, we find the starting block number for this batch.
-		bonusLookupBlockNumber := blockNumber / turnBlockCount * turnBlockCount
-		if bonusLookupBlockNumber >= turnBlockCount-1 {
-			bonusLookupBlockNumber -= turnBlockCount - 1
-		}
-		bonusLookupHeader := getHeaderByNumber(bonusLookupBlockNumber)
-
-		if bonusLookupHeader != nil {
-			rand := uniformRandom(uint64(len(bonusCandidateDelegates)), bonusLookupHeader.Root)
-			delegates = append(delegates, bonusCandidateDelegates[rand])
-		} else {
-			delegates = append(delegates, bonusCandidateDelegates[0])
-		}
+		header := getHeaderByNumber(blockNumber)
+		slot := (header.Time + 1) / turnBlockCount
+		slotData := make([]byte, 8)
+		binary.BigEndian.PutUint64(slotData, slot)
+		rand := uniformRandom(uint64(len(bonusCandidateDelegates)), crypto.Keccak256Hash(slotData))
+		delegates = append(delegates, bonusCandidateDelegates[rand])
 	}
 
 	return delegates

@@ -241,6 +241,8 @@ func (w *worker) processWork(env *environment, block *types.Block) {
 		return
 	}
 
+	env.ebakusState.Release()
+
 	log.Info("Successfully sealed new block", "number", block.Number(), "hash", block.Hash())
 
 	// Broadcast the block and announce chain insertion event
@@ -268,7 +270,7 @@ func (w *worker) makeCurrent(parent *types.Block, header *types.Header) error {
 		return err
 	}
 
-	ebakusState, err := w.chain.EbakusStateAt(parent.Hash(), parent.NumberU64())
+	ebakusState, err := w.chain.EbakusStateAt(parent.Hash(), parent.NumberU64()) // gets released in processWork()
 	if err != nil {
 		return fmt.Errorf("Worker makeCurrent() failed to get ebakus state at block number %d: %s", parent.NumberU64(), err)
 	}
