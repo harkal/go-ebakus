@@ -535,6 +535,12 @@ web3._extend({
 			inputFormatter: [web3._extend.formatters.inputAddressFormatter, null, web3._extend.formatters.inputBlockNumberFormatter]
 		}),
 		new web3._extend.Method({
+			name: 'getStaked',
+			call: 'eth_getStaked',
+			params: 2,
+			inputFormatter: [web3._extend.formatters.inputAddressFormatter, web3._extend.formatters.inputBlockNumberFormatter]
+		}),
+		new web3._extend.Method({
 			name: 'getABIForContract',
 			call: 'eth_getABIForContract',
 			params: 1,

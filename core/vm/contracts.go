@@ -750,7 +750,7 @@ func (c *systemContract) stakeCmd(evm *EVM, from common.Address, amount uint64) 
 	binary.BigEndian.PutUint64(systemStakedBytesIn[:], systemStaked)
 	db.Insert([]byte(types.SystemStakeDBKey), systemStakedBytesIn)
 
-	staked, err := getStaked(db, from)
+	staked, err := GetStaked(db, from)
 	if err != nil {
 		return nil, err
 	}
@@ -800,7 +800,7 @@ func (c *systemContract) stakeCmd(evm *EVM, from common.Address, amount uint64) 
 func (c *systemContract) getStakedCmd(evm *EVM, from common.Address) ([]byte, error) {
 	db := evm.EbakusState
 
-	staked, err := getStaked(db, from)
+	staked, err := GetStaked(db, from)
 	if err != nil {
 		return nil, err
 	}
@@ -966,7 +966,7 @@ func (c *systemContract) claimCmd(evm *EVM, from common.Address) ([]byte, error)
 	return nil, nil
 }
 
-func getStaked(db *ebakusdb.Snapshot, from common.Address) (*types.Staked, error) {
+func GetStaked(db *ebakusdb.Snapshot, from common.Address) (*types.Staked, error) {
 	var staked types.Staked
 
 	whereClause, err := makeIDLikeWhereClause(db, from)
@@ -993,7 +993,7 @@ func (c *systemContract) voteCmd(evm *EVM, from common.Address, addresses []comm
 		return nil, errVoteMaxWitnessesReached
 	}
 
-	staked, err := getStaked(db, from)
+	staked, err := GetStaked(db, from)
 	if err != nil {
 		return nil, err
 	}
@@ -1016,7 +1016,7 @@ func (c *systemContract) voteCmd(evm *EVM, from common.Address, addresses []comm
 func (c *systemContract) unvoteCmd(evm *EVM, from common.Address) ([]byte, error) {
 	db := evm.EbakusState
 
-	staked, err := getStaked(db, from)
+	staked, err := GetStaked(db, from)
 	if err != nil {
 		return nil, err
 	}

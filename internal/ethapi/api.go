@@ -541,6 +541,28 @@ func (s *PublicBlockChainAPI) GetBalance(ctx context.Context, address common.Add
 	return (*hexutil.Big)(state.GetBalance(address)), state.Error()
 }
 
+// GetStaked returns the amount staked for the given address in the state of the
+// given block number. The rpc.LatestBlockNumber and rpc.PendingBlockNumber meta
+// block numbers are also allowed.
+func (s *PublicBlockChainAPI) GetStaked(ctx context.Context, address common.Address, blockNrOrHash rpc.BlockNumberOrHash) (uint64, error) {
+	ebakusState, _, err := s.b.EbakusStateAndHeaderByNumberOrHash(ctx, blockNrOrHash)
+	if err != nil {
+		return 0, err
+	}
+
+	if ebakusState == nil {
+		return 0, fmt.Errorf("Failed to find ebakusdb snapshot")
+	}
+	defer ebakusState.Release()
+
+	staked, err := vm.GetStaked(ebakusState, address)
+	if staked == nil || err != nil {
+		return 0, err
+	}
+
+	return staked.Amount, nil
+}
+
 // GetVirtualDifficultyFactor returns the factor used when calculating
 // virtual difficulty for a transaction
 func (s *PublicBlockChainAPI) GetVirtualDifficultyFactor(ctx context.Context, address common.Address, blockNrOrHash rpc.BlockNumberOrHash) (float64, error) {
