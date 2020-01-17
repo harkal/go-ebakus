@@ -682,8 +682,10 @@ func (s *PublicBlockChainAPI) GetBlockByNumber(ctx context.Context, number rpc.B
 			}
 		}
 
+		parentNumber := block.NumberU64() - 1
+
 		// Get block delegates
-		ebakusState, _, err := s.b.EbakusStateAndHeaderByNumber(ctx, rpc.BlockNumber(block.NumberU64()))
+		ebakusState, _, err := s.b.EbakusStateAndHeaderByNumber(ctx, rpc.BlockNumber(parentNumber))
 		if err != nil {
 			return nil, err
 		}
@@ -701,7 +703,7 @@ func (s *PublicBlockChainAPI) GetBlockByNumber(ctx context.Context, number rpc.B
 			return header
 		}
 
-		delegates := dpos.GetDelegates(block.NumberU64(), ebakusState, s.b.ChainConfig().DPOS.DelegateCount, s.b.ChainConfig().DPOS.BonusDelegateCount, s.b.ChainConfig().DPOS.TurnBlockCount, getHeaderByNumber)
+		delegates := dpos.GetDelegates(parentNumber, ebakusState, s.b.ChainConfig().DPOS.DelegateCount, s.b.ChainConfig().DPOS.BonusDelegateCount, s.b.ChainConfig().DPOS.TurnBlockCount, getHeaderByNumber)
 
 		delegateIds := make([]common.Address, 0)
 		for _, d := range delegates {
