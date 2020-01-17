@@ -199,7 +199,6 @@ type Server struct {
 	checkpointAddPeer       chan *conn
 
 	// State of run loop and listenLoop.
-	lastLookup     time.Time
 	inboundHistory expHeap
 }
 
@@ -651,9 +650,12 @@ func (srv *Server) run(dialstate dialer) {
 		inboundCount = 0
 		trusted      = make(map[enode.ID]bool, len(srv.TrustedNodes))
 		taskdone     = make(chan task, maxActiveDialTasks)
+		tick         = time.NewTicker(30 * time.Second)
 		runningTasks []task
 		queuedTasks  []task // tasks that can't run yet
 	)
+	defer tick.Stop()
+
 	// Put trusted nodes into a map to speed up checks.
 	// Trusted peers are loaded on startup or added via AddTrustedPeer RPC.
 	for _, n := range srv.TrustedNodes {
@@ -695,6 +697,9 @@ running:
 		scheduleTasks()
 
 		select {
+		case <-tick.C:
+			// This is just here to ensure the dial scheduler runs occasionally.
+
 		case <-srv.quit:
 			// The server was stopped. Run the cleanup logic.
 			break running
@@ -779,6 +784,9 @@ running:
 				if p.Inbound() {
 					inboundCount++
 				}
+				if conn, ok := c.fd.(*meteredConn); ok {
+					conn.handshakeDone(p)
+				}
 			}
 			// The dialer logic relies on the assumption that
 			// dial tasks complete after the peer has been added or
@@ -862,9 +870,9 @@ func (srv *Server) maxDialedConns() int {
 // listenLoop runs in its own goroutine and accepts
 // inbound connections.
 func (srv *Server) listenLoop() {
-	defer srv.loopWG.Done()
 	srv.log.Debug("TCP listener up", "addr", srv.listener.Addr())
 
+	// The slots channel limits accepts of new connections.
 	tokens := defaultMaxPendingPeers
 	if srv.MaxPendingPeers > 0 {
 		tokens = srv.MaxPendingPeers
@@ -873,6 +881,15 @@ func (srv *Server) listenLoop() {
 	for i := 0; i < tokens; i++ {
 		slots <- struct{}{}
 	}
+
+	// Wait for slots to be returned on exit. This ensures all connection goroutines
+	// are down before listenLoop returns.
+	defer srv.loopWG.Done()
+	defer func() {
+		for i := 0; i < cap(slots); i++ {
+			<-slots
+		}
+	}()
 
 	for {
 		// Wait for a free slot before accepting.
@@ -889,6 +906,7 @@ func (srv *Server) listenLoop() {
 				continue
 			} else if err != nil {
 				srv.log.Debug("Read error", "err", err)
+				slots <- struct{}{}
 				return
 			}
 			break
@@ -902,9 +920,13 @@ func (srv *Server) listenLoop() {
 			continue
 		}
 		if remoteIP != nil {
-			fd = newMeteredConn(fd, true, remoteIP)
+			var addr *net.TCPAddr
+			if tcp, ok := fd.RemoteAddr().(*net.TCPAddr); ok {
+				addr = tcp
+			}
+			fd = newMeteredConn(fd, true, addr)
+			srv.log.Trace("Accepted connection", "addr", fd.RemoteAddr())
 		}
-		srv.log.Trace("Accepted connection", "addr", fd.RemoteAddr())
 		go func() {
 			srv.SetupConn(fd, inboundConn, nil)
 			slots <- struct{}{}
@@ -973,9 +995,6 @@ func (srv *Server) setupConn(c *conn, flags connFlag, dialDest *enode.Node) erro
 		c.node = dialDest
 	} else {
 		c.node = nodeFromConn(remotePubkey, c.fd)
-	}
-	if conn, ok := c.fd.(*meteredConn); ok {
-		conn.handshakeDone(c.node.ID())
 	}
 	clog := srv.log.New("id", c.node.ID(), "addr", c.fd.RemoteAddr(), "conn", c.flags)
 	err = srv.checkpoint(c, srv.checkpointPostHandshake)
