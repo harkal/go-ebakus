@@ -1558,6 +1558,8 @@ func SubmitTransaction(ctx context.Context, b Backend, tx *types.Transaction) (c
 // SendTransaction creates a transaction for the given argument, sign it and submit it to the
 // transaction pool.
 func (s *PublicTransactionPoolAPI) SendTransaction(ctx context.Context, args SendTxArgs) (common.Hash, error) {
+	hasWorkNonce := args.WorkNonce != nil
+
 	// Look up the wallet containing the requested signer
 	account := accounts.Account{Address: args.From}
 
@@ -1577,8 +1579,21 @@ func (s *PublicTransactionPoolAPI) SendTransaction(ctx context.Context, args Sen
 	if err := args.setDefaults(ctx, s.b); err != nil {
 		return common.Hash{}, err
 	}
+
 	// Assemble the transaction and sign with the wallet
 	tx := args.toTransaction()
+
+	// Calculate work
+	if !hasWorkNonce {
+		targetDifficulty, err := DoSuggestDifficulty(ctx, s.b, args.From)
+		if err != nil {
+			return common.Hash{}, err
+		}
+
+		targetDifficulty *= float64(*args.Gas)
+
+		tx.CalculateWorkNonce(targetDifficulty)
+	}
 
 	signed, err := wallet.SignTx(account, tx, s.b.ChainConfig().ChainID)
 	if err != nil {
