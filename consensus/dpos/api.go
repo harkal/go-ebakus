@@ -64,7 +64,7 @@ func (api *API) GetDelegates(ctx context.Context, number rpc.BlockNumber) ([]int
 	ebakusState := api.dpos.ebakusDb.Snapshot(*ebakusSnapshotID)
 	defer ebakusState.Release()
 
-	delegates := GetDelegates(header.Number.Uint64(), ebakusState, api.dpos.config.DelegateCount, api.dpos.config.BonusDelegateCount, api.dpos.config.TurnBlockCount, api.dpos.blockchain.GetHeaderByNumber)
+	delegates := GetDelegates(header, ebakusState, api.dpos.config.DelegateCount, api.dpos.config.BonusDelegateCount, api.dpos.config.TurnBlockCount)
 
 	return api.rpcOutputWitnesses(&delegates), nil
 }

@@ -266,7 +266,9 @@ func (d *DPOS) verifySeal(chain consensus.ChainReader, header *types.Header, par
 		return fmt.Errorf("Verify seal failed to get ebakus state: %s", err)
 	}
 
-	signer := d.getSignerAtSlot(chain, ebakusState, parentBlockNumber, slot)
+	parentHeader := d.blockchain.GetHeaderByHash(header.ParentHash)
+
+	signer := d.getSignerAtSlot(chain, parentHeader, ebakusState, slot)
 	ebakusState.Release()
 
 	blockSigner, err := ecrecover(header, d.signatures)
@@ -308,7 +310,7 @@ func (d *DPOS) Prepare(chain consensus.ChainReader, stop <-chan struct{}) (*type
 			return nil, nil, fmt.Errorf("Prepare new block failed to get ebakus state at block number %d: %s", headBlockNumber, err)
 		}
 
-		inTurnSigner := d.getSignerAtSlot(chain, ebakusState, headBlockNumber, slot)
+		inTurnSigner := d.getSignerAtSlot(chain, head.Header(), ebakusState, slot)
 		ebakusState.Release()
 
 		log.Trace("Check turn", "slot", slot, "signer", signer, "turn for", inTurnSigner)
@@ -381,14 +383,8 @@ func (d *DPOS) FinalizeAndAssemble(chain consensus.ChainReader, header *types.He
 	delegateCount := d.config.DelegateCount
 	bonusDelegateCount := d.config.BonusDelegateCount
 	turnBlockCount := d.config.TurnBlockCount
-	oldDelegates := GetDelegates(oldBlockNumber, oldEbakusState, delegateCount, bonusDelegateCount, turnBlockCount, d.blockchain.GetHeaderByNumber)
-	getHeaderByNumber := func(blockNumber uint64) *types.Header {
-		if blockNumber == header.Number.Uint64() {
-			return header
-		}
-		return d.blockchain.GetHeaderByNumber(blockNumber)
-	}
-	newDelegates := GetDelegates(header.Number.Uint64(), ebakusState, delegateCount, bonusDelegateCount, turnBlockCount, getHeaderByNumber)
+	oldDelegates := GetDelegates(d.blockchain.GetHeaderByHash(header.ParentHash), oldEbakusState, delegateCount, bonusDelegateCount, turnBlockCount)
+	newDelegates := GetDelegates(header, ebakusState, delegateCount, bonusDelegateCount, turnBlockCount)
 	delegateDiff := oldDelegates.Diff(newDelegates)
 
 	log.Trace("Delegates", "diff", delegateDiff)
@@ -488,8 +484,8 @@ func unixNow() uint64 {
 	return uint64(time.Now().Unix())
 }
 
-func (d *DPOS) getSignerAtSlot(chain consensus.ChainReader, state *ebakusdb.Snapshot, blockNumber uint64, slot float64) common.Address {
-	delegates := GetDelegates(blockNumber, state, d.config.DelegateCount, d.config.BonusDelegateCount, d.config.TurnBlockCount, d.blockchain.GetHeaderByNumber)
+func (d *DPOS) getSignerAtSlot(chain consensus.ChainReader, header *types.Header, state *ebakusdb.Snapshot, slot float64) common.Address {
+	delegates := GetDelegates(header, state, d.config.DelegateCount, d.config.BonusDelegateCount, d.config.TurnBlockCount)
 
 	if d.config.TurnBlockCount == 0 {
 		log.Warn("DPOS.TurnBlockCount is zero. This means that mining won't match a signer.")
@@ -591,7 +587,7 @@ func uniformRandom(max uint64, hash common.Hash) uint64 {
 	return rand
 }
 
-func GetDelegates(blockNumber uint64, snap *ebakusdb.Snapshot, maxWitnesses uint64, maxBonusWitnesses uint64, turnBlockCount uint64, getHeaderByNumber func(uint64) *types.Header) vm.WitnessArray {
+func GetDelegates(header *types.Header, snap *ebakusdb.Snapshot, maxWitnesses uint64, maxBonusWitnesses uint64, turnBlockCount uint64) vm.WitnessArray {
 	if maxWitnesses == 0 {
 		log.Warn("DPOS.getDelegates maxWitnesses is zero. This means that mining won't match a signer. Check if DPOS.DelegatesCount is set to zero")
 	}
@@ -608,7 +604,6 @@ func GetDelegates(blockNumber uint64, snap *ebakusdb.Snapshot, maxWitnesses uint
 		bonusCandidateDelegates := delegates[maxWitnesses-1:]
 		delegates = delegates[:maxWitnesses-1] // excluding the last bonus position from maxWitnesses
 
-		header := getHeaderByNumber(blockNumber)
 		slot := (header.Time + 1) / turnBlockCount
 		slotData := make([]byte, 8)
 		binary.BigEndian.PutUint64(slotData, slot)

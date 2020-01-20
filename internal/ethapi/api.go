@@ -692,18 +692,14 @@ func (s *PublicBlockChainAPI) GetBlockByNumber(ctx context.Context, number rpc.B
 		if ebakusState == nil {
 			return nil, fmt.Errorf("Failed to find ebakusdb snapshot")
 		}
-
 		defer ebakusState.Release()
 
-		getHeaderByNumber := func(blockNumber uint64) *types.Header {
-			header, err := s.b.HeaderByNumber(ctx, rpc.BlockNumber(blockNumber))
-			if err != nil {
-				return nil
-			}
-			return header
+		parentHeader, err := s.b.HeaderByNumber(ctx, rpc.BlockNumber(parentNumber))
+		if err != nil {
+			return nil, fmt.Errorf("Failed to find parent header")
 		}
 
-		delegates := dpos.GetDelegates(parentNumber, ebakusState, s.b.ChainConfig().DPOS.DelegateCount, s.b.ChainConfig().DPOS.BonusDelegateCount, s.b.ChainConfig().DPOS.TurnBlockCount, getHeaderByNumber)
+		delegates := dpos.GetDelegates(parentHeader, ebakusState, s.b.ChainConfig().DPOS.DelegateCount, s.b.ChainConfig().DPOS.BonusDelegateCount, s.b.ChainConfig().DPOS.TurnBlockCount)
 
 		delegateIds := make([]common.Address, 0)
 		for _, d := range delegates {
