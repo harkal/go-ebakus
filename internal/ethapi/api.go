@@ -982,10 +982,8 @@ func (s *PublicBlockChainAPI) EstimateGas(ctx context.Context, args CallArgs) (h
 	return DoEstimateGas(ctx, s.b, args, blockNrOrHash, s.b.RPCGasCap())
 }
 
-// SuggestDifficulty returns the currently suggested difficulty needed to execute the
-// given transaction against the current pending block.
-func (s *PublicBlockChainAPI) SuggestDifficulty(ctx context.Context, addr common.Address) (float64, error) {
-	ebakusState, _, err := s.b.EbakusStateAndHeaderByNumber(ctx, rpc.LatestBlockNumber)
+func DoSuggestDifficulty(ctx context.Context, b Backend, addr common.Address) (float64, error) {
+	ebakusState, _, err := b.EbakusStateAndHeaderByNumber(ctx, rpc.LatestBlockNumber)
 	if err != nil {
 		return types.MinimumTargetDifficulty, err
 	}
@@ -995,7 +993,7 @@ func (s *PublicBlockChainAPI) SuggestDifficulty(ctx context.Context, addr common
 	}
 	defer ebakusState.Release()
 
-	dv, err := s.suggestVirtualDifficulty(ebakusState)
+	dv, err := DoSuggestVirtualDifficulty(b, ebakusState)
 	if err != nil {
 		return types.MinimumTargetDifficulty, err
 	}
@@ -1010,12 +1008,16 @@ func (s *PublicBlockChainAPI) SuggestDifficulty(ctx context.Context, addr common
 	return diff, nil
 }
 
-// SuggestVirtualDifficulty returns the currently suggested virtual difficulty needed to execute the
+// SuggestDifficulty returns the currently suggested difficulty needed to execute the
 // given transaction against the current pending block.
-func (s *PublicBlockChainAPI) suggestVirtualDifficulty(ebakusState *ebakusdb.Snapshot) (float64, error) {
+func (s *PublicBlockChainAPI) SuggestDifficulty(ctx context.Context, addr common.Address) (float64, error) {
+	return DoSuggestDifficulty(ctx, s.b, addr)
+}
+
+func DoSuggestVirtualDifficulty(b Backend, ebakusState *ebakusdb.Snapshot) (float64, error) {
 	var minDv *big.Float
 
-	pending, queue := s.b.TxPoolContent()
+	pending, queue := b.TxPoolContent()
 
 	// Flatten the pending transactions
 	for from, txs := range pending {
@@ -1047,6 +1049,12 @@ func (s *PublicBlockChainAPI) suggestVirtualDifficulty(ebakusState *ebakusdb.Sna
 	}
 
 	return dv, nil
+}
+
+// SuggestVirtualDifficulty returns the currently suggested virtual difficulty needed to execute the
+// given transaction against the current pending block.
+func (s *PublicBlockChainAPI) suggestVirtualDifficulty(ebakusState *ebakusdb.Snapshot) (float64, error) {
+	return DoSuggestVirtualDifficulty(s.b, ebakusState)
 }
 
 // ExecutionResult groups all structured logs emitted by the EVM
@@ -1511,11 +1519,6 @@ func (args *SendTxArgs) setDefaults(ctx context.Context, b Backend) error {
 		}
 		args.Gas = &estimated
 		log.Trace("Estimate gas usage automatically", "gas", args.Gas)
-	}
-	// Calculate work
-	if args.WorkNonce == nil {
-		// @TODO: maybe allow here auto call to suggest and calculate difficulty to enable easier use of
-		//		  sendTransaction() etc from the console
 	}
 	return nil
 }
