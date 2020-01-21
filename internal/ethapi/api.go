@@ -978,10 +978,8 @@ func (s *PublicBlockChainAPI) EstimateGas(ctx context.Context, args CallArgs) (h
 	return DoEstimateGas(ctx, s.b, args, blockNrOrHash, s.b.RPCGasCap())
 }
 
-// SuggestDifficulty returns the currently suggested difficulty needed to execute the
-// given transaction against the current pending block.
-func (s *PublicBlockChainAPI) SuggestDifficulty(ctx context.Context, addr common.Address) (float64, error) {
-	ebakusState, _, err := s.b.EbakusStateAndHeaderByNumber(ctx, rpc.LatestBlockNumber)
+func DoSuggestDifficulty(ctx context.Context, b Backend, addr common.Address) (float64, error) {
+	ebakusState, _, err := b.EbakusStateAndHeaderByNumber(ctx, rpc.LatestBlockNumber)
 	if err != nil {
 		return types.MinimumTargetDifficulty, err
 	}
@@ -991,7 +989,7 @@ func (s *PublicBlockChainAPI) SuggestDifficulty(ctx context.Context, addr common
 	}
 	defer ebakusState.Release()
 
-	dv, err := s.suggestVirtualDifficulty(ebakusState)
+	dv, err := DoSuggestVirtualDifficulty(b, ebakusState)
 	if err != nil {
 		return types.MinimumTargetDifficulty, err
 	}
@@ -1006,12 +1004,16 @@ func (s *PublicBlockChainAPI) SuggestDifficulty(ctx context.Context, addr common
 	return diff, nil
 }
 
-// SuggestVirtualDifficulty returns the currently suggested virtual difficulty needed to execute the
+// SuggestDifficulty returns the currently suggested difficulty needed to execute the
 // given transaction against the current pending block.
-func (s *PublicBlockChainAPI) suggestVirtualDifficulty(ebakusState *ebakusdb.Snapshot) (float64, error) {
+func (s *PublicBlockChainAPI) SuggestDifficulty(ctx context.Context, addr common.Address) (float64, error) {
+	return DoSuggestDifficulty(ctx, s.b, addr)
+}
+
+func DoSuggestVirtualDifficulty(b Backend, ebakusState *ebakusdb.Snapshot) (float64, error) {
 	var minDv *big.Float
 
-	pending, queue := s.b.TxPoolContent()
+	pending, queue := b.TxPoolContent()
 
 	// Flatten the pending transactions
 	for from, txs := range pending {
@@ -1043,6 +1045,12 @@ func (s *PublicBlockChainAPI) suggestVirtualDifficulty(ebakusState *ebakusdb.Sna
 	}
 
 	return dv, nil
+}
+
+// SuggestVirtualDifficulty returns the currently suggested virtual difficulty needed to execute the
+// given transaction against the current pending block.
+func (s *PublicBlockChainAPI) suggestVirtualDifficulty(ebakusState *ebakusdb.Snapshot) (float64, error) {
+	return DoSuggestVirtualDifficulty(s.b, ebakusState)
 }
 
 // ExecutionResult groups all structured logs emitted by the EVM
@@ -1508,11 +1516,6 @@ func (args *SendTxArgs) setDefaults(ctx context.Context, b Backend) error {
 		args.Gas = &estimated
 		log.Trace("Estimate gas usage automatically", "gas", args.Gas)
 	}
-	// Calculate work
-	if args.WorkNonce == nil {
-		// @TODO: maybe allow here auto call to suggest and calculate difficulty to enable easier use of
-		//		  sendTransaction() etc from the console
-	}
 	return nil
 }
 
@@ -1551,12 +1554,22 @@ func SubmitTransaction(ctx context.Context, b Backend, tx *types.Transaction) (c
 // SendTransaction creates a transaction for the given argument, sign it and submit it to the
 // transaction pool.
 func (s *PublicTransactionPoolAPI) SendTransaction(ctx context.Context, args SendTxArgs) (common.Hash, error) {
+	hasWorkNonce := args.WorkNonce != nil
+
 	// Look up the wallet containing the requested signer
 	account := accounts.Account{Address: args.From}
 
 	wallet, err := s.b.AccountManager().Find(account)
 	if err != nil {
 		return common.Hash{}, err
+	}
+
+	// Exit on locked account, so as calculate work doesn't happen allowing DDoS attack
+	if status, err := wallet.Status(); status == "Locked" || err == nil {
+		if err != nil {
+			return common.Hash{}, err
+		}
+		return common.Hash{}, fmt.Errorf("authentication needed: password or unlock")
 	}
 
 	if args.Nonce == nil {
@@ -1570,8 +1583,21 @@ func (s *PublicTransactionPoolAPI) SendTransaction(ctx context.Context, args Sen
 	if err := args.setDefaults(ctx, s.b); err != nil {
 		return common.Hash{}, err
 	}
+
 	// Assemble the transaction and sign with the wallet
 	tx := args.toTransaction()
+
+	// Calculate work
+	if !hasWorkNonce {
+		targetDifficulty, err := DoSuggestDifficulty(ctx, s.b, args.From)
+		if err != nil {
+			return common.Hash{}, err
+		}
+
+		targetDifficulty *= float64(*args.Gas)
+
+		tx.CalculateWorkNonce(targetDifficulty)
+	}
 
 	signed, err := wallet.SignTx(account, tx, s.b.ChainConfig().ChainID)
 	if err != nil {
