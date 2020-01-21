@@ -1565,7 +1565,7 @@ func (s *PublicTransactionPoolAPI) SendTransaction(ctx context.Context, args Sen
 	}
 
 	// Exit on locked account, so as calculate work doesn't happen allowing DDoS attack
-	if status, err := wallet.Status(); status == "Locked" || err == nil {
+	if status, err := wallet.Status(); status == "Locked" || err != nil {
 		if err != nil {
 			return common.Hash{}, err
 		}
