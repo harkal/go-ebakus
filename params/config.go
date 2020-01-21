@@ -27,7 +27,7 @@ import (
 
 // Genesis hashes to enforce below configs on.
 var (
-	MainnetGenesisHash = common.HexToHash("0x0c45ca1e2bfe786c62966b34a5c2cfa1cd5004ba6bd4299fe227225ab9a4e3cb")
+	MainnetGenesisHash = common.HexToHash("0x6adede15bd390361b3899b8cc6108c72dbbede804492ca1c9689e639070bd12f")
 	TestnetGenesisHash = common.HexToHash("0xcf7a993bef4cb35edb16f88b60a181d80455294145af6f7d84813a4092307d7f")
 )
 
@@ -37,10 +37,10 @@ var (
 		TurnBlockCount:      6,
 		InitialDistribution: 1e9,
 		YearlyInflation:     0.01,
-		DelegateCount:       3,
+		DelegateCount:       21,
 		BonusDelegateCount:  100,
 		MaxWitnessesVotes:   20,
-		BootProducer:        common.HexToAddress("0xc0fafb8d1246Baa6534DE2b335beffC141EBA80f"),
+		BootProducer:        common.HexToAddress("0x1ec161A7B635a5975C3786C800844ed0633D3A31"),
 	}
 
 	// MainnetChainConfig is the chain parameters to run a node on the main network.
