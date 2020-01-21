@@ -1568,6 +1568,14 @@ func (s *PublicTransactionPoolAPI) SendTransaction(ctx context.Context, args Sen
 		return common.Hash{}, err
 	}
 
+	// Exit on locked account, so as calculate work doesn't happen allowing DDoS attack
+	if status, err := wallet.Status(); status == "Locked" || err == nil {
+		if err != nil {
+			return common.Hash{}, err
+		}
+		return common.Hash{}, fmt.Errorf("authentication needed: password or unlock")
+	}
+
 	if args.Nonce == nil {
 		// Hold the addresse's mutex around signing to prevent concurrent assignment of
 		// the same nonce to multiple accounts.
