@@ -60,7 +60,7 @@ var (
 		InitialDistribution: 1e9,
 		YearlyInflation:     0.01,
 		DelegateCount:       3,
-		BonusDelegateCount:  2,
+		BonusDelegateCount:  100,
 		MaxWitnessesVotes:   20,
 		BootProducer:        common.HexToAddress("0xd53de783b12f12b7852348f2e32c21990746ad02"),
 	}
