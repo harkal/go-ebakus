@@ -24,6 +24,7 @@ import (
 
 	"github.com/ebakus/go-ebakus/common"
 	"github.com/ebakus/go-ebakus/core"
+	"github.com/ebakus/go-ebakus/core/types"
 	"github.com/ebakus/go-ebakus/eth/downloader"
 	"github.com/ebakus/go-ebakus/eth/gasprice"
 	"github.com/ebakus/go-ebakus/miner"
@@ -44,7 +45,7 @@ var DefaultConfig = Config{
 	Miner: miner.Config{
 		GasFloor: 60000000,
 		GasCeil:  80000000,
-		GasPrice: 0.0,
+		GasPrice: types.MinimumTargetDifficulty,
 		Recommit: 3 * time.Second,
 	},
 	TxPool: core.DefaultTxPoolConfig,
