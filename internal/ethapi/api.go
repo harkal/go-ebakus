@@ -978,27 +978,27 @@ func (s *PublicBlockChainAPI) EstimateGas(ctx context.Context, args CallArgs) (h
 	return DoEstimateGas(ctx, s.b, args, blockNrOrHash, s.b.RPCGasCap())
 }
 
-func DoSuggestDifficulty(ctx context.Context, b Backend, addr common.Address) (float64, error) {
+func DoSuggestDifficulty(ctx context.Context, b Backend, minTargetDifficulty float64, addr common.Address) (float64, error) {
 	ebakusState, _, err := b.EbakusStateAndHeaderByNumber(ctx, rpc.LatestBlockNumber)
 	if err != nil {
-		return types.MinimumTargetDifficulty, err
+		return minTargetDifficulty, err
 	}
 
 	if ebakusState == nil {
-		return types.MinimumTargetDifficulty, fmt.Errorf("Failed to find ebakusdb snapshot")
+		return minTargetDifficulty, fmt.Errorf("Failed to find ebakusdb snapshot")
 	}
 	defer ebakusState.Release()
 
 	dv, err := DoSuggestVirtualDifficulty(b, ebakusState)
 	if err != nil {
-		return types.MinimumTargetDifficulty, err
+		return minTargetDifficulty, err
 	}
 
 	cv := types.VirtualCapacity(addr, ebakusState)
 
 	diff := dv / cv
-	if diff < types.MinimumTargetDifficulty {
-		return types.MinimumTargetDifficulty, nil
+	if diff < minTargetDifficulty {
+		return minTargetDifficulty, nil
 	}
 
 	return diff, nil
@@ -1007,7 +1007,7 @@ func DoSuggestDifficulty(ctx context.Context, b Backend, addr common.Address) (f
 // SuggestDifficulty returns the currently suggested difficulty needed to execute the
 // given transaction against the current pending block.
 func (s *PublicBlockChainAPI) SuggestDifficulty(ctx context.Context, addr common.Address) (float64, error) {
-	return DoSuggestDifficulty(ctx, s.b, addr)
+	return DoSuggestDifficulty(ctx, s.b, s.b.MinGasPrice(), addr)
 }
 
 func DoSuggestVirtualDifficulty(b Backend, ebakusState *ebakusdb.Snapshot) (float64, error) {
@@ -1589,7 +1589,7 @@ func (s *PublicTransactionPoolAPI) SendTransaction(ctx context.Context, args Sen
 
 	// Calculate work
 	if !hasWorkNonce {
-		targetDifficulty, err := DoSuggestDifficulty(ctx, s.b, args.From)
+		targetDifficulty, err := DoSuggestDifficulty(ctx, s.b, s.b.MinGasPrice(), args.From)
 		if err != nil {
 			return common.Hash{}, err
 		}
