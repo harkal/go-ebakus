@@ -39,6 +39,7 @@ import (
 	"github.com/ebakus/go-ebakus/common/fdlimit"
 	"github.com/ebakus/go-ebakus/consensus/dpos"
 	"github.com/ebakus/go-ebakus/core"
+	"github.com/ebakus/go-ebakus/core/types"
 	"github.com/ebakus/go-ebakus/core/vm"
 	"github.com/ebakus/go-ebakus/crypto"
 	"github.com/ebakus/go-ebakus/eth"
@@ -1398,7 +1399,7 @@ func SetEthConfig(ctx *cli.Context, stack *node.Node, cfg *eth.Config) {
 
 		cfg.Genesis = core.DeveloperGenesisBlock(uint64(ctx.GlobalInt(DeveloperPeriodFlag.Name)), developer.Address)
 		if !ctx.GlobalIsSet(MinerGasPriceFlag.Name) && !ctx.GlobalIsSet(MinerLegacyGasPriceFlag.Name) {
-			cfg.Miner.GasPrice = 1.0
+			cfg.Miner.GasPrice = types.MinimumTargetDifficulty
 		}
 	}
 }
