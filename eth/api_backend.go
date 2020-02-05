@@ -335,6 +335,10 @@ func (b *EthAPIBackend) RPCGasCap() *big.Int {
 	return b.eth.config.RPCGasCap
 }
 
+func (b *EthAPIBackend) MinGasPrice() float64 {
+	return b.eth.config.Miner.GasPrice
+}
+
 func (b *EthAPIBackend) BloomStatus() (uint64, uint64) {
 	sections, _, _ := b.eth.bloomIndexer.Sections()
 	return params.BloomBitsBlocks, sections
