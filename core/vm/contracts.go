@@ -598,6 +598,7 @@ const SystemContractABI = `[
   ],
   "outputs": [
     {
+      "name": "abi",
       "type": "string"
     }
   ],
