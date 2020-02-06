@@ -39,6 +39,7 @@ import (
 	"github.com/ebakus/go-ebakus/common/fdlimit"
 	"github.com/ebakus/go-ebakus/consensus/dpos"
 	"github.com/ebakus/go-ebakus/core"
+	"github.com/ebakus/go-ebakus/core/types"
 	"github.com/ebakus/go-ebakus/core/vm"
 	"github.com/ebakus/go-ebakus/crypto"
 	"github.com/ebakus/go-ebakus/eth"
@@ -281,7 +282,7 @@ var (
 		Usage: "Time interval to regenerate the local transaction journal",
 		Value: core.DefaultTxPoolConfig.Rejournal,
 	}
-	TxPoolPriceLimitFlag = cli.Uint64Flag{
+	TxPoolPriceLimitFlag = cli.Float64Flag{
 		Name:  "txpool.pricelimit",
 		Usage: "Minimum gas price limit to enforce for acceptance into the pool",
 		Value: eth.DefaultConfig.TxPool.PriceLimit,
@@ -1173,7 +1174,7 @@ func setTxPool(ctx *cli.Context, cfg *core.TxPoolConfig) {
 		cfg.Rejournal = ctx.GlobalDuration(TxPoolRejournalFlag.Name)
 	}
 	if ctx.GlobalIsSet(TxPoolPriceLimitFlag.Name) {
-		cfg.PriceLimit = ctx.GlobalUint64(TxPoolPriceLimitFlag.Name)
+		cfg.PriceLimit = ctx.GlobalFloat64(TxPoolPriceLimitFlag.Name)
 	}
 	if ctx.GlobalIsSet(TxPoolPriceBumpFlag.Name) {
 		cfg.PriceBump = ctx.GlobalUint64(TxPoolPriceBumpFlag.Name)
@@ -1398,7 +1399,7 @@ func SetEthConfig(ctx *cli.Context, stack *node.Node, cfg *eth.Config) {
 
 		cfg.Genesis = core.DeveloperGenesisBlock(uint64(ctx.GlobalInt(DeveloperPeriodFlag.Name)), developer.Address)
 		if !ctx.GlobalIsSet(MinerGasPriceFlag.Name) && !ctx.GlobalIsSet(MinerLegacyGasPriceFlag.Name) {
-			cfg.Miner.GasPrice = 1.0
+			cfg.Miner.GasPrice = types.MinimumTargetDifficulty
 		}
 	}
 }

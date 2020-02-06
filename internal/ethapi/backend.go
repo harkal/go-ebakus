@@ -48,6 +48,7 @@ type Backend interface {
 	AccountManager() *accounts.Manager
 	ExtRPCEnabled() bool
 	RPCGasCap() *big.Int // global gas cap for eth_call over rpc: DoS protection
+	MinGasPrice() float64
 
 	// Blockchain API
 	SetHead(number uint64)
