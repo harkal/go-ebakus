@@ -43,8 +43,8 @@ var DefaultConfig = Config{
 	TrieDirtyCache:     256,
 	TrieTimeout:        60 * time.Minute,
 	Miner: miner.Config{
-		GasFloor: 60000000,
-		GasCeil:  80000000,
+		GasFloor: 80000000,
+		GasCeil:  160000000,
 		GasPrice: types.MinimumTargetDifficulty,
 		Recommit: 3 * time.Second,
 	},

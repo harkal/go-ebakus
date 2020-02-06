@@ -986,8 +986,22 @@ func GetStaked(db *ebakusdb.Snapshot, from common.Address) (*types.Staked, error
 	return &staked, nil
 }
 
+func unique(addresses []common.Address) []common.Address {
+	used := make(map[common.Address]bool)
+	res := []common.Address{}
+	for _, entry := range addresses {
+		if _, value := used[entry]; !value {
+			used[entry] = true
+			res = append(res, entry)
+		}
+	}
+	return res
+}
+
 func (c *systemContract) voteCmd(evm *EVM, from common.Address, addresses []common.Address) ([]byte, error) {
 	db := evm.EbakusState
+
+	addresses = unique(addresses)
 
 	if len(addresses) > int(evm.chainConfig.DPOS.MaxWitnessesVotes) {
 		return nil, errVoteMaxWitnessesReached
