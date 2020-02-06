@@ -133,8 +133,8 @@ type TxPoolConfig struct {
 	Journal   string           // Journal of local transactions to survive node restarts
 	Rejournal time.Duration    // Time interval to regenerate the local transaction journal
 
-	PriceLimit uint64 // Minimum gas price to enforce for acceptance into the pool
-	PriceBump  uint64 // Minimum price bump percentage to replace an already existing transaction (nonce)
+	PriceLimit float64 // Minimum gas price to enforce for acceptance into the pool
+	PriceBump  uint64  // Minimum price bump percentage to replace an already existing transaction (nonce)
 
 	AccountSlots uint64 // Number of executable transaction slots guaranteed per account
 	GlobalSlots  uint64 // Maximum number of executable transaction slots for all accounts
@@ -150,7 +150,7 @@ var DefaultTxPoolConfig = TxPoolConfig{
 	Journal:   "transactions.rlp",
 	Rejournal: time.Hour,
 
-	PriceLimit: 1,
+	PriceLimit: types.MinimumTargetDifficulty,
 	PriceBump:  10,
 
 	AccountSlots: 16,
@@ -169,7 +169,7 @@ func (config *TxPoolConfig) sanitize() TxPoolConfig {
 		log.Warn("Sanitizing invalid txpool journal time", "provided", conf.Rejournal, "updated", time.Second)
 		conf.Rejournal = time.Second
 	}
-	if conf.PriceLimit < 1 {
+	if conf.PriceLimit < types.MinimumTargetDifficulty {
 		log.Warn("Sanitizing invalid txpool price limit", "provided", conf.PriceLimit, "updated", DefaultTxPoolConfig.PriceLimit)
 		conf.PriceLimit = DefaultTxPoolConfig.PriceLimit
 	}
@@ -268,7 +268,7 @@ func NewTxPool(config TxPoolConfig, chainconfig *params.ChainConfig, chain block
 		queueTxEventCh:  make(chan *types.Transaction),
 		reorgDoneCh:     make(chan chan struct{}),
 		reorgShutdownCh: make(chan struct{}),
-		gasPrice:        float64(config.PriceLimit),
+		gasPrice:        config.PriceLimit,
 	}
 	pool.locals = newAccountSet(pool.signer)
 	for _, addr := range config.Locals {

@@ -282,7 +282,7 @@ var (
 		Usage: "Time interval to regenerate the local transaction journal",
 		Value: core.DefaultTxPoolConfig.Rejournal,
 	}
-	TxPoolPriceLimitFlag = cli.Uint64Flag{
+	TxPoolPriceLimitFlag = cli.Float64Flag{
 		Name:  "txpool.pricelimit",
 		Usage: "Minimum gas price limit to enforce for acceptance into the pool",
 		Value: eth.DefaultConfig.TxPool.PriceLimit,
@@ -1174,7 +1174,7 @@ func setTxPool(ctx *cli.Context, cfg *core.TxPoolConfig) {
 		cfg.Rejournal = ctx.GlobalDuration(TxPoolRejournalFlag.Name)
 	}
 	if ctx.GlobalIsSet(TxPoolPriceLimitFlag.Name) {
-		cfg.PriceLimit = ctx.GlobalUint64(TxPoolPriceLimitFlag.Name)
+		cfg.PriceLimit = ctx.GlobalFloat64(TxPoolPriceLimitFlag.Name)
 	}
 	if ctx.GlobalIsSet(TxPoolPriceBumpFlag.Name) {
 		cfg.PriceBump = ctx.GlobalUint64(TxPoolPriceBumpFlag.Name)
