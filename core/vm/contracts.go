@@ -731,12 +731,12 @@ func (c *systemContract) stakeCmd(evm *EVM, from common.Address, amount uint64) 
 	if !hasEnoughBalance {
 		log.Trace("Account doesn't have sufficient balance")
 		return nil, errStakeNotEnoughBalance
-	} else {
-		for _, claimableEntry := range claimablesToBeDeleted {
-			if err := db.DeleteObj(ClaimableTable, claimableEntry.Id); err != nil {
-				log.Trace("Claimable tokens failed to delete (staked)", "err", err)
-				return nil, errSystemContractError
-			}
+	}
+
+	for _, claimableEntry := range claimablesToBeDeleted {
+		if err := db.DeleteObj(ClaimableTable, claimableEntry.Id); err != nil {
+			log.Trace("Claimable tokens failed to delete (staked)", "err", err)
+			return nil, errSystemContractError
 		}
 	}
 
