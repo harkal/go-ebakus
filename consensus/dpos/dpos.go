@@ -342,7 +342,7 @@ func (d *DPOS) Prepare(chain consensus.ChainReader, stop <-chan struct{}) (*type
 
 		timeToNextSlot := nextSlotTime.Sub(time.Now())
 
-		log.Info("Sleeping", "time", timeToNextSlot)
+		log.Trace("Sleeping", "time", timeToNextSlot)
 
 		select {
 		case <-stop:
