@@ -1731,8 +1731,6 @@ func (s *PublicTransactionPoolAPI) CalculateWorkNonce(ctx context.Context, args 
 
 	targetDifficulty *= float64(*args.Gas)
 
-	log.Info("Cork", "Diff target:", targetDifficulty)
-
 	// Assemble the transaction and calculate PoW
 	tx := args.toTransaction()
 	tx.CalculateWorkNonce(targetDifficulty)
