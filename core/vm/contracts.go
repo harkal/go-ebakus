@@ -1233,6 +1233,8 @@ func (c *systemContract) storeWitnessInfo(evm *EVM, witnessAddress common.Addres
 }
 
 func storeWitnessInfo(db *ebakusdb.Snapshot, witnessAddress common.Address, info string) ([]byte, error) {
+	// TODO: limit size of info string
+
 	if _, err := getWitness(db, witnessAddress); err != nil {
 		return nil, err
 	}
