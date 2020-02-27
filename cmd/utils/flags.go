@@ -535,7 +535,11 @@ var (
 		Name:  "preload",
 		Usage: "Comma separated list of JavaScript files to preload into the console",
 	}
-
+	EbakusdbMaxActiveIteratorsFlag = cli.Uint64Flag{
+		Name:  "maxactiveiterators",
+		Usage: "Maximum number of ebakusDb iterators to retain in memory for RPC APIs",
+		Value: eth.DefaultConfig.EbakusdbMaxActiveIterators,
+	}
 	// Network Settings
 	MaxPeersFlag = cli.IntFlag{
 		Name:  "maxpeers",
@@ -1364,6 +1368,9 @@ func SetEthConfig(ctx *cli.Context, stack *node.Node, cfg *eth.Config) {
 	}
 	if ctx.GlobalIsSet(RPCGlobalGasCap.Name) {
 		cfg.RPCGasCap = new(big.Int).SetUint64(ctx.GlobalUint64(RPCGlobalGasCap.Name))
+	}
+	if ctx.GlobalIsSet(EbakusdbMaxActiveIteratorsFlag.Name) {
+		cfg.EbakusdbMaxActiveIterators = ctx.GlobalUint64(EbakusdbMaxActiveIteratorsFlag.Name)
 	}
 
 	// Override any default configs for hard coded networks.
