@@ -110,6 +110,9 @@ const (
 	SystemContractStoreAbiCmd = "storeAbiForAddress"
 	SystemContractGetAbiCmd   = "getAbiForAddress"
 
+	SystemContractStoreWitnessInfoCmd = "storeWitnessInfo"
+	SystemContractGetWitnessInfoCmd   = "getWitnessInfo"
+
 	DBContractCreateTableCmd = "createTable"
 	DBContractInsertObjCmd   = "insertObj"
 	DBContractDeleteObjCmd   = "deleteObj"
@@ -141,13 +144,15 @@ var (
 	errUnstakeNotEnoughStakedAmount = errors.New("not enough staked tokens for amount requested to unstake")
 
 	errVoteMalformed           = errors.New("voting transaction malformed")
-	errVoteAddressIsNotWitness = errors.New("a voted address is not valid")
 	errVoteNothingStaked       = errors.New("nothing staked")
 	errVoteMaxWitnessesReached = errors.New("not allowed to vote more than 20 witnesses")
 	errElectEnableMalformed    = errors.New("elect enable transaction malformed")
 	errContractAbiMalformed    = errors.New("contract abi transaction malformed")
 	errContractAbiNotFound     = errors.New("contract abi not found")
 	errContractAbiExists       = errors.New("contract abi exists")
+	errWitnessNotFound         = errors.New("witness not found")
+	errWitnessInfoMalformed    = errors.New("witness info transaction malformed")
+	errWitnessInfoNotFound     = errors.New("witness info not found")
 
 	errDBContractError      = errors.New("db contract error")
 	errNoEntryFound         = errors.New("no entry found in db")
@@ -210,6 +215,10 @@ func (c *systemContract) RequiredGas(input []byte) uint64 {
 		return params.SystemContractStoreAbiGas
 	case SystemContractGetAbiCmd:
 		return params.SystemContractGetAbiGas
+	case SystemContractStoreWitnessInfoCmd:
+		return params.SystemContractStoreWitnessInfoGas
+	case SystemContractGetWitnessInfoCmd:
+		return params.SystemContractGetWitnessInfoGas
 	default:
 		return params.SystemContractBaseGas
 	}
@@ -246,6 +255,13 @@ func (s WitnessArray) Diff(b WitnessArray) types.DelegateDiff {
 }
 
 var WitnessesTable = ebkdb.GetDBTableName(types.PrecompliledSystemContract, "Witnesses")
+
+type WitnessInfo struct {
+	Id   common.Address
+	Info string
+}
+
+var WitnessInfoTable = ebkdb.GetDBTableName(types.PrecompliledSystemContract, "WitnessInfo")
 
 type ClaimableId [common.AddressLength + unsafe.Sizeof(uint64(0))]byte // address + timestamp
 
@@ -363,6 +379,11 @@ func SystemContractSetupDB(db *ebakusdb.Snapshot, address common.Address) error 
 		return err
 	}
 
+	if db.HasTable(WitnessInfoTable) {
+		panic("WitnessInfo table existed before fork")
+	}
+	db.CreateTable(WitnessInfoTable, &WitnessInfo{})
+
 	return nil
 }
 
@@ -404,22 +425,30 @@ func makeIDLikeWhereClause(db *ebakusdb.Snapshot, from common.Address) (*ebakusd
 	return whereClause, nil
 }
 
+func getWitness(db *ebakusdb.Snapshot, address common.Address) (*Witness, error) {
+	var witness Witness
+	whereClause, err := makeIDLikeWhereClause(db, address)
+	if err != nil {
+		return nil, err
+	}
+
+	iter, err := db.Select(WitnessesTable, whereClause)
+	if err != nil {
+		return nil, errSystemContractError
+	}
+
+	if iter.Next(&witness) == false {
+		return nil, errWitnessNotFound
+	}
+
+	return &witness, nil
+}
+
 func vote(db *ebakusdb.Snapshot, from common.Address, addresses []common.Address, amount uint64) error {
 	for _, address := range addresses {
-		var witness Witness
-
-		whereClause, err := makeIDLikeWhereClause(db, address)
+		witness, err := getWitness(db, address)
 		if err != nil {
 			return err
-		}
-
-		iter, err := db.Select(WitnessesTable, whereClause)
-		if err != nil {
-			return errSystemContractError
-		}
-
-		if iter.Next(&witness) == false {
-			return errVoteAddressIsNotWitness
 		}
 
 		witness.Stake = witness.Stake + amount
@@ -605,6 +634,35 @@ const SystemContractABI = `[
   "constant": true,
   "payable": false,
   "stateMutability": "view"
+},{
+  "type": "function",
+  "name": "storeWitnessInfo",
+  "inputs": [
+    {
+      "name": "info",
+      "type": "string"
+    }
+  ],
+  "outputs": [],
+  "stateMutability": "nonpayable"
+},{
+  "type": "function",
+  "name": "getWitnessInfo",
+  "inputs": [
+    {
+      "name": "address",
+      "type": "address"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "info",
+      "type": "string"
+    }
+  ],
+  "constant": true,
+  "payable": false,
+  "stateMutability": "view"
 }]`
 
 const SystemContractTablesABI = `[
@@ -623,6 +681,19 @@ const SystemContractTablesABI = `[
     {
       "name": "Flags",
       "type": "uint64"
+    }
+  ]
+},{
+  "type": "table",
+  "name": "WitnessInfo",
+  "inputs": [
+    {
+      "name": "Id",
+      "type": "address"
+    },
+    {
+      "name": "Info",
+      "type": "string"
     }
   ]
 },{
@@ -1157,6 +1228,66 @@ func GetAbiAtAddress(db *ebakusdb.Snapshot, contractAddress common.Address) (str
 	return contractAbi.Abi, nil
 }
 
+func (c *systemContract) storeWitnessInfo(evm *EVM, witnessAddress common.Address, info string) ([]byte, error) {
+	return storeWitnessInfo(evm.EbakusState, witnessAddress, info)
+}
+
+func storeWitnessInfo(db *ebakusdb.Snapshot, witnessAddress common.Address, info string) ([]byte, error) {
+	if _, err := getWitness(db, witnessAddress); err != nil {
+		return nil, err
+	}
+
+	whereClause, err := makeIDLikeWhereClause(db, witnessAddress)
+	if err != nil {
+		return nil, err
+	}
+
+	iter, err := db.Select(WitnessInfoTable, whereClause)
+	if err != nil {
+		return nil, errSystemContractError
+	}
+
+	var witnessInfo WitnessInfo
+	if iter.Next(&witnessInfo) == false {
+		witnessInfo = WitnessInfo{
+			Id:   witnessAddress,
+			Info: info,
+		}
+	} else {
+		witnessInfo.Info = info
+	}
+
+	if err := db.InsertObj(WitnessInfoTable, &witnessInfo); err != nil {
+		return nil, errSystemContractError
+	}
+
+	return nil, nil
+}
+
+func (c *systemContract) getWitnessInfo(evm *EVM, witnessAddress common.Address) (string, error) {
+	return GetWitnessInfo(evm.EbakusState, witnessAddress)
+}
+
+func GetWitnessInfo(db *ebakusdb.Snapshot, witnessAddress common.Address) (string, error) {
+	where := []byte("Id = ")
+	whereClause, err := db.WhereParser(append(where, witnessAddress.Bytes()...))
+	if err != nil {
+		return "", errSystemContractError
+	}
+
+	iter, err := db.Select(WitnessInfoTable, whereClause)
+	if err != nil {
+		return "", errSystemContractError
+	}
+
+	var witnessInfo WitnessInfo
+	if iter.Next(&witnessInfo) == false {
+		return "", errWitnessInfoNotFound
+	}
+
+	return witnessInfo.Info, nil
+}
+
 func (c *systemContract) Run(evm *EVM, contract *Contract, input []byte) ([]byte, error) {
 	from := contract.Caller()
 
@@ -1247,6 +1378,35 @@ func (c *systemContract) Run(evm *EVM, contract *Contract, input []byte) ([]byte
 		}
 
 		contractAbi, err := c.getAbiAtAddress(evm, contractAddress)
+		if err != nil {
+			return nil, errSystemContractError
+		}
+
+		res, err := evmABI.PackWithArguments(cmd, abi.OutputsArgumentsType, contractAbi)
+		if err != nil {
+			log.Trace("ContractAbi failed to pack response", "err", err)
+			return nil, errSystemContractError
+		}
+
+		return res[4:], nil
+	case SystemContractStoreWitnessInfoCmd:
+		var info string
+		err = evmABI.UnpackWithArguments(&info, cmd, inputData, abi.InputsArgumentsType)
+		if err != nil {
+			log.Trace("SystemContractABI failed to unpack input", "cmd", cmd, "err", err)
+			return nil, errWitnessInfoMalformed
+		}
+
+		return c.storeWitnessInfo(evm, from, info)
+	case SystemContractGetWitnessInfoCmd:
+		var witnessAddress common.Address
+		err = evmABI.UnpackWithArguments(&witnessAddress, cmd, inputData, abi.InputsArgumentsType)
+		if err != nil {
+			log.Trace("SystemContractABI failed to unpack input", "cmd", cmd, "err", err)
+			return nil, errWitnessInfoMalformed
+		}
+
+		contractAbi, err := c.getWitnessInfo(evm, witnessAddress)
 		if err != nil {
 			return nil, errSystemContractError
 		}

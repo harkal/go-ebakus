@@ -114,24 +114,26 @@ const (
 	EbakusDBMemoryUsageGas uint64 = 650 // Cost per EbakusDb byte used
 
 	// Precompiled contract gas prices
-	SystemContractBaseGas        uint64 = 500 // Base price for not fine grained System contract commands
-	SystemContractStakeGas       uint64 = 800
-	SystemContractGetStakedGas   uint64 = 100
-	SystemContractUnstakeGas     uint64 = 500
-	SystemContractClaimGas       uint64 = 300
-	SystemContractVoteGas        uint64 = 100 // Multiplied by the number of the voted addresses
-	SystemContractUnvoteGas      uint64 = 500
-	SystemContractElectEnableGas uint64 = 100
-	SystemContractStoreAbiGas    uint64 = 500
-	SystemContractGetAbiGas      uint64 = 100
-	DBContractBaseGas            uint64 = 500 // Base price for not fine grained DB contract commands
-	DBContractCreateTableGas     uint64 = 500
-	DBContractInsertObjGas       uint64 = 500
-	DBContractDeleteObjGas       uint64 = 500
-	DBContractGetGas             uint64 = 500 // Multiplied by the number of the voted addresses
-	DBContractSelectGas          uint64 = 500
-	DBContractNextGas            uint64 = 500
-	DBContractPrevGas            uint64 = 500
+	SystemContractBaseGas             uint64 = 500 // Base price for not fine grained System contract commands
+	SystemContractStakeGas            uint64 = 800
+	SystemContractGetStakedGas        uint64 = 100
+	SystemContractUnstakeGas          uint64 = 500
+	SystemContractClaimGas            uint64 = 300
+	SystemContractVoteGas             uint64 = 100 // Multiplied by the number of the voted addresses
+	SystemContractUnvoteGas           uint64 = 500
+	SystemContractElectEnableGas      uint64 = 100
+	SystemContractStoreAbiGas         uint64 = 500
+	SystemContractGetAbiGas           uint64 = 100
+	SystemContractStoreWitnessInfoGas uint64 = 500
+	SystemContractGetWitnessInfoGas   uint64 = 100
+	DBContractBaseGas                 uint64 = 500 // Base price for not fine grained DB contract commands
+	DBContractCreateTableGas          uint64 = 500
+	DBContractInsertObjGas            uint64 = 500
+	DBContractDeleteObjGas            uint64 = 500
+	DBContractGetGas                  uint64 = 500 // Multiplied by the number of the voted addresses
+	DBContractSelectGas               uint64 = 500
+	DBContractNextGas                 uint64 = 500
+	DBContractPrevGas                 uint64 = 500
 
 	EcrecoverGas        uint64 = 3000 // Elliptic curve sender recovery gas price
 	Sha256BaseGas       uint64 = 60   // Base price for a SHA256 operation
