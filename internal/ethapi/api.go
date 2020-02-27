@@ -1839,7 +1839,6 @@ func (api *PublicDBAPI) addEbakusStateIterator(tableName string, iter *ebakusdb.
 		BlockNumber:     blockNumber,
 	}
 
-
 	elem := api.ebakusStateIteratorsList.PushFront(&tableIter)
 	api.ebakusStateIteratorsMap[tableIter.Handle] = elem
 
@@ -1872,7 +1871,6 @@ func (api *PublicDBAPI) getEbakusStateIterator(handle uint64) (*ebakusStateItera
 
 func (api *PublicDBAPI) releaseEbakusStateIterator(handle uint64) {
 	if elem, ok := api.ebakusStateIteratorsMap[handle]; ok {
-		stateIter, _ := elem.Value.(*ebakusStateIterator)
 		api.ebakusStateIteratorsMux.Lock()
 		delete(api.ebakusStateIteratorsMap, handle)
 		api.ebakusStateIteratorsList.Remove(elem)
