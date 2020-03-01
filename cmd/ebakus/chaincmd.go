@@ -472,6 +472,13 @@ func removeDB(ctx *cli.Context) error {
 	} else {
 		log.Info("EbakusDB database missing", "path", path)
 	}
+	// Remove EbakusDB lockfile
+	path = stack.ResolvePath("state.db~")
+	if common.FileExist(path) {
+		confirmAndRemoveDB(path, "EbakusDB database")
+	} else {
+		log.Info("EbakusDB database missing", "path", path)
+	}
 	return nil
 }
 
