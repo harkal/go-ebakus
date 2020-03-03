@@ -211,7 +211,7 @@ func (w *trezorDriver) trezorSign(derivationPath []uint32, tx *types.Transaction
 	request := &trezor.EbakusSignTx{
 		AddressN:   derivationPath,
 		Nonce:      new(big.Int).SetUint64(tx.Nonce()).Bytes(),
-		GasPrice:   big.NewInt(int64(tx.GasPrice())).Bytes(),
+		GasPrice:   new(big.Int).SetUint64(tx.WorkNonce()).Bytes(),
 		GasLimit:   new(big.Int).SetUint64(tx.Gas()).Bytes(),
 		Value:      tx.Value().Bytes(),
 		DataLength: &length,
