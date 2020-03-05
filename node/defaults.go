@@ -51,7 +51,7 @@ var DefaultConfig = Config{
 	GraphQLVirtualHosts: []string{"localhost"},
 	P2P: p2p.Config{
 		ListenAddr: ":30403",
-		MaxPeers:   50,
+		MaxPeers:   25,
 		NAT:        nat.Any(),
 	},
 }

@@ -49,6 +49,7 @@ type Backend interface {
 	ExtRPCEnabled() bool
 	RPCGasCap() *big.Int // global gas cap for eth_call over rpc: DoS protection
 	MinGasPrice() float64
+	EbakusdbMaxActiveIterators() uint64
 
 	// Blockchain API
 	SetHead(number uint64)

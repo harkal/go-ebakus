@@ -33,15 +33,16 @@ import (
 
 // DefaultConfig contains default settings for use on the Ebakus main net.
 var DefaultConfig = Config{
-	SyncMode:           downloader.FullSync,
-	DPOS:               *params.MainnetDPOSConfig,
-	NetworkId:          params.MainnetChainConfig.ChainID.Uint64(),
-	LightPeers:         100,
-	UltraLightFraction: 75,
-	DatabaseCache:      768,
-	TrieCleanCache:     256,
-	TrieDirtyCache:     256,
-	TrieTimeout:        60 * time.Minute,
+	SyncMode:                   downloader.FullSync,
+	DPOS:                       *params.MainnetDPOSConfig,
+	NetworkId:                  params.MainnetChainConfig.ChainID.Uint64(),
+	LightPeers:                 100,
+	UltraLightFraction:         75,
+	DatabaseCache:              768,
+	TrieCleanCache:             256,
+	TrieDirtyCache:             256,
+	TrieTimeout:                60 * time.Minute,
+	EbakusdbMaxActiveIterators: 1000,
 	Miner: miner.Config{
 		GasFloor: 80000000,
 		GasCeil:  160000000,
@@ -101,6 +102,8 @@ type Config struct {
 	TrieCleanCache int
 	TrieDirtyCache int
 	TrieTimeout    time.Duration
+
+	EbakusdbMaxActiveIterators uint64 // Maximum number of ebakusDb iterators to retain in memory for RPC APIs
 
 	// Mining options
 	Miner miner.Config

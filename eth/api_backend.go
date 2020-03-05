@@ -339,6 +339,10 @@ func (b *EthAPIBackend) MinGasPrice() float64 {
 	return b.eth.config.Miner.GasPrice
 }
 
+func (b *EthAPIBackend) EbakusdbMaxActiveIterators() uint64 {
+	return b.eth.config.EbakusdbMaxActiveIterators
+}
+
 func (b *EthAPIBackend) BloomStatus() (uint64, uint64) {
 	sections, _, _ := b.eth.bloomIndexer.Sections()
 	return params.BloomBitsBlocks, sections

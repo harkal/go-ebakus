@@ -281,6 +281,10 @@ func (b *LesApiBackend) MinGasPrice() float64 {
 	return b.eth.config.Miner.GasPrice
 }
 
+func (b *LesApiBackend) EbakusdbMaxActiveIterators() uint64 {
+	return b.eth.config.EbakusdbMaxActiveIterators
+}
+
 func (b *LesApiBackend) BloomStatus() (uint64, uint64) {
 	if b.eth.bloomIndexer == nil {
 		return 0, 0

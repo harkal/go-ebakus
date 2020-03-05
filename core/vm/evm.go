@@ -18,9 +18,9 @@ package vm
 
 import (
 	"math/big"
+	"math/rand"
 	"sync/atomic"
 	"time"
-	"unsafe"
 
 	"github.com/ebakus/ebakusdb"
 	"github.com/ebakus/go-ebakus/common"
@@ -499,20 +499,23 @@ type ebakusStateIterator struct {
 	Iter      *ebakusdb.ResultIterator
 }
 
-func (ri *ebakusStateIterator) GetPtr() uintptr {
-	return uintptr(unsafe.Pointer(ri))
-}
-
 func (evm *EVM) addEbakusStateIterator(tableName string, iter *ebakusdb.ResultIterator) uint64 {
+	var handle uint64
+	for {
+		handle = rand.Uint64()
+		if _, ok := evm.ebakusStateIterators[handle]; !ok {
+			break
+		}
+	}
+
 	tableIter := ebakusStateIterator{
 		TableName: tableName,
 		Iter:      iter,
 	}
-	tableIterPointer := tableIter.GetPtr()
 
-	evm.ebakusStateIterators[uint64(tableIterPointer)] = &tableIter
+	evm.ebakusStateIterators[handle] = &tableIter
 
-	return uint64(tableIterPointer)
+	return handle
 }
 
 func (evm *EVM) getEbakusStateIterator(handle uint64) *ebakusStateIterator {
