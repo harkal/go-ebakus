@@ -541,8 +541,8 @@ web3._extend({
 			inputFormatter: [web3._extend.formatters.inputAddressFormatter, web3._extend.formatters.inputBlockNumberFormatter]
 		}),
 		new web3._extend.Method({
-			name: 'getABIForContract',
-			call: 'eth_getABIForContract',
+			name: 'getAbiForAddress',
+			call: 'eth_getAbiForAddress',
 			params: 1,
 			inputFormatter: [web3._extend.formatters.inputAddressFormatter]
 		}),

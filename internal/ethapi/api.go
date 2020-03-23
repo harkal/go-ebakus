@@ -1783,8 +1783,8 @@ func (s *PublicTransactionPoolAPI) Resend(ctx context.Context, sendArgs SendTxAr
 	return common.Hash{}, fmt.Errorf("Transaction %#x not found", matchTx.Hash())
 }
 
-// GetABIForContract returns the ABI for a contract address
-func (s *PublicTransactionPoolAPI) GetABIForContract(ctx context.Context, addr common.Address) (string, error) {
+// GetAbiForAddress returns the ABI for a contract address
+func (s *PublicTransactionPoolAPI) GetAbiForAddress(ctx context.Context, addr common.Address) (string, error) {
 	ebakusState, _, err := s.b.EbakusStateAndHeaderByNumber(ctx, rpc.LatestBlockNumber)
 	if err != nil {
 		return "", err
