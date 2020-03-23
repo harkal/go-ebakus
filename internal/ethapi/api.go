@@ -1870,11 +1870,12 @@ func (api *PublicDBAPI) getEbakusStateIterator(handle uint64) (*ebakusStateItera
 }
 
 func (api *PublicDBAPI) releaseEbakusStateIterator(handle uint64) {
+	api.ebakusStateIteratorsMux.Lock()
+	defer api.ebakusStateIteratorsMux.Unlock()
+
 	if elem, ok := api.ebakusStateIteratorsMap[handle]; ok {
-		api.ebakusStateIteratorsMux.Lock()
 		delete(api.ebakusStateIteratorsMap, handle)
 		api.ebakusStateIteratorsList.Remove(elem)
-		api.ebakusStateIteratorsMux.Unlock()
 	}
 }
 
