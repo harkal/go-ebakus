@@ -182,8 +182,8 @@ func (s *PublicTxPoolAPI) Inspect() map[string]map[string]map[string]string {
 	return content
 }
 
-// ReloadBlacklistedaccounts reloads the blacklisted accounts JSON
-func (s *PublicTxPoolAPI) ReloadBlacklistedaccounts() {
+// ReloadBlacklistedAccounts reloads the blacklisted accounts JSON
+func (s *PublicTxPoolAPI) ReloadBlacklistedAccounts() {
 	s.b.ReloadBlacklistedAccounts()
 }
 
