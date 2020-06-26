@@ -738,8 +738,8 @@ web3._extend({
 	methods:
 	[
 		new web3._extend.Method({
-			name: 'reloadBlacklistedaccounts',
-			call: 'txpool_reloadBlacklistedaccounts',
+			name: 'reloadBlacklistedAccounts',
+			call: 'txpool_reloadBlacklistedAccounts',
 			params: 0
 		}),
 	],
