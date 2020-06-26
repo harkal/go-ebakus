@@ -182,6 +182,11 @@ func (s *PublicTxPoolAPI) Inspect() map[string]map[string]map[string]string {
 	return content
 }
 
+// ReloadBlacklistedaccounts reloads the blacklisted accounts JSON
+func (s *PublicTxPoolAPI) ReloadBlacklistedaccounts() {
+	s.b.ReloadBlacklistedAccounts()
+}
+
 // PublicAccountAPI provides an API to access accounts managed by this node.
 // It offers only methods that can retrieve accounts.
 type PublicAccountAPI struct {

@@ -334,9 +334,7 @@ func NewTxPool(config TxPoolConfig, chainconfig *params.ChainConfig, chain block
 		}
 	}
 
-	if accounts := config.parseBlacklistedAccounts(); accounts != nil {
-		pool.blacklistedAccounts = accounts
-	}
+	pool.ReloadBlacklistedAccounts()
 
 	// Subscribe events from blockchain and start the main event loop.
 	pool.chainHeadSub = pool.chain.SubscribeChainHeadEvent(pool.chainHeadCh)
@@ -440,6 +438,13 @@ func (pool *TxPool) Stop() {
 // starts sending event to the given channel.
 func (pool *TxPool) SubscribeNewTxsEvent(ch chan<- NewTxsEvent) event.Subscription {
 	return pool.scope.Track(pool.txFeed.Subscribe(ch))
+}
+
+// ReloadBlacklistedAccounts reloads the blacklisted accounts.
+func (pool *TxPool) ReloadBlacklistedAccounts() {
+	if accounts := pool.config.parseBlacklistedAccounts(); accounts != nil {
+		pool.blacklistedAccounts = accounts
+	}
 }
 
 // GasPrice returns the current gas price enforced by the transaction pool.

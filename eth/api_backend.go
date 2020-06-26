@@ -299,6 +299,10 @@ func (b *EthAPIBackend) SubscribeNewTxsEvent(ch chan<- core.NewTxsEvent) event.S
 	return b.eth.TxPool().SubscribeNewTxsEvent(ch)
 }
 
+func (b *EthAPIBackend) ReloadBlacklistedAccounts() {
+	b.eth.TxPool().ReloadBlacklistedAccounts()
+}
+
 func (b *EthAPIBackend) Downloader() *downloader.Downloader {
 	return b.eth.Downloader()
 }
