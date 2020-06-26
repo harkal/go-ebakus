@@ -20,6 +20,7 @@ import (
 	"errors"
 	"fmt"
 	"math"
+	"os"
 	"sort"
 	"sync"
 	"time"
@@ -43,6 +44,9 @@ const (
 var (
 	// ErrInvalidSender is returned if the transaction contains an invalid signature.
 	ErrInvalidSender = errors.New("invalid sender")
+
+	// ErrBlacklistedSender is returned if the transaction sender is blacklisted in this node.
+	ErrBlacklistedSender = errors.New("blacklisted sender")
 
 	// ErrNonceTooLow is returned if the nonce of a transaction is lower than the
 	// one present in the local chain.
@@ -133,6 +137,8 @@ type TxPoolConfig struct {
 	Journal   string           // Journal of local transactions to survive node restarts
 	Rejournal time.Duration    // Time interval to regenerate the local transaction journal
 
+	BlacklistedAccounts string // File holding the blacklisted accounts list
+
 	PriceLimit float64 // Minimum gas price to enforce for acceptance into the pool
 	PriceBump  uint64  // Minimum price bump percentage to replace an already existing transaction (nonce)
 
@@ -149,6 +155,8 @@ type TxPoolConfig struct {
 var DefaultTxPoolConfig = TxPoolConfig{
 	Journal:   "transactions.rlp",
 	Rejournal: time.Hour,
+
+	BlacklistedAccounts: "blacklisted-accounts.json",
 
 	PriceLimit: types.MinimumTargetDifficulty,
 	PriceBump:  10,
@@ -200,6 +208,37 @@ func (config *TxPoolConfig) sanitize() TxPoolConfig {
 	return conf
 }
 
+// parseBlacklistedAccounts parses a list of blacklisted accounts loaded from a .json
+// file from within the data directory.
+func (config *TxPoolConfig) parseBlacklistedAccounts() map[common.Address]bool {
+	// Short circuit if no blacklisted accounts config is present
+	if config.BlacklistedAccounts == "" {
+		return nil
+	}
+	if _, err := os.Stat(config.BlacklistedAccounts); err != nil {
+		return nil
+	}
+
+	// Load the blacklisted accounts from the config file.
+	var hexAccounts []string
+	if err := common.LoadJSON(config.BlacklistedAccounts, &hexAccounts); err != nil {
+		log.Error(fmt.Sprintf("Can't load blacklisted accounts list file: %v", err))
+		return nil
+	}
+
+	// Interpret the list as accounts map
+	accounts := make(map[common.Address]bool)
+	for _, account := range hexAccounts {
+		if !common.IsHexAddress(account) {
+			log.Error(fmt.Sprintf("Malformed blacklisted address: %s\n", account))
+			continue
+		}
+		address := common.HexToAddress(account)
+		accounts[address] = true
+	}
+	return accounts
+}
+
 // TxPool contains all currently known transactions. Transactions
 // enter the pool when they are received from the network or submitted
 // locally. They exit the pool when they are included in the blockchain.
@@ -223,8 +262,9 @@ type TxPool struct {
 	pendingNonces *txNoncer      // Pending state tracking virtual nonces
 	currentMaxGas uint64         // Current gas limit for transaction caps
 
-	locals  *accountSet // Set of local transaction to exempt from eviction rules
-	journal *txJournal  // Journal of local transaction to back up to disk
+	locals              *accountSet             // Set of local transaction to exempt from eviction rules
+	journal             *txJournal              // Journal of local transaction to back up to disk
+	blacklistedAccounts map[common.Address]bool // List of blacklisted accounts
 
 	pending map[common.Address]*txList   // All currently processable transactions
 	queue   map[common.Address]*txList   // Queued but non-processable transactions
@@ -292,6 +332,10 @@ func NewTxPool(config TxPoolConfig, chainconfig *params.ChainConfig, chain block
 		if err := pool.journal.rotate(pool.local()); err != nil {
 			log.Warn("Failed to rotate transaction journal", "err", err)
 		}
+	}
+
+	if accounts := config.parseBlacklistedAccounts(); accounts != nil {
+		pool.blacklistedAccounts = accounts
 	}
 
 	// Subscribe events from blockchain and start the main event loop.
@@ -526,6 +570,10 @@ func (pool *TxPool) validateTx(tx *types.Transaction, local bool) error {
 	from, err := types.Sender(pool.signer, tx)
 	if err != nil {
 		return ErrInvalidSender
+	}
+	// Ensure sender is not blacklisted
+	if _, found := pool.blacklistedAccounts[from]; found {
+		return ErrBlacklistedSender
 	}
 	// Drop transactions under our own minimal accepted gas price
 	if pool.gasPrice > tx.GasPrice() {
