@@ -735,7 +735,14 @@ web3._extend({
 const TxpoolJs = `
 web3._extend({
 	property: 'txpool',
-	methods: [],
+	methods:
+	[
+		new web3._extend.Method({
+			name: 'reloadBlacklistedAccounts',
+			call: 'txpool_reloadBlacklistedAccounts',
+			params: 0
+		}),
+	],
 	properties:
 	[
 		new web3._extend.Property({

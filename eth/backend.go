@@ -214,6 +214,9 @@ func New(ctx *node.ServiceContext, config *Config) (*Ebakus, error) {
 	if config.TxPool.Journal != "" {
 		config.TxPool.Journal = ctx.ResolvePath(config.TxPool.Journal)
 	}
+	if config.TxPool.BlacklistedAccounts != "" {
+		config.TxPool.BlacklistedAccounts = ctx.ResolvePath(config.TxPool.BlacklistedAccounts)
+	}
 	eth.txPool = core.NewTxPool(config.TxPool, chainConfig, eth.blockchain)
 
 	// Permit the downloader to use the trie cache allowance during fast sync
