@@ -371,7 +371,7 @@ func (d *DPOS) FinalizeAndAssemble(chain consensus.ChainReader, header *types.He
 	receipts []*types.Receipt) (*types.Block, error) {
 
 	// For internal storage chains, refuse to seal empty blocks (no reward but would spin sealing)
-	if len(txs) == 0 {
+	if d.genesis.SuspendEmptyBlocks && len(txs) == 0 {
 		now := unixNow()
 		slot := float64(now) / float64(d.config.Period)
 		nextSlotTime := time.Unix(int64((slot+1)*float64(d.config.Period)), 0)

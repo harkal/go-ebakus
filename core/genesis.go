@@ -48,14 +48,15 @@ var errGenesisNoConfig = errors.New("genesis has no chain configuration")
 // Genesis specifies the header fields, state of a genesis block. It also defines hard
 // fork switch-over blocks through the chain configuration.
 type Genesis struct {
-	Config    *params.ChainConfig `json:"config"`
-	Nonce     uint64              `json:"nonce"`
-	Timestamp uint64              `json:"timestamp"`
-	ExtraData []byte              `json:"extraData"`
-	GasLimit  uint64              `json:"gasLimit"   gencodec:"required"`
-	Mixhash   common.Hash         `json:"mixHash"`
-	Coinbase  common.Address      `json:"coinbase"`
-	Alloc     GenesisAlloc        `json:"alloc"      gencodec:"required"`
+	Config             *params.ChainConfig `json:"config"`
+	Nonce              uint64              `json:"nonce"`
+	Timestamp          uint64              `json:"timestamp"`
+	ExtraData          []byte              `json:"extraData"`
+	GasLimit           uint64              `json:"gasLimit"   gencodec:"required"`
+	Mixhash            common.Hash         `json:"mixHash"`
+	Coinbase           common.Address      `json:"coinbase"`
+	Alloc              GenesisAlloc        `json:"alloc"      gencodec:"required"`
+	SuspendEmptyBlocks bool                `json:"suspendEmptyBlocks"`
 
 	// These fields are used for consensus tests. Please don't use them
 	// in actual genesis blocks.
@@ -379,6 +380,33 @@ func DeveloperGenesisBlock(period uint64, faucet common.Address) *Genesis {
 	return &Genesis{
 		Config:   &config,
 		GasLimit: 6283185,
+		Alloc: map[common.Address]GenesisAccount{
+			common.BytesToAddress([]byte{1}): {Balance: big.NewInt(1)}, // ECRecover
+			common.BytesToAddress([]byte{2}): {Balance: big.NewInt(1)}, // SHA256
+			common.BytesToAddress([]byte{3}): {Balance: big.NewInt(1)}, // RIPEMD
+			common.BytesToAddress([]byte{4}): {Balance: big.NewInt(1)}, // Identity
+			common.BytesToAddress([]byte{5}): {Balance: big.NewInt(1)}, // ModExp
+			common.BytesToAddress([]byte{6}): {Balance: big.NewInt(1)}, // ECAdd
+			common.BytesToAddress([]byte{7}): {Balance: big.NewInt(1)}, // ECScalarMul
+			common.BytesToAddress([]byte{8}): {Balance: big.NewInt(1)}, // ECPairing
+			types.PrecompliledSystemContract: {Balance: big.NewInt(1)}, // SystemContract
+			types.PrecompliledDBContract:     {Balance: big.NewInt(1)}, // DBContract
+			faucet:                           {Balance: new(big.Int).Mul(big.NewInt(10), big.NewInt(params.Ether))},
+		},
+	}
+}
+
+// DefaultStorageGenesisBlock returns the 'ebakus --storage' genesis block. Note, this must
+// be seeded with the
+func DefaultStorageGenesisBlock(faucet common.Address) *Genesis {
+	config := *params.StorageChainConfig
+	config.DPOS.BootProducer = faucet
+
+	// Assemble and return the genesis with the precompiles and faucet pre-funded
+	return &Genesis{
+		Config:             &config,
+		GasLimit:           6283185,
+		SuspendEmptyBlocks: true,
 		Alloc: map[common.Address]GenesisAccount{
 			common.BytesToAddress([]byte{1}): {Balance: big.NewInt(1)}, // ECRecover
 			common.BytesToAddress([]byte{2}): {Balance: big.NewInt(1)}, // SHA256
