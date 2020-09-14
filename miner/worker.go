@@ -338,7 +338,9 @@ func (w *worker) commitNewWork() {
 
 	// Create the new block to seal with the consensus engine
 	if env.Block, err = w.engine.FinalizeAndAssemble(w.chain, header, env.state, env.ebakusState, w.coinbase, env.txs, env.receipts); err != nil {
-		log.Error("Failed to finalize block for sealing", "err", err)
+		if err != dpos.ErrWaitForTransactions {
+			log.Error("Failed to finalize block for sealing", "err", err)
+		}
 		return
 	}
 	// We only care about logging if we're actually mining.
