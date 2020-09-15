@@ -76,6 +76,28 @@ var (
 		DPOS: TestnetDPOSConfig,
 	}
 
+	StorageDPOSConfig = &DPOSConfig{
+		Period:              1,
+		TurnBlockCount:      6,
+		InitialDistribution: 1e9,
+		YearlyInflation:     0.01,
+		DelegateCount:       1,
+		BonusDelegateCount:  0,
+		MaxWitnessesVotes:   20,
+		BootProducer:        common.HexToAddress("0xd53de783b12f12b7852348f2e32c21990746ad02"),
+	}
+
+	// StorageChainConfig contains the chain parameters to run a node on the Ropsten test network.
+	StorageChainConfig = &ChainConfig{
+		ChainID:     big.NewInt(17),
+		EIP150Block: big.NewInt(0),
+		EIP150Hash:  common.Hash{},
+		EIP155Block: big.NewInt(0),
+		EIP158Block: big.NewInt(0),
+
+		DPOS: StorageDPOSConfig,
+	}
+
 	// AllEthashProtocolChanges contains every protocol change (EIPs) introduced
 	// and accepted by the Ebakus core developers into the Ethash consensus.
 	//

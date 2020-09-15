@@ -123,6 +123,7 @@ var (
 		utils.DeveloperFlag,
 		utils.DeveloperPeriodFlag,
 		utils.TestnetFlag,
+		utils.StorageFlag,
 		utils.VMEnableDebugFlag,
 		utils.NetworkIdFlag,
 		utils.EthStatsURLFlag,
@@ -407,7 +408,7 @@ func startNode(ctx *cli.Context, stack *node.Node) {
 	}
 
 	// Start auxiliary services if enabled
-	if ctx.GlobalBool(utils.MiningEnabledFlag.Name) || ctx.GlobalBool(utils.DeveloperFlag.Name) {
+	if ctx.GlobalBool(utils.MiningEnabledFlag.Name) || ctx.GlobalBool(utils.DeveloperFlag.Name) || ctx.GlobalBool(utils.StorageFlag.Name) {
 		// Mining only makes sense if a full Ebakus node is running
 		if ctx.GlobalString(utils.SyncModeFlag.Name) == "light" {
 			utils.Fatalf("Light clients do not support mining")

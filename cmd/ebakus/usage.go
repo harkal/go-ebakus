@@ -103,6 +103,12 @@ var AppHelpFlagGroups = []flagGroup{
 			utils.DeveloperPeriodFlag,
 		},
 	},
+	{
+		Name: "STORAGE CHAIN",
+		Flags: []cli.Flag{
+			utils.StorageFlag,
+		},
+	},
 	//{
 	//	Name: "DASHBOARD",
 	//	Flags: []cli.Flag{

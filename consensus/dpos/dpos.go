@@ -53,7 +53,7 @@ import (
 
 var (
 	checkpointInterval  = uint64(60 * 10)
-	blockPeriod         = uint64(2)   // Default block issuance period of 5 sec
+	blockPeriod         = uint64(1)   // Default block issuance period of 5 sec
 	initialDistribution = uint64(1e9) // EBK
 	yearlyInflation     = float64(0.01)
 
@@ -88,6 +88,8 @@ var (
 
 	// ErrProductionAborted is returned when the producer is instructed to prepaturely abort
 	ErrProductionAborted = errors.New("Production aborted")
+
+	ErrWaitForTransactions = errors.New("Sealing paused, waiting for transactions")
 )
 
 var blockProduceTimer = metrics.GetOrRegisterTimer("worker/blocks/produce", nil)
@@ -367,6 +369,22 @@ func (d *DPOS) Finalize(chain consensus.ChainReader, header *types.Header, state
 // setting the final state and assembling the block.
 func (d *DPOS) FinalizeAndAssemble(chain consensus.ChainReader, header *types.Header, state *state.StateDB, ebakusState *ebakusdb.Snapshot, coinbase common.Address, txs []*types.Transaction,
 	receipts []*types.Receipt) (*types.Block, error) {
+
+	// For internal storage chains, refuse to seal empty blocks (no reward but would spin sealing)
+	if d.genesis.SuspendEmptyBlocks && len(txs) == 0 {
+		now := unixNow()
+		slot := float64(now) / float64(d.config.Period)
+		nextSlotTime := time.Unix(int64((slot+1)*float64(d.config.Period)), 0)
+
+		timeToNextSlot := nextSlotTime.Sub(time.Now())
+
+		select {
+		case <-time.After(timeToNextSlot):
+		}
+
+		return nil, ErrWaitForTransactions
+	}
+
 	// Accumulate any block and uncle rewards and commit the final state root
 	d.AccumulateRewards(chain.Config().DPOS, state, header, coinbase)
 	header.Root = state.IntermediateRoot(chain.Config().IsEIP158(header.Number))
